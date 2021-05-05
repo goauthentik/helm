@@ -22,9 +22,16 @@ authentik:
     database: ""
     user: ""
     s3_backup:
+      access_key: ""
+      bucket: ""
+      region: ""
+      host: ""
+  redis:
+    host: ""
+
 # see configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
 env: {}
-  OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
+  # OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
   # SECRET_KEY: ""
   # POSTGRESQL__S3_BACKUP__SECRET_KEY: ""
   # EMAIL__PASSWORD: ""
