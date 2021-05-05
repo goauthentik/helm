@@ -4,6 +4,7 @@ name: authentik
 home: https://goauthentik.io
 sources:
   - https://github.com/goauthentik/authentik
+  - https://goauthentik.io/docs/
 version: 1.0.0-RC2
 appVersion: 2021.4.5
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
@@ -12,6 +13,7 @@ maintainers:
     email: jens@beryju.org
   - name: dirtycajunrice
     email: nick@cajun.pro
+    url: https://github.com/DirtyCajunRice
 dependencies:
   - name: postgresql
     version: 10.4.2
@@ -29,6 +31,8 @@ annotations:
   artifacthub.io/links: |
     - name: Github
       url: https://github.com/goauthentik/authentik
+    - name: Docs
+      url: https://goauthentik.io/docs/
   artifacthub.io/maintainers: |
     - name: Jens L. BeryJu
       email: jens@beryju.org
