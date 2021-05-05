@@ -1,0 +1,32 @@
+{{- if .Values.geoip.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ printf "%s-geoip" (include "common.names.fullname" .) }}
+spec:
+  schedule: {{ quote .Values.geoip.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: geoip
+              image: "maxmindinc/geoipupdate:v4.7.1"
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: GEOIPUPDATE_FREQUENCY
+                  value: "0"
+                - name: GEOIPUPDATE_ACCOUNT_ID
+                  value: {{ required "geoip account id required" .Values.geoip.accountId | quote }}
+                - name: GEOIPUPDATE_LICENSE_KEY
+                  value: {{ required "geoip license key required" .Values.geoip.licenseKey | quote }}
+                - name: GEOIPUPDATE_EDITION_IDS
+                  value: {{ required "geoip edition id required" .Values.geoip.editionIds | quote }}
+              volumeMounts:
+                - name: geoip
+                  mountPath: /usr/share/GeoIP
+          restartPolicy: OnFailure
+          volumes:
+            - name: geoip
+              emptyDir: { }
+  {{- end }}
