@@ -1,4 +1,4 @@
-name: "Charts: Lint and test"
+name: "ct"
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ on:
       - '!charts/**/README.md.gotmpl'
 
 jobs:
-  lint-test:
+  lint:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -30,8 +30,6 @@ jobs:
 
       - name: Run chart-testing (list-changed)
         id: list-changed
-        env:
-          CT_CONFIG_DIR: .
         run: |
           changed=$(ct list-changed)
           if [[ -n "$changed" ]]; then
