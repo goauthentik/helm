@@ -48,8 +48,17 @@ authentik:
 
 # see configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
 env: {}
+# AUTHENTIK_VAR_NAME: VALUE
 
 envFrom: []
+#  - configMapRef:
+#      name: special-config
+
+envValueFrom: {}
+#  AUTHENTIK_VAR_NAME:
+#    secretKeyRef:
+#      key: password
+#      name: my-secret
 
 service:
   enabled: true

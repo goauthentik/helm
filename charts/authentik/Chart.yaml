@@ -1,16 +1,21 @@
 apiVersion: v2
-description: authentik is an open-source Identity Provider focused on flexibility and versatility.
+description: authentik is an open-source Identity Provider focused on flexibility and versatility
 name: authentik
 home: https://goauthentik.io
 sources:
   - https://github.com/goauthentik/authentik
   - https://goauthentik.io/docs/
-version: 1.0.0-RC2
+keywords:
+  - proxy
+  - oauth
+  - authentication
+version: 1.0.0-RC3
 appVersion: 2021.4.5
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
     email: jens@beryju.org
+    url: https://github.com/BeryJu
   - name: dirtycajunrice
     email: nick@cajun.pro
     url: https://github.com/DirtyCajunRice
@@ -27,6 +32,18 @@ dependencies:
     repository: https://library-charts.k8s-at-home.com
     version: 2.4.0
 annotations:
+  artifacthub.io/prerelease: "true"
+  artifacthub.io/changes: |
+    - kind: added
+      description: Readme examples
+      links:
+        - name: Github PR
+          url: https://github.com/goauthentik/helm/pull/3
+    - kind: added
+      description: envValueFrom
+      links:
+        - name: Github PR
+          url: https://github.com/goauthentik/helm/pull/3
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
