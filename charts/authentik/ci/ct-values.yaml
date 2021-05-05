@@ -36,6 +36,12 @@ postgresql:
   persistence:
     enabled: false
 
+livenessProbe:
+  failureThreshold: 1000
+
+readinessProbe:
+  failureThreshold: 1000
+
 redis:
   fullnameOverride: redis
   enabled: true
