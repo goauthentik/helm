@@ -19,7 +19,7 @@ ingress:
 authentik:
   log_level: ""
   email:
-    host: ""
+    host: 10
     port: ""
     username: ""
     use_tls: ""
