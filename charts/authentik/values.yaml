@@ -1,7 +1,7 @@
 replicas: 1
 
 image:
-  name: ghcr.io/goauthentik/authentik
+  name: beryju//authentik
   tag: 2021.4.5
   pullPolicy: IfNotPresent
 
@@ -18,8 +18,9 @@ ingress:
 
 authentik:
   log_level: ""
+  secret_key: ""
   email:
-    host: 10
+    host: ""
     port: ""
     username: ""
     use_tls: ""

@@ -13,61 +13,32 @@ ingress:
         - path: "/"
           pathType: Prefix
 
-env:
-  AUTHENTIK_OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
-  AUTHENTIK_SECRET_KEY: "super_secret_key"
-  AUTHENTIK_POSTGRESQL__HOST: "postgresql"
-  AUTHENTIK_POSTGRESQL__NAME: "authentik"
-  AUTHENTIK_POSTGRESQL__USER: "authentik"
-  AUTHENTIK_POSTGRESQL__PASSWORD: "authentik"
-  AUTHENTIK_REDIS__HOST: "redis-master"
-  AUTHENTIK_REDIS__PASSWORD: "authentik"
-envFrom: []
-
-service:
-  enabled: true
-  type: ClusterIP
-  port: 80
-  name: http
-  protocol: TCP
-
-livenessProbe:
-  enabled: true
-  httpGet:
-    path: /-/health/live/
-    port: http
-  initialDelaySeconds: 15
-  periodSeconds: 30
-
-readinessProbe:
-  enabled: true
-  httpGet:
-    path: /-/health/ready/
-    port: http
-  initialDelaySeconds: 15
-  periodSeconds: 30
-
-serviceAccount:
-  create: true
-
-prometheus:
-  serviceMonitor:
-    create: false
-
-geoip:
-  enabled: false
+authentik:
+  log_level: debug
+  secret_key: 5up3r53cr37K3y
+  outposts:
+    docker_image_base: beryju/authentik
+  postgresql:
+    host: postgresql
+    name: authentik
+    user: authentik
+    password: au7h3n71k
+  redis:
+    host: redis-master
+    password: au7h3n71k
 
 postgresql:
   enabled: true
-  fullnameOverride: "postgresql"
-  postgresqlUsername: "authentik"
-  postgresqlPassword: "authentik"
-  postgresqlDatabase: "authentik"
+  fullnameOverride: postgresql
+  postgresqlUsername: authentik
+  postgresqlPassword: au7h3n71k
+  postgresqlDatabase: authentik
   persistence:
     enabled: false
+
 redis:
-  fullnameOverride: "redis"
+  fullnameOverride: redis
   enabled: true
   auth:
     enabled: true
-    password: "authentik"
+    password: au7h3n71k
