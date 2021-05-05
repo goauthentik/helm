@@ -1,5 +1,4 @@
 {{- if .Values.ingress.enabled -}}
-  {{- $appSvcName := printf "%s-server" (include "common.names.fullname" .) -}}
   {{- $apiIsStable := include "authentik.ingress.isStable" . -}}
 apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
 kind: Ingress
@@ -32,11 +31,11 @@ spec:
             backend:
               {{- if $apiIsStable }}
               service:
-                name: {{ $appSvcName }}
+                name: {{ include "common.names.fullname" $ }}
                 port:
                   name: http
               {{- else }}
-              serviceName: {{ $appSvcName }}
+              serviceName: {{ include "common.names.fullname" $ }}
               servicePort: 9000
               {{- end }}
           {{- end }}
