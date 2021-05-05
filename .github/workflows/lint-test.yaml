@@ -7,6 +7,9 @@ on:
       - '!charts/**/README.md'
       - '!charts/**/README.md.gotmpl'
 
+env:
+  CT_CONFIG: ct.yaml
+
 jobs:
   lint:
     runs-on: ubuntu-20.04
@@ -31,7 +34,7 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed --config ct.yaml)
+          changed=$(ct list-changed)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
