@@ -1,4 +1,4 @@
-name: "ct"
+name: "Lint and Test Chart"
 
 on:
   pull_request:
@@ -28,10 +28,10 @@ jobs:
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.0.1
 
-      - name: Run chart-testing (list-changed --config ct.yaml)
+      - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed)
+          changed=$(ct list-changed  --config ct.yaml)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
