@@ -1,7 +1,7 @@
 replicas: 1
 
 image:
-  name: goauthentik/authentik
+  name: beryju/authentik
   tag: 2021.4.5
   pullPolicy: IfNotPresent
 
