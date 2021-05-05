@@ -16,8 +16,14 @@ ingress:
         - path: "/"
           pathType: Prefix
 
-# see more configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
-env:
+authentik:
+  postgresql:
+    host: ""
+    database: ""
+    user: ""
+    s3_backup:
+# see configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
+env: {}
   OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
   # SECRET_KEY: ""
   # POSTGRESQL__S3_BACKUP__SECRET_KEY: ""

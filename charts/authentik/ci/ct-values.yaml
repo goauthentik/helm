@@ -67,7 +67,7 @@ postgresql:
     enabled: false
 redis:
   fullnameOverride: "redis"
-  enabled: false
+  enabled: true
   auth:
     enabled: true
     password: "authentik"
