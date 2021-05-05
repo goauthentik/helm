@@ -28,5 +28,5 @@ spec:
           restartPolicy: OnFailure
           volumes:
             - name: geoip
-              emptyDir: { }
+              emptyDir: {}
   {{- end }}
