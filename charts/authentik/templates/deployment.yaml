@@ -21,7 +21,7 @@ spec:
       {{- end }}
       {{- with $.Values.affinity }}
       affinity:
-      {{- toYaml . | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
@@ -33,16 +33,21 @@ spec:
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-          {{- include "authentik.env" $.Values.authentik | indent 12 }}
-          {{- with $.Values.envFrom }}
+            {{- include "authentik.env" $.Values.authentik | indent 12 }}
+            {{- range $name, $val := $.Values.envValueFrom }}
+          - name: {{ $name }}
+            valueFrom:
+              {{- toYaml $val | nindent 14 }}
+            {{- end }}
+            {{- with $.Values.envFrom }}
           envFrom:
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with $.Values.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- with $.Values.volumeMounts }}
           volumeMounts:
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- if eq . "server" }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+            {{- if eq . "server" }}
           ports:
             - name: http
               containerPort: 9000
@@ -51,24 +56,24 @@ spec:
               containerPort: 9443
               protocol: TCP
               {{- if $.Values.livenessProbe.enabled }}
-          {{- with omit $.Values.livenessProbe "enabled" }}
+                {{- with omit $.Values.livenessProbe "enabled" }}
           livenessProbe:
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- end }}
-          {{- if $.Values.readinessProbe.enabled }}
-          {{- with omit $.Values.readinessProbe "enabled" }}
+                  {{- toYaml . | nindent 12 }}
+                {{- end }}
+              {{- end }}
+              {{- if $.Values.readinessProbe.enabled }}
+                {{- with omit $.Values.readinessProbe "enabled" }}
           readinessProbe:
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- end }}
-          {{- end }}
-          {{- with index $.Values.resources . }}
+                  {{- toYaml . | nindent 12 }}
+                {{- end }}
+              {{- end }}
+            {{- end }}
+            {{- with index $.Values.resources . }}
           resources:
-          {{- toYaml . | nindent 12 }}
-      {{- end }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
       {{- with $.Values.volumes }}
       volumes:
-      {{- toYaml . | nindent 8 }}
-  {{- end }}
-  {{- end }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
