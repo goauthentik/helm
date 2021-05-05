@@ -1,0 +1,44 @@
+replicas: 1
+
+image:
+  name: docker.beryju.org/authentik/server
+  tag: gh-next
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+authentik:
+  log_level: debug
+  secret_key: 5up3r53cr37K3y
+  outposts:
+    docker_image_base: beryju/authentik
+  postgresql:
+    host: postgresql
+    name: authentik
+    user: authentik
+    password: au7h3n71k
+  redis:
+    host: redis-master
+    password: au7h3n71k
+
+postgresql:
+  enabled: true
+  fullnameOverride: postgresql
+  postgresqlUsername: authentik
+  postgresqlPassword: au7h3n71k
+  postgresqlDatabase: authentik
+  persistence:
+    enabled: false
+
+redis:
+  fullnameOverride: redis
+  enabled: true
+  auth:
+    enabled: true
+    password: au7h3n71k

@@ -6,10 +6,10 @@ kind: Ingress
 metadata:
   name: {{ include "common.names.fullname" . }}
   labels:
-  {{- include "common.labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-  {{- toYaml . | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   {{- if and $apiIsStable .Values.ingress.ingressClassName }}
@@ -17,14 +17,14 @@ spec:
   {{- end }}
   {{- with .Values.ingress.tls }}
   tls:
-  {{- toYaml . | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }} }
+          {{- range .paths }}
           - path: {{ .path | quote }}
             {{- if $apiIsStable }}
             pathType: {{ default "Prefix" .pathType }}
@@ -38,7 +38,7 @@ spec:
               {{- else }}
               serviceName: {{ $appSvcName }}
               servicePort: 9000
+              {{- end }}
           {{- end }}
     {{- end }}
-  {{- end }}
-  {{- end }}
+{{- end }}

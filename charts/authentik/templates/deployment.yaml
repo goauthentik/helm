@@ -28,10 +28,12 @@ spec:
           image: "{{ $.Values.image.name }}:{{ $.Values.image.tag }}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
           args: [{{ quote . }}]
-          {{- with $.Values.env }}
           env:
-          {{- toYaml . | nindent 12 }}
-          {{- end }}
+            {{- range $k, $v := $.Values.env }}
+            - name: {{ quote $k }}
+              value: {{ quote $v }}
+            {{- end }}
+          {{- include "authentik.env" $.Values.authentik | indent 12 }}
           {{- with $.Values.envFrom }}
           envFrom:
           {{- toYaml . | nindent 12 }}
