@@ -4,6 +4,70 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
+          description: removed lingering suffix in ingress causing a mismatch for selector
+          links:
+            - name: Github PR
+              url: https://github.com/goauthentik/helm/pull/5
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/authentik:2021.4.5
+        - name: authentik-proxy
+          image: ghcr.io/goauthentik/authentik-proxy:2021.4.5
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/DirtyCajunRice
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    appVersion: 2021.4.5
+    created: "2021-05-05T10:17:53.865458963Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.1.1
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: 13fd75f5eea90fe8f1782aaf2c5e2fe8f88ccbd8ddc2237fa0c0ad67460a9eaf
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/DirtyCajunRice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-1.0.0-RC5/authentik-1.0.0-RC5.tgz
+    version: 1.0.0-RC5
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
           description: envValueFrom indentation
           links:
             - name: Github PR
@@ -186,4 +250,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-1.0.0-RC2/authentik-1.0.0-RC2.tgz
     version: 1.0.0-RC2
-generated: "2021-05-05T08:50:21.601409145Z"
+generated: "2021-05-05T10:17:53.865488063Z"
