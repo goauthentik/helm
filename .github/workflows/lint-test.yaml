@@ -8,7 +8,7 @@ on:
       - '!charts/**/README.md.gotmpl'
 
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
