@@ -1,8 +1,8 @@
 replicas: 1
 
 image:
-  name: beryju//authentik
-  tag: 2021.4.5
+  name: docker.beryju.org/authentik/server
+  tag: gh-next
   pullPolicy: IfNotPresent
 
 ingress:
@@ -75,7 +75,7 @@ livenessProbe:
   httpGet:
     path: /-/health/live/
     port: http
-  initialDelaySeconds: 15
+  initialDelaySeconds: 60
   periodSeconds: 30
 
 readinessProbe:
@@ -83,7 +83,7 @@ readinessProbe:
   httpGet:
     path: /-/health/ready/
     port: http
-  initialDelaySeconds: 15
+  initialDelaySeconds: 60
   periodSeconds: 30
 
 serviceAccount:
