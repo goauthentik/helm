@@ -1,0 +1,74 @@
+replicas: 1
+
+image:
+  name: ghcr.io/goauthentik/authentik
+  tag: 2021.4.5
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+env:
+  AUTHENTIK_OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
+  AUTHENTIK_SECRET_KEY: "super_secret_key"
+  AUTHENTIK_POSTGRESQL__HOST: "postgresql"
+  AUTHENTIK_POSTGRESQL__NAME: "authentik"
+  AUTHENTIK_POSTGRESQL__USER: "authentik"
+  AUTHENTIK_REDIS__HOST: "redis"
+envFrom: []
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  name: http
+  protocol: TCP
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /-/health/live/
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 30
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /-/health/ready/
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 30
+
+serviceAccount:
+  create: true
+
+prometheus:
+  serviceMonitor:
+    create: false
+
+geoip:
+  enabled: true
+  schedule: "0 */8 * * *"
+  accountId: ""
+  licenseKey: ""
+  editionIds: "GeoLite2-City"
+
+postgresql:
+  enabled: true
+  fullnameOverride: "postgresql"
+  postgresqlUsername: "authentik"
+  postgresqlPassword: "authentik"
+  postgresqlDatabase: "authentik"
+  persistence:
+    enabled: false
+redis:
+  fullnameOverride: "redis"
+  enabled: false
+  auth:
+    enabled: false
