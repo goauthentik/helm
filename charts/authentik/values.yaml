@@ -35,7 +35,7 @@ authentik:
     send_pii: ""
   postgresql:
     host: ""
-    database: ""
+    name: ""
     user: ""
     s3_backup:
       access_key: ""
