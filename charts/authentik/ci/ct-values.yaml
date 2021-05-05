@@ -53,7 +53,7 @@ prometheus:
     create: false
 
 geoip:
-  enabled: true
+  enabled: false
   schedule: "0 */8 * * *"
   accountId: ""
   licenseKey: ""
