@@ -9,7 +9,7 @@ keywords:
   - proxy
   - oauth
   - authentication
-version: 1.0.0-RC4
+version: 1.0.0-RC5
 appVersion: 2021.4.5
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
@@ -35,10 +35,10 @@ annotations:
   artifacthub.io/prerelease: "true"
   artifacthub.io/changes: |
     - kind: fixed
-      description: envValueFrom indentation
+      description: removed lingering suffix in ingress causing a mismatch for selector
       links:
         - name: Github PR
-          url: https://github.com/goauthentik/helm/pull/4
+          url: https://github.com/goauthentik/helm/pull/5
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
