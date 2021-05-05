@@ -30,7 +30,10 @@ spec:
           args: [{{ quote . }}]
           {{- with $.Values.env }}
           env:
-          {{- toYaml . | nindent 12 }}
+            {{- range $k, $v := . }}
+            - name: {{ quote $k }}
+              value: {{ quote $v }}
+            {{- end }}
           {{- end }}
           {{- with $.Values.envFrom }}
           envFrom:
