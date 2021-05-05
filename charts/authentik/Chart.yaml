@@ -9,7 +9,7 @@ keywords:
   - proxy
   - oauth
   - authentication
-version: 1.0.0-RC3
+version: 1.0.0-RC4
 appVersion: 2021.4.5
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
@@ -34,16 +34,11 @@ dependencies:
 annotations:
   artifacthub.io/prerelease: "true"
   artifacthub.io/changes: |
-    - kind: added
-      description: Readme examples
+    - kind: fixed
+      description: envValueFrom indentation
       links:
         - name: Github PR
-          url: https://github.com/goauthentik/helm/pull/3
-    - kind: added
-      description: envValueFrom
-      links:
-        - name: Github PR
-          url: https://github.com/goauthentik/helm/pull/3
+          url: https://github.com/goauthentik/helm/pull/4
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github

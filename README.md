@@ -1,8 +1,8 @@
 # authentik
 
-![Version: 1.0.0-RC2](https://img.shields.io/badge/Version-1.0.0--RC2-informational?style=flat-square) ![AppVersion: 2021.4.5](https://img.shields.io/badge/AppVersion-2021.4.5-informational?style=flat-square)
+![Version: 1.0.0-RC4](https://img.shields.io/badge/Version-1.0.0--RC4-informational?style=flat-square) ![AppVersion: 2021.4.5](https://img.shields.io/badge/AppVersion-2021.4.5-informational?style=flat-square)
 
-authentik is an open-source Identity Provider focused on flexibility and versatility.
+authentik is an open-source Identity Provider focused on flexibility and versatility
 
 **Homepage:** <https://goauthentik.io>
 
@@ -10,7 +10,7 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| BeryJu | jens@beryju.org |  |
+| BeryJu | jens@beryju.org | https://github.com/BeryJu |
 | dirtycajunrice | nick@cajun.pro | https://github.com/DirtyCajunRice |
 
 ## Source Code
@@ -43,8 +43,8 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | authentik.error_reporting.send_pii | string | `""` |  |
 | authentik.log_level | string | `""` |  |
 | authentik.outposts.docker_image_base | string | `""` |  |
-| authentik.postgresql.database | string | `""` |  |
 | authentik.postgresql.host | string | `""` |  |
+| authentik.postgresql.name | string | `""` |  |
 | authentik.postgresql.s3_backup.access_key | string | `""` |  |
 | authentik.postgresql.s3_backup.bucket | string | `""` |  |
 | authentik.postgresql.s3_backup.host | string | `""` |  |
@@ -55,14 +55,15 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | authentik.secret_key | string | `""` |  |
 | env | object | `{}` |  |
 | envFrom | list | `[]` |  |
+| envValueFrom | object | `{}` |  |
 | geoip.accountId | string | `""` |  |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` |  |
 | geoip.licenseKey | string | `""` |  |
 | geoip.schedule | string | `"0 */8 * * *"` |  |
-| image.name | string | `"beryju//authentik"` |  |
+| image.name | string | `"docker.beryju.org/authentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"2021.4.5"` |  |
+| image.tag | string | `"gh-next"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
@@ -73,7 +74,7 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | livenessProbe.enabled | bool | `true` |  |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` |  |
 | livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `15` |  |
+| livenessProbe.initialDelaySeconds | int | `60` |  |
 | livenessProbe.periodSeconds | int | `30` |  |
 | postgresql.enabled | bool | `false` |  |
 | prometheus.rules.create | bool | `false` |  |
@@ -86,7 +87,7 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `15` |  |
+| readinessProbe.initialDelaySeconds | int | `60` |  |
 | readinessProbe.periodSeconds | int | `30` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` |  |

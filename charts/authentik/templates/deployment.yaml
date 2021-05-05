@@ -35,9 +35,9 @@ spec:
             {{- end }}
             {{- include "authentik.env" $.Values.authentik | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
-          - name: {{ $name }}
-            valueFrom:
-              {{- toYaml $val | nindent 14 }}
+            - name: {{ $name }}
+              valueFrom:
+                {{- toYaml $val | nindent 16 }}
             {{- end }}
             {{- with $.Values.envFrom }}
           envFrom:
