@@ -24,7 +24,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          {{- range .paths }} }
+          {{- range .paths }}
           - path: {{ .path | quote }}
             {{- if $apiIsStable }}
             pathType: {{ default "Prefix" .pathType }}
