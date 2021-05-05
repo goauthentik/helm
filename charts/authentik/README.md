@@ -31,14 +31,36 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| env.OUTPOSTS__DOCKER_IMAGE_BASE | string | `"ghcr.io/goauthentik/authentik"` |  |
+| authentik.email.from | string | `""` |  |
+| authentik.email.host | string | `""` |  |
+| authentik.email.port | string | `""` |  |
+| authentik.email.timeout | string | `""` |  |
+| authentik.email.use_ssl | string | `""` |  |
+| authentik.email.use_tls | string | `""` |  |
+| authentik.email.username | string | `""` |  |
+| authentik.error_reporting.enabled | bool | `false` |  |
+| authentik.error_reporting.environment | string | `""` |  |
+| authentik.error_reporting.send_pii | string | `""` |  |
+| authentik.log_level | string | `""` |  |
+| authentik.outposts.docker_image_base | string | `""` |  |
+| authentik.postgresql.database | string | `""` |  |
+| authentik.postgresql.host | string | `""` |  |
+| authentik.postgresql.s3_backup.access_key | string | `""` |  |
+| authentik.postgresql.s3_backup.bucket | string | `""` |  |
+| authentik.postgresql.s3_backup.host | string | `""` |  |
+| authentik.postgresql.s3_backup.region | string | `""` |  |
+| authentik.postgresql.user | string | `""` |  |
+| authentik.redis.host | string | `""` |  |
+| authentik.redis.password | string | `""` |  |
+| authentik.secret_key | string | `""` |  |
+| env | object | `{}` |  |
 | envFrom | list | `[]` |  |
 | geoip.accountId | string | `""` |  |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` |  |
 | geoip.licenseKey | string | `""` |  |
 | geoip.schedule | string | `"0 */8 * * *"` |  |
-| image.name | string | `"ghcr.io/goauthentik/authentik"` |  |
+| image.name | string | `"beryju//authentik"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `"2021.4.5"` |  |
 | ingress.annotations | object | `{}` |  |
