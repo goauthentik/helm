@@ -1,55 +1,44 @@
-{{- $fullName := include "authentik.fullname" . -}}
-apiVersion: extensions/v1beta1
+{{- if .Values.ingress.enabled -}}
+  {{- $appSvcName := printf "%s-server" (include "common.names.fullname" .) -}}
+  {{- $apiIsStable := include "authentik.ingress.isStable" . -}}
+apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ include "common.names.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "authentik.name" . }}
-    helm.sh/chart: {{ include "authentik.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- include "common.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-  {{ toYaml . | indent 4 }}
+  {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if .Values.ingress.tls }}
-  tls:
-    {{- range .Values.ingress.tls }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-      {{- end }}
-      secretName: {{ .secretName }}
+  {{- if and $apiIsStable .Values.ingress.ingressClassName }}
+  ingressClassName: {{ $.Values.ingress.ingressClassName }}
   {{- end }}
+  {{- with .Values.ingress.tls }}
+  tls:
+  {{- toYaml . | nindent 4 }}
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ . | quote }}
+    - host: {{ .host | quote }}
       http:
         paths:
-          - path: /
+          {{- range .paths }} }
+          - path: {{ .path | quote }}
+            {{- if $apiIsStable }}
+            pathType: {{ default "Prefix" .pathType }}
+            {{- end }}
             backend:
-              serviceName: {{ $fullName }}-web
-              servicePort: http
-          - path: /static/
-            backend:
-              serviceName: {{ $fullName }}-static
-              servicePort: http
-          - path: /if/
-            backend:
-              serviceName: {{ $fullName }}-static
-              servicePort: http
-          - path: /media/
-            backend:
-              serviceName: {{ $fullName }}-static
-              servicePort: http
-          - path: /robots.txt
-            backend:
-              serviceName: {{ $fullName }}-static
-              servicePort: http
-          - path: /favicon.ico
-            backend:
-              serviceName: {{ $fullName }}-static
-              servicePort: http
+              {{- if $apiIsStable }}
+              service:
+                name: {{ $appSvcName }}
+                port:
+                  name: http
+              {{- else }}
+              serviceName: {{ $appSvcName }}
+              servicePort: 9000
+          {{- end }}
+    {{- end }}
+  {{- end }}
   {{- end }}

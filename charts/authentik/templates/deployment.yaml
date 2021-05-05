@@ -1,0 +1,72 @@
+{{- range list "server" "worker" }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ printf "%s-%s" (include "common.names.fullname" $) . }}
+  labels:
+  {{- include "common.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $.Values.replicas }}
+  selector:
+    matchLabels:
+  {{- include "common.labels" $ | nindent 6 }}
+  template:
+    metadata:
+      labels:
+    {{- include "common.labels" $ | nindent 8 }}
+    spec:
+      {{- if $.Values.serviceAccount.create }}
+      serviceAccountName: {{ include "common.names.fullname" $ }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          image: "{{ $.Values.image.name }}:{{ $.Values.image.tag }}"
+          imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
+          args: [{{ quote . }}]
+          {{- with $.Values.env }}
+          env:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.envFrom }}
+          envFrom:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.volumeMounts }}
+          volumeMounts:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if eq . "server" }}
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+            - name: https
+              containerPort: 9443
+              protocol: TCP
+              {{- if $.Values.livenessProbe.enabled }}
+          {{- with omit $.Values.livenessProbe "enabled" }}
+          livenessProbe:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- if $.Values.readinessProbe.enabled }}
+          {{- with omit $.Values.readinessProbe "enabled" }}
+          readinessProbe:
+          {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- with index $.Values.resources . }}
+          resources:
+          {{- toYaml . | nindent 12 }}
+      {{- end }}
+      {{- with $.Values.volumes }}
+      volumes:
+      {{- toYaml . | nindent 8 }}
+  {{- end }}
+  {{- end }}

@@ -1,97 +1,118 @@
-###################################
-# Values directly affecting authentik
-###################################
+replicas: 1
+
 image:
-  name: beryju/authentik
-  name_static: beryju/authentik-static
-  name_outposts: beryju/authentik # Prefix used for Outpost deployments, Outpost type and version is appended
-  tag: 2021.4.3
+  name: ghcr.io/goauthentik/authentik
+  tag: 2021.4.5
   pullPolicy: IfNotPresent
 
-serverReplicas: 1
-workerReplicas: 1
-
-# Enable the Kubernetes integration which lets authentik deploy outposts into kubernetes
-kubernetesIntegration: true
-
-monitoring:
+ingress:
   enabled: false
+  ingressClassName: ""
+  annotations: {}
+  labels: {}
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
 
-pvc:
-  mode: ReadWriteMany
-  uploadsSize: 5Gi
-  uploadsStorageClass: null
-  geoIpSize: 1Gi
-  geoIpStorageClass: null
+# see more configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
+env:
+  OUTPOSTS__DOCKER_IMAGE_BASE: "ghcr.io/goauthentik/authentik"
+  # SECRET_KEY: ""
+  # POSTGRESQL__S3_BACKUP__SECRET_KEY: ""
+  # EMAIL__PASSWORD: ""
+  # POSTGRESQL__HOST: ""
+  # POSTGRESQL__NAME: ""
+  # POSTGRESQL__USER: ""
+  # POSTGRESQL__S3_BACKUP__ACCESS_KEY: ""
+  # POSTGRESQL__S3_BACKUP__BUCKET: ""
+  # POSTGRESQL__S3_BACKUP__REGION: ""
+  # POSTGRESQL__S3_BACKUP__HOST: ""
+  # REDIS__HOST: ""
+  # ERROR_REPORTING__ENABLED: ""
+  # ERROR_REPORTING__ENVIRONMENT: ""
+  # ERROR_REPORTING__SEND_PII: ""
+  # LOG_LEVEL: ""
+  # OUTPOSTS__DOCKER_IMAGE_BASE: ""
+  # EMAIL__HOST: ""
+  # EMAIL__PORT: ""
+  # EMAIL__USERNAME: ""
+  # EMAIL__USE_TLS: ""
+  # EMAIL__USE_SSL: ""
+  # EMAIL__TIMEOUT: ""
+  # EMAIL__FROM: ""
+envFrom: []
 
-config:
-  # Optionally specify fixed secret_key, otherwise generated automatically
-  # secretKey: _k*@6h2u2@q-dku57hhgzb7tnx*ba9wodcb^s9g0j59@=y(@_o
-  # Enable error reporting
-  errorReporting:
-    enabled: false
-    environment: customer
-    sendPii: false
-  # Log level used by web and worker
-  # Can be either debug, info, warning, error
-  logLevel: warning
-  # Global Email settings
-  email:
-    # SMTP Host Emails are sent to
-    host: localhost
-    port: 25
-    # Optionally authenticate
-    username: ""
-    password: ""
-    # Use StartTLS
-    useTls: false
-    # Use SSL
-    useSsl: false
-    timeout: 10
-    # Email address authentik will send from, should have a correct @domain
-    from: authentik@localhost
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  name: http
+  protocol: TCP
+  labels: {}
+  annotations: {}
 
-# Enable MaxMind GeoIP
+volumes: []
+
+volumeMounts: []
+
+affinity: {}
+
+resources:
+  server: {}
+  worker: {}
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /-/health/live/
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 30
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /-/health/ready/
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 30
+
+serviceAccount:
+  create: true
+
+prometheus:
+  serviceMonitor:
+    create: false
+    interval: 10s
+    scrapeTimeout: 3s
+    secret:
+      name: ""
+      # username currently _MUST_ be "monitor"
+      usernameKey: ""
+      passwordKey: ""
+  rules:
+    create: false
+
 geoip:
   enabled: false
+  schedule: "0 */8 * * *"
   accountId: ""
   licenseKey: ""
-  image: maxmindinc/geoipupdate:latest
+  editionIds: "GeoLite2-City"
 
-# Enable Database Backups to S3
-# backup:
-#   accessKey: access-key
-#   secretKey: secret-key
-#   bucket: s3-bucket
-#   region: eu-central-1
-#   host: s3-host
-
-ingress:
-  annotations: { }
-  # kubernetes.io/ingress.class: nginx
-  # kubernetes.io/tls-acme: "true"
-  hosts:
-    - authentik.k8s.local
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - authentik.k8s.local
-
-###################################
-# Values controlling dependencies
-###################################
-
-install:
-  postgresql: true
-  redis: true
-
-# These values influence the bundled postgresql and redis charts, but are also used by authentik to connect
 postgresql:
-  postgresqlDatabase: authentik
-
+  enabled: false
+  # postgresqlUsername: ""
+  # postgresqlPassword: ""
+  # postgresqlDatabase: ""
+  # persistence:
+  #   enabled: true
+  #   storageClass:
+  #   accessModes:
+  #     - ReadWriteOnce
 redis:
-  cluster:
+  enabled: false
+  auth:
     enabled: false
-  master:
-    # https://stackoverflow.com/a/59189742
-    disableCommands: []
