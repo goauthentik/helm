@@ -12,8 +12,7 @@
     {{- if kindIs "string" $v }}
       {{- $name = printf "%s_%s" (upper $k) (upper $v) }}
     {{- end }}
-- name: {{ printf "AUTHENTIK_EMAIL__%s" (upper .) | quote }}
-  value: {{ quote . }}
-    {{- end -}}
+- name: {{ quote $name }}
+  value: {{ quote $v }}
   {{- end -}}
 {{- end -}}
