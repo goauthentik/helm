@@ -5,3 +5,9 @@
   {{- end -}}
   {{- $isStable -}}
 {{- end -}}
+
+{{- define "authentik.env" -}}
+  {{- range .Values.authentik -}}
+
+  {{- end -}}
+{{- end -}}

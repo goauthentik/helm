@@ -20,7 +20,7 @@ env:
   AUTHENTIK_POSTGRESQL__NAME: "authentik"
   AUTHENTIK_POSTGRESQL__USER: "authentik"
   AUTHENTIK_POSTGRESQL__PASSWORD: "authentik"
-  AUTHENTIK_REDIS__HOST: "redis"
+  AUTHENTIK_REDIS__HOST: "redis-headless"
   AUTHENTIK_REDIS__PASSWORD: "authentik"
 envFrom: []
 

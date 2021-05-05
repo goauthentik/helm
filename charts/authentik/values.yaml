@@ -17,6 +17,21 @@ ingress:
           pathType: Prefix
 
 authentik:
+  log_level: ""
+  email:
+    host: ""
+    port: ""
+    username: ""
+    use_tls: ""
+    use_ssl: ""
+    timeout: ""
+    from: ""
+  outposts:
+    docker_image_base: ""
+  error_reporting:
+    enabled: false
+    environment: ""
+    send_pii: ""
   postgresql:
     host: ""
     database: ""
@@ -28,6 +43,9 @@ authentik:
       host: ""
   redis:
     host: ""
+    password: ""
+
+
 
 # see configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
 env: {}
