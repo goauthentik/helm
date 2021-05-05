@@ -8,8 +8,8 @@ image:
 ingress:
   enabled: false
   ingressClassName: ""
-  annotations: { }
-  labels: { }
+  annotations: {}
+  labels: {}
   hosts:
     - host: authentik.domain.tld
       paths:
@@ -50,18 +50,18 @@ service:
   port: 80
   name: http
   protocol: TCP
-  labels: { }
-  annotations: { }
+  labels: {}
+  annotations: {}
 
 volumes: []
 
 volumeMounts: []
 
-affinity: { }
+affinity: {}
 
 resources:
-  server: { }
-  worker: { }
+  server: {}
+  worker: {}
 
 livenessProbe:
   enabled: true
