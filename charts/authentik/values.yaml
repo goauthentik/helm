@@ -46,7 +46,7 @@ authentik:
     host: ""
     password: ""
 
-# see configuration options at https://goauthentik.io/docs/installation/docker-compose-config/
+# see configuration options at https://goauthentik.io/docs/installation/configuration/
 env: {}
 # AUTHENTIK_VAR_NAME: VALUE
 
