@@ -17,26 +17,27 @@ ingress:
           pathType: Prefix
 
 authentik:
-  log_level: ""
+  log_level: info
   secret_key: ""
   email:
     host: ""
     port: ""
     username: ""
-    use_tls: ""
-    use_ssl: ""
-    timeout: ""
+    use_tls: false
+    use_ssl: false
+    timeout: 30
     from: ""
   outposts:
-    docker_image_base: ""
+    docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
   error_reporting:
     enabled: false
-    environment: ""
-    send_pii: ""
+    environment: "k8s"
+    send_pii: false
   postgresql:
     host: ""
     name: ""
     user: ""
+    password: ""
     s3_backup:
       access_key: ""
       bucket: ""
