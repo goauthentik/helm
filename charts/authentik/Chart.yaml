@@ -35,10 +35,10 @@ annotations:
   artifacthub.io/prerelease: "true"
   artifacthub.io/changes: |
     - kind: fixed
-      description: removed lingering suffix in ingress causing a mismatch for selector
+      description: added example values to get started
       links:
         - name: Github PR
-          url: https://github.com/goauthentik/helm/pull/5
+          url: https://github.com/goauthentik/helm/pull/6
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
