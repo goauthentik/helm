@@ -9,7 +9,7 @@ keywords:
   - proxy
   - oauth
   - authentication
-version: 1.0.0-RC5
+version: 1.0.0-RC6
 appVersion: 2021.4.5
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
