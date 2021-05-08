@@ -9,6 +9,42 @@
 
 {{ template "chart.maintainersSection" . }}
 
+## Example values to get started:
+
+```yaml
+authentik:
+  secret_key: "PleaseGenerateA50CharKey"
+  error_reporting:
+    enabled: true
+  postgresql:
+    host: "{{ .Release.Name }}-postgresql"
+    name: "authentik"
+    user: "authentik"
+    password: "ThisIsNotASecurePassword"
+  redis:
+    host: "{{ .Release.Name }}-redis-master"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+postgresql:
+  enabled: true
+  postgresqlUsername: "authentik"
+  postgresqlPassword: "ThisIsNotASecurePassword"
+  postgresqlDatabase: "authentik"
+  persistence:
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+redis:
+  enabled: true
+```
+
 {{ template "chart.sourcesSection" . }}
 
 {{ template "chart.requirementsSection" . }}
