@@ -30,6 +30,8 @@ authentik:
   outposts:
     docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
   error_reporting:
+    # This sends anonymous usage-data, stack traces on errors and
+    # performance data to sentry.beryju.org, and is fully opt-in
     enabled: false
     environment: "k8s"
     send_pii: false
