@@ -120,12 +120,7 @@ prometheus:
       passwordKey: ""
   rules:
     create: false
-host: ""
-name: "authentik"
-user: "authentik"
-password: "ThisIsNotASecurePassword"
-redis:
-host: "'{{ .Release.Name }}'-redis-master"
+
 geoip:
   enabled: false
   schedule: "0 */8 * * *"
