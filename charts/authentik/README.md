@@ -94,8 +94,6 @@ redis:
 | geoip.enabled | bool | `false` |  |
 | geoip.licenseKey | string | `""` |  |
 | geoip.schedule | string | `"0 */8 * * *"` |  |
-| host | string | `""` |  |
-| host | string | `"'{{ .Release.Name }}'-redis-master"` |  |
 | image.name | string | `"docker.beryju.org/authentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `"gh-next"` |  |
@@ -111,8 +109,6 @@ redis:
 | livenessProbe.httpGet.port | string | `"http"` |  |
 | livenessProbe.initialDelaySeconds | int | `15` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
-| name | string | `"authentik"` |  |
-| password | string | `"ThisIsNotASecurePassword"` |  |
 | postgresql.enabled | bool | `false` |  |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
@@ -128,7 +124,6 @@ redis:
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | readinessProbe.initialDelaySeconds | int | `15` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
-| redis | string | `nil` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` |  |
 | replicas | int | `1` |  |
@@ -142,6 +137,5 @@ redis:
 | service.protocol | string | `"TCP"` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.create | bool | `true` |  |
-| user | string | `"authentik"` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
