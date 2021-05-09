@@ -36,6 +36,9 @@ authentik:
     environment: "k8s"
     send_pii: false
   postgresql:
+    # -- set the postgresql hostname to talk to
+    # if unset and .Values.postgresql.enabled == true, will generate the default
+    # @default -- `{{ .Release.Name }}-postgresql`
     host: ""
     name: ""
     user: ""
@@ -82,21 +85,25 @@ resources:
   server: {}
   worker: {}
 
+# WARNING! When initially deploying, authentik has to do a few DB migrations. This may cause it to die from probe
+# failure, but will continue on reboot. You can disable this during deployment if this is not desired
 livenessProbe:
+  # -- enables or disables the livenessProbe
   enabled: true
   httpGet:
+    # -- liveness probe url path
     path: /-/health/live/
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 30
+  initialDelaySeconds: 15
+  periodSeconds: 10
 
 readinessProbe:
   enabled: true
   httpGet:
     path: /-/health/ready/
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 30
+  initialDelaySeconds: 15
+  periodSeconds: 10
 
 serviceAccount:
   create: true
@@ -113,7 +120,12 @@ prometheus:
       passwordKey: ""
   rules:
     create: false
-
+host: ""
+name: "authentik"
+user: "authentik"
+password: "ThisIsNotASecurePassword"
+redis:
+host: "'{{ .Release.Name }}'-redis-master"
 geoip:
   enabled: false
   schedule: "0 */8 * * *"
@@ -123,9 +135,9 @@ geoip:
 
 postgresql:
   enabled: false
-  # postgresqlUsername: ""
+  postgresqlUsername: "authentik"
   # postgresqlPassword: ""
-  # postgresqlDatabase: ""
+  postgresqlDatabase: "authentik"
   # persistence:
   #   enabled: true
   #   storageClass:

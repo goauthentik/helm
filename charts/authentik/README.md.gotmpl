@@ -19,12 +19,12 @@ authentik:
   error_reporting:
     enabled: true
   postgresql:
-    host: "{{ .Release.Name }}-postgresql"
+    host: "asdf-postgresql"
     name: "authentik"
     user: "authentik"
     password: "ThisIsNotASecurePassword"
   redis:
-    host: "{{ .Release.Name }}-redis-master"
+    host: "asdf-redis-master"
 
 ingress:
   enabled: true
@@ -36,13 +36,7 @@ ingress:
 
 postgresql:
   enabled: true
-  postgresqlUsername: "authentik"
   postgresqlPassword: "ThisIsNotASecurePassword"
-  postgresqlDatabase: "authentik"
-  persistence:
-    enabled: true
-    accessModes:
-      - ReadWriteOnce
 redis:
   enabled: true
 ```

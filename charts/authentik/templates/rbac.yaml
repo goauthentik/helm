@@ -31,31 +31,47 @@ rules:
       - services
       - configmaps
     verbs:
-      - "get"
-      - "create"
-      - "delete"
-      - "list"
-      - "patch"
+      - get
+      - create
+      - delete
+      - list
+      - patch
   - apiGroups:
-      - "extensions"
-      - "apps"
+      - extensions
+      - apps
     resources:
-      - "deployments"
+      - deployments
     verbs:
-      - "get"
-      - "create"
-      - "delete"
-      - "list"
-      - "patch"
+      - get
+      - create
+      - delete
+      - list
+      - patch
   - apiGroups:
-      - "extensions"
-      - "networking.k8s.io"
+      - extensions
+      - networking.k8s.io
     resources:
-      - "ingresses"
+      - ingresses
     verbs:
-      - "get"
-      - "create"
-      - "delete"
-      - "list"
-      - "patch"
+      - get
+      - create
+      - delete
+      - list
+      - patch
+  - apiGroups:
+     - traefik.containo.us
+    resources:
+     - middlewares
+    verbs:
+      - get
+      - create
+      - delete
+      - list
+      - patch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - list
   {{- end }}
