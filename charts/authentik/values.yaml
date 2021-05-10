@@ -21,7 +21,7 @@ authentik:
   secret_key: ""
   email:
     host: ""
-    port: ""
+    port: 587
     username: ""
     use_tls: false
     use_ssl: false

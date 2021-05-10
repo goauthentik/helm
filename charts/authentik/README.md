@@ -65,7 +65,7 @@ redis:
 | affinity | object | `{}` |  |
 | authentik.email.from | string | `""` |  |
 | authentik.email.host | string | `""` |  |
-| authentik.email.port | string | `""` |  |
+| authentik.email.port | int | `587` |  |
 | authentik.email.timeout | int | `30` |  |
 | authentik.email.use_ssl | bool | `false` |  |
 | authentik.email.use_tls | bool | `false` |  |
