@@ -16,8 +16,6 @@ ingress:
 authentik:
   log_level: debug
   secret_key: 5up3r53cr37K3y
-  outposts:
-    docker_image_base: beryju/authentik
   postgresql:
     host: postgresql
     name: authentik
@@ -30,9 +28,7 @@ authentik:
 postgresql:
   enabled: true
   fullnameOverride: postgresql
-  postgresqlUsername: authentik
   postgresqlPassword: au7h3n71k
-  postgresqlDatabase: authentik
   persistence:
     enabled: false
 
