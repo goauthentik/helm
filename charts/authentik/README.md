@@ -1,6 +1,6 @@
 # authentik
 
-![Version: 1.0.0-RC5](https://img.shields.io/badge/Version-1.0.0--RC5-informational?style=flat-square) ![AppVersion: 2021.4.5](https://img.shields.io/badge/AppVersion-2021.4.5-informational?style=flat-square)
+![Version: 1.0.0-RC6](https://img.shields.io/badge/Version-1.0.0--RC6-informational?style=flat-square) ![AppVersion: 2021.4.5](https://img.shields.io/badge/AppVersion-2021.4.5-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -12,6 +12,38 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | ---- | ------ | --- |
 | BeryJu | jens@beryju.org | https://github.com/BeryJu |
 | dirtycajunrice | nick@cajun.pro | https://github.com/DirtyCajunRice |
+
+## Example values to get started:
+
+```yaml
+authentik:
+  secret_key: "PleaseGenerateA50CharKey"
+  # This sends anonymous usage-data, stack traces on errors and
+  # performance data to sentry.beryju.org, and is fully opt-in
+  error_reporting:
+    enabled: true
+  postgresql:
+    host: "asdf-postgresql"
+    name: "authentik"
+    user: "authentik"
+    password: "ThisIsNotASecurePassword"
+  redis:
+    host: "asdf-redis-master"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+postgresql:
+  enabled: true
+  postgresqlPassword: "ThisIsNotASecurePassword"
+redis:
+  enabled: true
+```
 
 ## Source Code
 
@@ -33,18 +65,19 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | affinity | object | `{}` |  |
 | authentik.email.from | string | `""` |  |
 | authentik.email.host | string | `""` |  |
-| authentik.email.port | string | `""` |  |
-| authentik.email.timeout | string | `""` |  |
-| authentik.email.use_ssl | string | `""` |  |
-| authentik.email.use_tls | string | `""` |  |
+| authentik.email.port | int | `587` |  |
+| authentik.email.timeout | int | `30` |  |
+| authentik.email.use_ssl | bool | `false` |  |
+| authentik.email.use_tls | bool | `false` |  |
 | authentik.email.username | string | `""` |  |
 | authentik.error_reporting.enabled | bool | `false` |  |
-| authentik.error_reporting.environment | string | `""` |  |
-| authentik.error_reporting.send_pii | string | `""` |  |
-| authentik.log_level | string | `""` |  |
-| authentik.outposts.docker_image_base | string | `""` |  |
-| authentik.postgresql.host | string | `""` |  |
+| authentik.error_reporting.environment | string | `"k8s"` |  |
+| authentik.error_reporting.send_pii | bool | `false` |  |
+| authentik.log_level | string | `"info"` |  |
+| authentik.outposts.docker_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` |  |
+| authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `""` |  |
+| authentik.postgresql.password | string | `""` |  |
 | authentik.postgresql.s3_backup.access_key | string | `""` |  |
 | authentik.postgresql.s3_backup.bucket | string | `""` |  |
 | authentik.postgresql.s3_backup.host | string | `""` |  |
@@ -71,12 +104,14 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | ingress.hosts[0].paths[0].pathType | string | `"Prefix"` |  |
 | ingress.ingressClassName | string | `""` |  |
 | ingress.labels | object | `{}` |  |
-| livenessProbe.enabled | bool | `true` |  |
-| livenessProbe.httpGet.path | string | `"/-/health/live/"` |  |
+| livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
+| livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `60` |  |
-| livenessProbe.periodSeconds | int | `30` |  |
+| livenessProbe.initialDelaySeconds | int | `15` |  |
+| livenessProbe.periodSeconds | int | `10` |  |
 | postgresql.enabled | bool | `false` |  |
+| postgresql.postgresqlDatabase | string | `"authentik"` |  |
+| postgresql.postgresqlUsername | string | `"authentik"` |  |
 | prometheus.rules.create | bool | `false` |  |
 | prometheus.serviceMonitor.create | bool | `false` |  |
 | prometheus.serviceMonitor.interval | string | `"10s"` |  |
@@ -87,8 +122,8 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `60` |  |
-| readinessProbe.periodSeconds | int | `30` |  |
+| readinessProbe.initialDelaySeconds | int | `15` |  |
+| readinessProbe.periodSeconds | int | `10` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` |  |
 | replicas | int | `1` |  |

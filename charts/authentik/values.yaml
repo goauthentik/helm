@@ -17,26 +17,32 @@ ingress:
           pathType: Prefix
 
 authentik:
-  log_level: ""
+  log_level: info
   secret_key: ""
   email:
     host: ""
-    port: ""
+    port: 587
     username: ""
-    use_tls: ""
-    use_ssl: ""
-    timeout: ""
+    use_tls: false
+    use_ssl: false
+    timeout: 30
     from: ""
   outposts:
-    docker_image_base: ""
+    docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
   error_reporting:
+    # This sends anonymous usage-data, stack traces on errors and
+    # performance data to sentry.beryju.org, and is fully opt-in
     enabled: false
-    environment: ""
-    send_pii: ""
+    environment: "k8s"
+    send_pii: false
   postgresql:
+    # -- set the postgresql hostname to talk to
+    # if unset and .Values.postgresql.enabled == true, will generate the default
+    # @default -- `{{ .Release.Name }}-postgresql`
     host: ""
     name: ""
     user: ""
+    password: ""
     s3_backup:
       access_key: ""
       bucket: ""
@@ -79,21 +85,25 @@ resources:
   server: {}
   worker: {}
 
+# WARNING! When initially deploying, authentik has to do a few DB migrations. This may cause it to die from probe
+# failure, but will continue on reboot. You can disable this during deployment if this is not desired
 livenessProbe:
+  # -- enables or disables the livenessProbe
   enabled: true
   httpGet:
+    # -- liveness probe url path
     path: /-/health/live/
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 30
+  initialDelaySeconds: 15
+  periodSeconds: 10
 
 readinessProbe:
   enabled: true
   httpGet:
     path: /-/health/ready/
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 30
+  initialDelaySeconds: 15
+  periodSeconds: 10
 
 serviceAccount:
   create: true
@@ -120,9 +130,9 @@ geoip:
 
 postgresql:
   enabled: false
-  # postgresqlUsername: ""
+  postgresqlUsername: "authentik"
   # postgresqlPassword: ""
-  # postgresqlDatabase: ""
+  postgresqlDatabase: "authentik"
   # persistence:
   #   enabled: true
   #   storageClass:
