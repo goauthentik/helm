@@ -34,19 +34,8 @@ dependencies:
 annotations:
   artifacthub.io/prerelease: "true"
   artifacthub.io/changes: |
-    - kind: added
-      description: example values in readme to get started
-      links:
-        - name: Github PR
-          url: https://github.com/goauthentik/helm/pull/6
-    - kind: added
-      description: a few of the descriptions for values.yaml
-    - kind: changed
-      description: default values for some empty fields
     - kind: fixed
-      description: missing roles for traefik middlewares and crd list
-    - kind: security
-      description: explicitly disabled send_pii by default
+      description: update images in Chart.yaml file
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -62,6 +51,8 @@ annotations:
       url: https://github.com/DirtyCajunRice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/authentik:2021.4.5
-    - name: authentik-proxy
-      image: ghcr.io/goauthentik/authentik-proxy:2021.4.5
+      image: ghcr.io/goauthentik/server:2021.4.5
+    - name: authentik-outpost-proxy
+      image: ghcr.io/goauthentik/proxy:2021.4.5
+    - name: authentik-outpost-ldap
+      image: ghcr.io/goauthentik/ldap:2021.4.5
