@@ -10,7 +10,7 @@ keywords:
   - oauth
   - authentication
 version: 1.0.0-RC6
-appVersion: 2021.4.5
+appVersion: 2021.4.6
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -51,8 +51,8 @@ annotations:
       url: https://github.com/DirtyCajunRice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.4.5
+      image: ghcr.io/goauthentik/server:2021.4.6
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.4.5
+      image: ghcr.io/goauthentik/proxy:2021.4.6
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.4.5
+      image: ghcr.io/goauthentik/ldap:2021.4.6
