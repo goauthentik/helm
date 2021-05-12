@@ -9,6 +9,13 @@ keywords:
   - proxy
   - oauth
   - authentication
+  - saml
+  - sso
+  - identity
+  - single-sign-on
+  - ldap
+  - idp
+  - sp
 version: 1.0.0-RC7
 appVersion: 2021.4.6
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
