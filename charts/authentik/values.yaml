@@ -43,11 +43,14 @@ authentik:
     name: ""
     user: ""
     password: ""
+    port: 5432
     s3_backup:
       access_key: ""
+      secret_key: ""
       bucket: ""
       region: ""
       host: ""
+      location: ""
   redis:
     host: ""
     password: ""
