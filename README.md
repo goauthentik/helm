@@ -61,9 +61,9 @@ authentik is an open-source Identity Provider focused on flexibility and versati
 | geoip.enabled | bool | `false` |  |
 | geoip.licenseKey | string | `""` |  |
 | geoip.schedule | string | `"0 */8 * * *"` |  |
-| image.name | string | `"docker.beryju.org/authentik/server"` |  |
+| image.name | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"gh-next"` |  |
+| image.tag | string | `"2021.5.1"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |

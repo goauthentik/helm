@@ -1,8 +1,8 @@
 replicas: 1
 
 image:
-  name: docker.beryju.org/authentik/server
-  tag: gh-next
+  name: ghcr.io/goauthentik/server
+  tag: 2021.5.1
   pullPolicy: IfNotPresent
 
 ingress:
