@@ -73,20 +73,18 @@ redis:
 | authentik.error_reporting.enabled | bool | `false` |  |
 | authentik.error_reporting.environment | string | `"k8s"` |  |
 | authentik.error_reporting.send_pii | bool | `false` |  |
-| authentik.log_level | string | `"info"` |  |
-| authentik.outposts.docker_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` |  |
+| authentik.log_level | string | `"info"` | Log level for server and worker |
+| authentik.outposts.docker_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `""` |  |
 | authentik.postgresql.password | string | `""` |  |
-| authentik.postgresql.s3_backup.access_key | string | `""` |  |
-| authentik.postgresql.s3_backup.bucket | string | `""` |  |
-| authentik.postgresql.s3_backup.host | string | `""` |  |
-| authentik.postgresql.s3_backup.region | string | `""` |  |
+| authentik.postgresql.port | int | `5432` |  |
+| authentik.postgresql.s3_backup | object | `{"access_key":"","bucket":"","host":"","location":"","region":"","secret_key":""}` | optional S3 backup, backs the full database up once a day |
 | authentik.postgresql.user | string | `""` |  |
 | authentik.redis.host | string | `""` |  |
 | authentik.redis.password | string | `""` |  |
-| authentik.secret_key | string | `""` |  |
-| env | object | `{}` |  |
+| authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | envFrom | list | `[]` |  |
 | envValueFrom | object | `{}` |  |
 | geoip.accountId | string | `""` |  |

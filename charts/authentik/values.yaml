@@ -17,7 +17,10 @@ ingress:
           pathType: Prefix
 
 authentik:
+  # -- Log level for server and worker
   log_level: info
+  # -- Secret key used for cookie singing and unique user IDs,
+  # don't change this after the first install
   secret_key: ""
   email:
     host: ""
@@ -28,6 +31,10 @@ authentik:
     timeout: 30
     from: ""
   outposts:
+    # -- Template used for managed outposts. The following placeholders can be used
+    # %(type)s - the type of the outpost
+    # %(version)s - version of your authentik install
+    # %(build_hash)s - only for beta versions, the build hash of the image
     docker_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
   error_reporting:
     # This sends anonymous usage-data, stack traces on errors and
@@ -44,6 +51,7 @@ authentik:
     user: ""
     password: ""
     port: 5432
+    # -- optional S3 backup, backs the full database up once a day
     s3_backup:
       access_key: ""
       secret_key: ""
@@ -55,7 +63,7 @@ authentik:
     host: ""
     password: ""
 
-# see configuration options at https://goauthentik.io/docs/installation/configuration/
+# -- see configuration options at https://goauthentik.io/docs/installation/configuration/
 env: {}
 # AUTHENTIK_VAR_NAME: VALUE
 
