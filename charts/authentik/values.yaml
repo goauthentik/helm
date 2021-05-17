@@ -2,7 +2,7 @@ replicas: 1
 
 image:
   name: ghcr.io/goauthentik/server
-  tag: 2021.5.1
+  tag: 2021.5.2
   pullPolicy: IfNotPresent
 
 ingress:
