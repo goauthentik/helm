@@ -8,7 +8,7 @@ metadata:
   {{- include "common.labels" $ | nindent 4 }}
 spec:
   {{ if eq . "server" -}}
-  replicas: {{ $.Values.replicas.server }}
+  replicas: {{ $.Values.replicas }}
   {{- else -}}
   replicas: {{ $.Values.replicas.worker }}
   {{- end }}

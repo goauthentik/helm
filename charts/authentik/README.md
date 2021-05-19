@@ -81,7 +81,7 @@ redis:
 | authentik.postgresql.port | int | `5432` |  |
 | authentik.postgresql.s3_backup | object | `{"access_key":"","bucket":"","host":"","location":"","region":"","secret_key":""}` | optional S3 backup, backs the full database up once a day |
 | authentik.postgresql.user | string | `""` |  |
-| authentik.redis.host | string | `""` |  |
+| authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
@@ -137,3 +137,4 @@ redis:
 | serviceAccount.create | bool | `true` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+| worker.replicas | int | `1` |  |

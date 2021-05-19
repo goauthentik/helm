@@ -1,6 +1,7 @@
-replicas:
-  server: 1
-  worker: 1
+replicas: 1
+
+worker:
+  replicas: 1
 
 image:
   name: ghcr.io/goauthentik/server
