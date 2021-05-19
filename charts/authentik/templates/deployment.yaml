@@ -10,7 +10,7 @@ spec:
   {{ if eq . "server" -}}
   replicas: {{ $.Values.replicas }}
   {{- else -}}
-  replicas: {{ $.Values.replicas.worker }}
+  replicas: {{ $.Values.worker.replicas }}
   {{- end }}
   selector:
     matchLabels:
