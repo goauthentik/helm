@@ -28,13 +28,11 @@ authentik:
 
 postgresql:
   enabled: true
-  fullnameOverride: postgresql
   postgresqlPassword: au7h3n71k
   persistence:
     enabled: false
 
 redis:
-  fullnameOverride: redis
   enabled: true
   auth:
     enabled: true
