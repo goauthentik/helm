@@ -59,9 +59,9 @@ rules:
       - list
       - patch
   - apiGroups:
-     - traefik.containo.us
+      - traefik.containo.us
     resources:
-     - middlewares
+      - middlewares
     verbs:
       - get
       - create
