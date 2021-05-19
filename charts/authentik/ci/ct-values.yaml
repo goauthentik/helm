@@ -19,12 +19,10 @@ authentik:
   log_level: debug
   secret_key: 5up3r53cr37K3y
   postgresql:
-    host: postgresql
     name: authentik
     user: authentik
     password: au7h3n71k
   redis:
-    host: redis-master
     password: au7h3n71k
 
 postgresql:

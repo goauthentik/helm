@@ -38,7 +38,7 @@ spec:
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-            {{- include "authentik.env" $.Values.authentik | indent 12 }}
+            {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
             - name: {{ $name }}
               valueFrom:

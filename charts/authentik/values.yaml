@@ -48,7 +48,7 @@ authentik:
     # -- set the postgresql hostname to talk to
     # if unset and .Values.postgresql.enabled == true, will generate the default
     # @default -- `{{ .Release.Name }}-postgresql`
-    host: ""
+    host: '{{ .Release.Name }}-postgresql'
     name: ""
     user: ""
     password: ""
@@ -62,7 +62,9 @@ authentik:
       host: ""
       location: ""
   redis:
-    host: ""
+    # -- set the redis hostname to talk to
+    # @default -- `{{ .Release.Name }}-redis-master`
+    host: '{{ .Release.Name }}-redis-master'
     password: ""
 
 # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
