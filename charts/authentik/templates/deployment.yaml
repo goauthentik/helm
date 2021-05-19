@@ -7,7 +7,11 @@ metadata:
   labels:
   {{- include "common.labels" $ | nindent 4 }}
 spec:
-  replicas: {{ $.Values.replicas }}
+  {{- if eq . "server" }}
+  replicas: {{ $.Values.replicas.server }}
+  {{- else -}}
+  replicas: {{ $.Values.replicas.worker }}
+  {{- end }}
   selector:
     matchLabels:
   {{- include "common.labels" $ | nindent 6 }}
