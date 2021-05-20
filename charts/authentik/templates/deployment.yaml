@@ -7,7 +7,11 @@ metadata:
   labels:
   {{- include "common.labels" $ | nindent 4 }}
 spec:
+  {{ if eq . "server" -}}
   replicas: {{ $.Values.replicas }}
+  {{- else -}}
+  replicas: {{ $.Values.worker.replicas }}
+  {{- end }}
   selector:
     matchLabels:
   {{- include "common.labels" $ | nindent 6 }}
@@ -34,7 +38,7 @@ spec:
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-            {{- include "authentik.env" $.Values.authentik | indent 12 }}
+            {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
             - name: {{ $name }}
               valueFrom:

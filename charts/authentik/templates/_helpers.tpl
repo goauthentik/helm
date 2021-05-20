@@ -7,10 +7,10 @@
 {{- end -}}
 
 {{- define "authentik.env" -}}
-  {{- range $k, $v := . -}}
+  {{- range $k, $v := .values -}}
     {{- if kindIs "map" $v -}}
       {{- range $sk, $sv := $v -}}
-        {{- include "authentik.env" (dict (printf "%s__%s" (upper $k) (upper $sk)) $sv) -}}
+        {{- include "authentik.env" (dict "root" $.root "values" (dict (printf "%s__%s" (upper $k) (upper $sk)) $sv)) -}}
       {{- end -}}
     {{- else -}}
       {{- $value := $v -}}
@@ -19,7 +19,7 @@
       {{- end -}}
       {{- if $v }}
 - name: {{ printf "AUTHENTIK_%s" (upper $k) }}
-  value: {{ $v }}
+  value: {{ tpl $v $.root }}
       {{- end }}
     {{- end -}}
   {{- end -}}
