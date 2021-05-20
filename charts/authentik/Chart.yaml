@@ -25,7 +25,7 @@ maintainers:
     url: https://github.com/BeryJu
   - name: dirtycajunrice
     email: nick@cajun.pro
-    url: https://github.com/DirtyCajunRice
+    url: https://github.com/dirtycajunrice
 dependencies:
   - name: postgresql
     version: 10.4.2
@@ -43,6 +43,10 @@ annotations:
   artifacthub.io/changes: |
     - kind: fixed
       description: update images in Chart.yaml file
+    - kind: added
+      description: all values under authentik: are now template-able
+    - kind: added
+      description: add more docs
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -55,7 +59,7 @@ annotations:
       url: https://beryju.org
     - name: Nicholas St. Germain
       email: nick@cajun.pro
-      url: https://github.com/DirtyCajunRice
+      url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
       image: ghcr.io/goauthentik/server:2021.5.2
