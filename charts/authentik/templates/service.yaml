@@ -50,4 +50,5 @@ spec:
       nodePort: {{ .Values.service.nodePort }}
   {{- end }}
   selector:
-  {{- include "common.labels" . | nindent 4 }}
+    {{- include "common.labels.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: "server"

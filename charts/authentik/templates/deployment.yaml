@@ -5,7 +5,8 @@ kind: Deployment
 metadata:
   name: {{ printf "%s-%s" (include "common.names.fullname" $) . }}
   labels:
-  {{- include "common.labels" $ | nindent 4 }}
+    {{- include "common.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: "{{ . }}"
 spec:
   {{ if eq . "server" -}}
   replicas: {{ $.Values.replicas }}
@@ -14,11 +15,13 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-  {{- include "common.labels" $ | nindent 6 }}
+      {{- include "common.labels.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: "{{ . }}"
   template:
     metadata:
       labels:
-    {{- include "common.labels" $ | nindent 8 }}
+        {{- include "common.labels.selectorLabels" $ | nindent 8 }}
+        app.kubernetes.io/component: "{{ . }}"
     spec:
       {{- if $.Values.serviceAccount.create }}
       serviceAccountName: {{ include "common.names.fullname" $ }}
