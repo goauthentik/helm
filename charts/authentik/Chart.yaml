@@ -17,7 +17,7 @@ keywords:
   - idp
   - sp
 version: 1.0.1
-appVersion: 2021.5.3
+appVersion: 2021.5.4
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -39,13 +39,6 @@ dependencies:
     repository: https://library-charts.k8s-at-home.com
     version: 2.4.0
 annotations:
-  artifacthub.io/changes: |
-    - kind: added
-      description: all values under authentik: are now template-able
-    - kind: added
-      description: add more docs
-    - kind: fixed
-      description: update images in Chart.yaml file
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -61,8 +54,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.5.3
+      image: ghcr.io/goauthentik/server:2021.5.4
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.5.3
+      image: ghcr.io/goauthentik/proxy:2021.5.4
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.5.3
+      image: ghcr.io/goauthentik/ldap:2021.5.4
