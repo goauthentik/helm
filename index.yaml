@@ -2,6 +2,72 @@ apiVersion: v1
 entries:
   authentik:
   - annotations:
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2021.5.4
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2021.5.4
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2021.5.4
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.5.4
+    created: "2021-05-26T13:46:55.339236824Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.1.1
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: 2021ee6470e844d0ff3e96b1673fe18075d78457b15bc1ec11abad61ba8986e5
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-1.0.1/authentik-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
       artifacthub.io/changes: |
         - kind: added
           description: all values under authentik: are now template-able
@@ -469,4 +535,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-1.0.0-RC2/authentik-1.0.0-RC2.tgz
     version: 1.0.0-RC2
-generated: "2021-05-21T12:38:34.246573412Z"
+generated: "2021-05-26T13:46:55.339286924Z"
