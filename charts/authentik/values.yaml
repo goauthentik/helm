@@ -7,7 +7,7 @@ worker:
 
 image:
   name: ghcr.io/goauthentik/server
-  tag: 2021.5.3
+  tag: 2021.5.4
   pullPolicy: IfNotPresent
 
 ingress:
@@ -186,5 +186,6 @@ postgresql:
 redis:
   # -- enable the bundled bitnami redis chart
   enabled: false
+  architecture: standalone
   auth:
     enabled: false

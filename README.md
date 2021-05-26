@@ -95,7 +95,7 @@ redis:
 | geoip.schedule | string | `"0 */8 * * *"` |  |
 | image.name | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"2021.5.3"` |  |
+| image.tag | string | `"2021.5.4"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |

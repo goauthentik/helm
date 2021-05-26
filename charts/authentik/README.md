@@ -1,6 +1,6 @@
 # authentik
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0--RC7-informational?style=flat-square) ![AppVersion: 2021.5.3](https://img.shields.io/badge/AppVersion-2021.5.3-informational?style=flat-square)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=flat-square) ![AppVersion: 2021.5.4](https://img.shields.io/badge/AppVersion-2021.5.4-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -95,7 +95,7 @@ redis:
 | geoip.schedule | string | `"0 */8 * * *"` |  |
 | image.name | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"2021.5.3"` |  |
+| image.tag | string | `"2021.5.4"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
