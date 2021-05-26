@@ -186,5 +186,6 @@ postgresql:
 redis:
   # -- enable the bundled bitnami redis chart
   enabled: false
+  architecture: standalone
   auth:
     enabled: false
