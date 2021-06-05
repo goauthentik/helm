@@ -91,8 +91,10 @@ redis:
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
+| geoip.image | string | `"maxmindinc/geoipupdate:v4.7"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.schedule | string | `"0 */8 * * *"` |  |
+| geoip.updateInterval | int | `8` | number of hours between update runs |
 | image.name | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `"2021.5.4"` |  |
@@ -123,6 +125,7 @@ redis:
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | readinessProbe.initialDelaySeconds | int | `15` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
+| redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | enable the bundled bitnami redis chart |
 | replicas | int | `1` | Server replicas |

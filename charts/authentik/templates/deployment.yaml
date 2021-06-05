@@ -32,6 +32,22 @@ spec:
       {{- end }}
       enableServiceLinks: true
       containers:
+      {{- if $.Values.geoip.enabled }}
+        - name: geoip-sidecar
+          image: "{{ $.Values.geoip.image }}"
+          env:
+            - name: GEOIPUPDATE_FREQUENCY
+              value: {{ $.Values.geoip.updateInterval | quote }}
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
+            - name: GEOIPUPDATE_LICENSE_KEY
+              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
+            - name: GEOIPUPDATE_EDITION_IDS
+              value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
+          volumeMounts:
+            - name: geoip-db
+              mountPath: /usr/share/GeoIP
+      {{- end }}
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.name }}:{{ $.Values.image.tag }}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
@@ -51,9 +67,11 @@ spec:
           envFrom:
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- with $.Values.volumeMounts }}
           volumeMounts:
-              {{- toYaml . | nindent 12 }}
+            - name: geoip-db
+              mountPath: /usr/share/GeoIP
+            {{- with $.Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- if eq . "server" }}
           ports:
@@ -80,8 +98,10 @@ spec:
           resources:
               {{- toYaml . | nindent 12 }}
             {{- end }}
-      {{- with $.Values.volumes }}
       volumes:
+        - name: geoip-db
+          emptyDir: {}
+      {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
 {{- end }}
