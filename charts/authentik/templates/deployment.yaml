@@ -38,6 +38,8 @@ spec:
           env:
             - name: GEOIPUPDATE_FREQUENCY
               value: {{ $.Values.geoip.updateInterval | quote }}
+            - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
+              value: "1"
             - name: GEOIPUPDATE_ACCOUNT_ID
               value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
             - name: GEOIPUPDATE_LICENSE_KEY
