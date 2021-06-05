@@ -39,6 +39,9 @@ dependencies:
     repository: https://library-charts.k8s-at-home.com
     version: 2.4.0
 annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: migrate GeoIP from CronJob to sidecar with emptyDir
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
