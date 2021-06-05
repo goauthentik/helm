@@ -165,7 +165,6 @@ prometheus:
 geoip:
   # -- optional GeoIP, deploys a cronjob to download the maxmind database
   enabled: false
-  schedule: "0 */8 * * *"
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
   accountId: ""
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
