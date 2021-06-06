@@ -114,11 +114,11 @@ redis:
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
 | prometheus.rules.create | bool | `false` |  |
 | prometheus.serviceMonitor.create | bool | `false` |  |
-| prometheus.serviceMonitor.interval | string | `"10s"` |  |
+| prometheus.serviceMonitor.interval | string | `"30s"` |  |
 | prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
 | prometheus.serviceMonitor.secret.name | string | `""` |  |
-| prometheus.serviceMonitor.secret.passwordKey | string | `""` |  |
-| prometheus.serviceMonitor.secret.usernameKey | string | `""` |  |
+| prometheus.serviceMonitor.secret.passwordKey | string | `"password"` | password is the secret key |
+| prometheus.serviceMonitor.secret.usernameKey | string | `"username"` | username *value* currently _MUST_ be "monitor" |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
