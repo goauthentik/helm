@@ -58,6 +58,7 @@ redis:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity applied to the deployments |
+| authentik.authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` |  |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "Authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
