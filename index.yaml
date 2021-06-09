@@ -271,7 +271,7 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
-          description: all values under authentik: are now template-able
+          description: all values under authentik are now template-able
         - kind: added
           description: add more docs
         - kind: fixed
@@ -346,7 +346,7 @@ entries:
         - kind: fixed
           description: update images in Chart.yaml file
         - kind: added
-          description: all values under authentik: are now template-able
+          description: all values under authentik are now template-able
         - kind: added
           description: add more docs
       artifacthub.io/images: |
