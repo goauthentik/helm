@@ -1,6 +1,6 @@
 # authentik
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![AppVersion: 2021.5.4](https://img.shields.io/badge/AppVersion-2021.5.4-informational?style=flat-square)
+![Version: 1.1.0](https://img.shields.io/badge/Version-1.1.0-informational?style=flat-square) ![AppVersion: 2021.5.4](https://img.shields.io/badge/AppVersion-2021.5.4-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -58,6 +58,7 @@ redis:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity applied to the deployments |
+| authentik.authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` |  |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "Authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
@@ -91,8 +92,9 @@ redis:
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
+| geoip.image | string | `"maxmindinc/geoipupdate:v4.7"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
-| geoip.schedule | string | `"0 */8 * * *"` |  |
+| geoip.updateInterval | int | `8` | number of hours between update runs |
 | image.name | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.tag | string | `"2021.5.4"` |  |
@@ -113,16 +115,17 @@ redis:
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
 | prometheus.rules.create | bool | `false` |  |
 | prometheus.serviceMonitor.create | bool | `false` |  |
-| prometheus.serviceMonitor.interval | string | `"10s"` |  |
+| prometheus.serviceMonitor.interval | string | `"30s"` |  |
 | prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
 | prometheus.serviceMonitor.secret.name | string | `""` |  |
-| prometheus.serviceMonitor.secret.passwordKey | string | `""` |  |
-| prometheus.serviceMonitor.secret.usernameKey | string | `""` |  |
+| prometheus.serviceMonitor.secret.passwordKey | string | `"password"` | password is the secret key |
+| prometheus.serviceMonitor.secret.usernameKey | string | `"username"` | username *value* currently _MUST_ be "monitor" |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | readinessProbe.initialDelaySeconds | int | `15` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
+| redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | enable the bundled bitnami redis chart |
 | replicas | int | `1` | Server replicas |

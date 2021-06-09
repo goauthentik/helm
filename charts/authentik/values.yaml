@@ -22,6 +22,8 @@ ingress:
           pathType: Prefix
 
 authentik:
+  authentik:
+    geoip: /geoip/GeoLite2-City.mmdb
   # -- Log level for server and worker
   log_level: info
   # -- Secret key used for cookie singing and unique user IDs,
@@ -152,25 +154,28 @@ serviceAccount:
 prometheus:
   serviceMonitor:
     create: false
-    interval: 10s
+    interval: 30s
     scrapeTimeout: 3s
     secret:
       name: ""
-      # username currently _MUST_ be "monitor"
-      usernameKey: ""
-      passwordKey: ""
+      # -- username *value* currently _MUST_ be "monitor"
+      usernameKey: username
+      # -- password is the secret key
+      passwordKey: password
   rules:
     create: false
 
 geoip:
   # -- optional GeoIP, deploys a cronjob to download the maxmind database
   enabled: false
-  schedule: "0 */8 * * *"
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
   accountId: ""
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
   licenseKey: ""
   editionIds: "GeoLite2-City"
+  image: maxmindinc/geoipupdate:v4.7
+  # -- number of hours between update runs
+  updateInterval: 8
 
 postgresql:
   # -- enable the bundled bitnami postgresql chart
