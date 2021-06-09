@@ -71,7 +71,7 @@ spec:
             {{- end }}
           volumeMounts:
             - name: geoip-db
-              mountPath: /usr/share/GeoIP
+              mountPath: /geoip
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}

@@ -22,6 +22,8 @@ ingress:
           pathType: Prefix
 
 authentik:
+  authentik:
+    geoip: /geoip/GeoLite2-City.mmdb
   # -- Log level for server and worker
   log_level: info
   # -- Secret key used for cookie singing and unique user IDs,
