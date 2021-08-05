@@ -17,7 +17,7 @@ keywords:
   - idp
   - sp
 version: 2.0.0
-appVersion: 2021.6.4
+appVersion: 2021.7.3
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -43,7 +43,7 @@ annotations:
     - kind: changed
       description: Breaking: Image value key is now repository
     - kind: changed
-      description: App version update to 2021.6.4
+      description: App version update to 2021.7.3
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
