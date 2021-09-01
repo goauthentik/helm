@@ -17,7 +17,7 @@ keywords:
   - idp
   - sp
 version: 2.1.0
-appVersion: 2021.7.3
+appVersion: 2021.8.4
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -41,7 +41,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App version update to 2021.7.3
+      description: App version update to 2021.8.4
     - kind: added
       description: Make avatar mode configurable
     - kind: deprecated
@@ -61,8 +61,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.7.3
+      image: ghcr.io/goauthentik/server:2021.8.4
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.7.3
+      image: ghcr.io/goauthentik/proxy:2021.8.4
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.7.3
+      image: ghcr.io/goauthentik/ldap:2021.8.4

@@ -1,6 +1,6 @@
 # authentik
 
-![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![AppVersion: 2021.7.3](https://img.shields.io/badge/AppVersion-2021.7.3-informational?style=flat-square)
+![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -97,9 +97,9 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.7"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
-| image.repository | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"2021.7.3"` |  |
+| image.repository | string | `"ghcr.io/goauthentik/server"` |  |
+| image.tag | string | `"2021.8.4"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
