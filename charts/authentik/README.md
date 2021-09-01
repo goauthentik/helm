@@ -1,17 +1,16 @@
-# authentik
+<p align="center">
+    <img src="https://goauthentik.io/img/icon_top_brand_colour.svg" height="150" alt="authentik logo">
+</p>
 
-![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=flat-square)
+---
+
+[![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
+![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=for-the-badge)
+![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
 **Homepage:** <https://goauthentik.io>
-
-## Maintainers
-
-| Name | Email | Url |
-| ---- | ------ | --- |
-| BeryJu | jens@beryju.org | https://github.com/BeryJu |
-| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
 
 ## Example values to get started:
 
@@ -39,6 +38,13 @@ postgresql:
 redis:
   enabled: true
 ```
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| BeryJu | jens@beryju.org | https://github.com/BeryJu |
+| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
 
 ## Source Code
 
