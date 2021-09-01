@@ -42,6 +42,10 @@ annotations:
   artifacthub.io/changes: |
     - kind: changed
       description: App version update to 2021.7.3
+    - kind: added
+      description: Make avatar mode configurable
+    - kind: deprecated
+      description: Deprecate authentik.authentik fields
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
