@@ -7,7 +7,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2021.7.3
+  tag: 2021.8.4
   pullPolicy: IfNotPresent
 
 ingress:
@@ -22,6 +22,7 @@ ingress:
           pathType: Prefix
 
 authentik:
+  # -- Deprecated, use `authentik.geoip` instead of `authentik.authentik.geoip`
   authentik:
     geoip: /geoip/GeoLite2-City.mmdb
   # -- Log level for server and worker
@@ -29,6 +30,10 @@ authentik:
   # -- Secret key used for cookie singing and unique user IDs,
   # don't change this after the first install
   secret_key: ""
+  # -- Path for the geoip database. If the file doesn't exist, GeoIP features are disabled.
+  geoip: /geoip/GeoLite2-City.mmdb
+  # -- Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none'
+  avatars: gravatar
   email:
     # -- SMTP Server emails are sent from, fully optional
     host: ""
@@ -43,7 +48,7 @@ authentik:
     use_ssl: false
     # -- Connection timeout
     timeout: 30
-    # -- Email from address, can either be in the format "foo@bar.baz" or "Authentik <foo@bar.baz>"
+    # -- Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>"
     from: ""
   outposts:
     # -- Template used for managed outposts. The following placeholders can be used

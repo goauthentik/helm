@@ -1,13 +1,18 @@
-{{ template "chart.header" . }}
-{{ template "chart.deprecationWarning" . }}
+<p align="center">
+    <img src="https://goauthentik.io/img/icon_top_brand_colour.svg" height="150" alt="authentik logo">
+</p>
 
-{{ template "chart.badgesSection" . }}
+---
+
+[![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
+![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=for-the-badge)
+![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=for-the-badge)
+
+{{ template "chart.deprecationWarning" . }}
 
 {{ template "chart.description" . }}
 
 {{ template "chart.homepageLine" . }}
-
-{{ template "chart.maintainersSection" . }}
 
 ## Example values to get started:
 
@@ -35,6 +40,8 @@ postgresql:
 redis:
   enabled: true
 ```
+
+{{ template "chart.maintainersSection" . }}
 
 {{ template "chart.sourcesSection" . }}
 

@@ -1,17 +1,16 @@
-# authentik
+<p align="center">
+    <img src="https://goauthentik.io/img/icon_top_brand_colour.svg" height="150" alt="authentik logo">
+</p>
 
-![Version: 2.1.0](https://img.shields.io/badge/Version-2.1.0-informational?style=flat-square) ![AppVersion: 2021.7.3](https://img.shields.io/badge/AppVersion-2021.7.3-informational?style=flat-square)
+---
+
+[![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
+![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=for-the-badge)
+![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
 **Homepage:** <https://goauthentik.io>
-
-## Maintainers
-
-| Name | Email | Url |
-| ---- | ------ | --- |
-| BeryJu | jens@beryju.org | https://github.com/BeryJu |
-| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
 
 ## Example values to get started:
 
@@ -40,6 +39,13 @@ redis:
   enabled: true
 ```
 
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| BeryJu | jens@beryju.org | https://github.com/BeryJu |
+| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
+
 ## Source Code
 
 * <https://github.com/goauthentik/authentik>
@@ -58,8 +64,9 @@ redis:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity applied to the deployments |
-| authentik.authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` |  |
-| authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "Authentik <foo@bar.baz>" |
+| authentik.authentik | object | `{"geoip":"/geoip/GeoLite2-City.mmdb"}` | Deprecated, use `authentik.geoip` instead of `authentik.authentik.geoip` |
+| authentik.avatars | string | `"gravatar"` | Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none' |
+| authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
 | authentik.email.port | int | `587` |  |
@@ -70,6 +77,7 @@ redis:
 | authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
 | authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
+| authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the geoip database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.docker_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
@@ -95,9 +103,9 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.7"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
-| image.repository | string | `"ghcr.io/goauthentik/server"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.tag | string | `"2021.7.3"` |  |
+| image.repository | string | `"ghcr.io/goauthentik/server"` |  |
+| image.tag | string | `"2021.8.4"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
