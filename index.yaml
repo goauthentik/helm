@@ -4,6 +4,79 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: App version update to 2021.8.4
+        - kind: added
+          description: Make avatar mode configurable
+        - kind: deprecated
+          description: Deprecate authentik.authentik fields
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2021.8.4
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2021.8.4
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2021.8.4
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.8.4
+    created: "2021-09-02T19:36:57.560671853Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 14.1.1
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: c2522aee524ac80ff04a9400268d38e8b52bd8a77355c0a54566ecb15828c5b0
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-2.2.0/authentik-2.2.0.tgz
+    version: 2.2.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: App version update to 2021.7.3
       artifacthub.io/images: |
         - name: authentik
@@ -876,4 +949,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-1.0.0-RC2/authentik-1.0.0-RC2.tgz
     version: 1.0.0-RC2
-generated: "2021-08-05T22:03:01.110256468Z"
+generated: "2021-09-02T19:36:57.561987412Z"
