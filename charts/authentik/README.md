@@ -87,6 +87,7 @@ redis:
 | authentik.postgresql.s3_backup.access_key | string | `""` | optional S3 backup, access key |
 | authentik.postgresql.s3_backup.bucket | string | `""` | optional S3 backup, bucket |
 | authentik.postgresql.s3_backup.host | string | `""` | optional S3 backup, host, including protocol (https://minio.domain.tld) |
+| authentik.postgresql.s3_backup.insecure_skip_verify | bool | `false` | optional S3 backup, set to `true` to disable SSL certificate verification |
 | authentik.postgresql.s3_backup.location | string | `"/"` | optional S3 backup, location in the bucket |
 | authentik.postgresql.s3_backup.region | string | `""` | optional S3 backup, region |
 | authentik.postgresql.s3_backup.secret_key | string | `""` | optional S3 backup, secret key |
