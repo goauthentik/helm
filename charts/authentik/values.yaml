@@ -91,6 +91,8 @@ authentik:
       # -- optional S3 backup, location in the bucket
       # @default -- `"/"`
       location: ""
+      # -- optional S3 backup, set to `true` to disable SSL certificate verification
+      insecure_skip_verify: false
   redis:
     # -- set the redis hostname to talk to
     # @default -- `{{ .Release.Name }}-redis-master`
