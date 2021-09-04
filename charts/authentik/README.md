@@ -5,7 +5,7 @@
 ---
 
 [![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 2.3.0](https://img.shields.io/badge/Version-2.3.0-informational?style=for-the-badge)
+![Version: 2.3.1](https://img.shields.io/badge/Version-2.3.1-informational?style=for-the-badge)
 ![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
