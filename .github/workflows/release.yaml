@@ -20,8 +20,6 @@ jobs:
 
       - name: Set up Helm
         uses: azure/setup-helm@v1
-        with:
-          version: v3.5.4
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.0

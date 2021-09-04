@@ -7,7 +7,7 @@ metadata:
     {{- include "common.labels" . | nindent 4 }}
 spec:
   groups:
-    - name: Aggregate request counters
+    - name: authentik Aggregate request counters
       rules:
         - record: job:django_http_requests_before_middlewares_total:sum_rate30s
           expr: sum(rate(django_http_requests_before_middlewares_total[30s])) by (job)
@@ -47,7 +47,7 @@ spec:
           expr: sum(rate(django_http_exceptions_total_by_type[30s])) by (job,type)
         - record: job:django_http_exceptions_total_by_view:sum_rate30s
           expr: sum(rate(django_http_exceptions_total_by_view[30s])) by (job,view)
-    - name: Aggregate latency histograms
+    - name: authentik Aggregate latency histograms
       rules:
         - record: job:django_http_requests_latency_including_middlewares_seconds:quantile_rate30s
           expr: histogram_quantile(0.50, sum(rate(django_http_requests_latency_including_middlewares_seconds_bucket[30s])) by (job, le))
@@ -81,7 +81,7 @@ spec:
           expr: histogram_quantile(0.999, sum(rate(django_http_requests_latency_seconds_bucket[30s])) by (job, le))
           labels:
             quantile: "99.9"
-    - name: Aggregate model operations
+    - name: authentik Aggregate model operations
       rules:
         - record: job:django_model_inserts_total:sum_rate1m
           expr: sum(rate(django_model_inserts_total[1m])) by (job, model)
@@ -89,7 +89,7 @@ spec:
           expr: sum(rate(django_model_updates_total[1m])) by (job, model)
         - record: job:django_model_deletes_total:sum_rate1m
           expr: sum(rate(django_model_deletes_total[1m])) by (job, model)
-    - name: Aggregate database operations
+    - name: authentik Aggregate database operations
       rules:
         - record: job:django_db_new_connections_total:sum_rate30s
           expr: sum(rate(django_db_new_connections_total[30s])) by (alias, vendor)
@@ -101,17 +101,48 @@ spec:
           expr: sum(rate(django_db_execute_many_total[30s])) by (alias, vendor)
         - record: job:django_db_errors_total:sum_rate30s
           expr: sum(rate(django_db_errors_total[30s])) by (alias, vendor, type)
-    - name: Aggregate migrations
+    - name: authentik Aggregate migrations
       rules:
         - record: job:django_migrations_applied_total:max
           expr: max(django_migrations_applied_total) by (job, connection)
         - record: job:django_migrations_unapplied_total:max
           expr: max(django_migrations_unapplied_total) by (job, connection)
-    - name: Alerts
+    - name: authentik Alerts
       rules:
-        - alert: UnappliedMigrations
-          expr: job:django_migrations_unapplied_total:max > 0
-          for: 1m
+        - alert: NoWorkersConnected
+          expr: sum (authentik_admin_workers) == 0
+          annotations:
+            message: |
+              authentik's worker are either not running or not connected.
+            summary: No workers connected
+          for: 10m
           labels:
-            severity: testing
+            severity: critical
+        - alert: PendingMigrations
+          expr: max(django_migrations_unapplied_total) BY (job, connection) > 0
+          annotations:
+            message: |
+              authentik has pending database migrations
+            summary: Pending database migrations
+          for: 10m
+          labels:
+            severity: critical
+        - alert: FailedSystemTasks
+          expr: count(authentik_system_tasks{status="TaskResultStatus.ERROR"}) > 0
+          annotations:
+            message: |
+              System task {{ printf "{{ $labels.task_name }}" }} has failed
+            summary: Failed system tasks
+          for: 2h
+          labels:
+            severity: critical
+        - alert: DisconnectedOutposts
+          expr: sum by (outpost) (authentik_outposts_connected{uid!~"specific.*"}) < 1
+          annotations:
+            message: |
+              Outpost {{ printf "{{ $labels.outpost }}" }} has at least 1 disconnected instance
+            summary: Disconnected outpost
+          for: 2h
+          labels:
+            severity: critical
   {{- end }}
