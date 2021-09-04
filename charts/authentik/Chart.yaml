@@ -16,7 +16,7 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2.3.1
+version: 2.3.2
 appVersion: 2021.8.4
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
@@ -41,11 +41,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: Bump geoip sidecar image
-    - kind: changed
-      description: Use lifecycle: sidecar for geoip
-    - kind: added
-      description: Add new Prometheus alerts
+      description: Don't use lifecycle: sidecar for geoip
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
