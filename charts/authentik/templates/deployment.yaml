@@ -32,24 +32,6 @@ spec:
       {{- end }}
       enableServiceLinks: true
       containers:
-      {{- if $.Values.geoip.enabled }}
-        - name: geoip-sidecar
-          image: "{{ $.Values.geoip.image }}"
-          env:
-            - name: GEOIPUPDATE_FREQUENCY
-              value: {{ $.Values.geoip.updateInterval | quote }}
-            - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
-              value: "1"
-            - name: GEOIPUPDATE_ACCOUNT_ID
-              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
-            - name: GEOIPUPDATE_LICENSE_KEY
-              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
-            - name: GEOIPUPDATE_EDITION_IDS
-              value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
-          volumeMounts:
-            - name: geoip-db
-              mountPath: /usr/share/GeoIP
-      {{- end }}
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
@@ -100,6 +82,24 @@ spec:
           resources:
               {{- toYaml . | nindent 12 }}
             {{- end }}
+      {{- if $.Values.geoip.enabled }}
+        - name: geoip-sidecar
+          image: "{{ $.Values.geoip.image }}"
+          env:
+            - name: GEOIPUPDATE_FREQUENCY
+              value: {{ $.Values.geoip.updateInterval | quote }}
+            - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
+              value: "1"
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
+            - name: GEOIPUPDATE_LICENSE_KEY
+              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
+            - name: GEOIPUPDATE_EDITION_IDS
+              value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
+          volumeMounts:
+            - name: geoip-db
+              mountPath: /usr/share/GeoIP
+      {{- end }}
       volumes:
         - name: geoip-db
           emptyDir: {}
