@@ -85,6 +85,8 @@ spec:
       {{- if $.Values.geoip.enabled }}
         - name: geoip-sidecar
           image: "{{ $.Values.geoip.image }}"
+          lifecycle:
+            type: Sidecar
           env:
             - name: GEOIPUPDATE_FREQUENCY
               value: {{ $.Values.geoip.updateInterval | quote }}
