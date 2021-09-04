@@ -41,11 +41,11 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: App version update to 2021.8.4
+      description: Bump geoip sidecar image
+    - kind: changed
+      description: Use lifecycle: sidecar for geoip
     - kind: added
-      description: Make avatar mode configurable
-    - kind: deprecated
-      description: Deprecate authentik.authentik fields
+      description: Add new Prometheus alerts
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
