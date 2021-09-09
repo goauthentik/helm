@@ -7,21 +7,8 @@ metadata:
   name: {{ include "common.names.fullname" . }}
 spec:
   endpoints:
-    - basicAuth:
-        password:
-          name: {{ required "serviceMonitor secret name is required" .Values.prometheus.serviceMonitor.secret.name }}
-          key: {{ required "serviceMonitor secret password key is required"  .Values.prometheus.serviceMonitor.secret.passwordKey }}
-        username:
-          name: {{ required "serviceMonitor secret name is required" .Values.prometheus.serviceMonitor.secret.name }}
-          key: {{ required "serviceMonitor secret username key is required" .Values.prometheus.serviceMonitor.secret.usernameKey }}
-      port: http
-      path: /metrics/
+    - port: http-metrics
       scrapeTimeout: {{ .Values.prometheus.serviceMonitor.scrapeTimeout }}
-      # TODO: add bearerToken auth option
-      # bearerTokenSecret:
-      #   key: secret-key
-      #   name: secret
-      #   optional: false
       interval: {{ .Values.prometheus.serviceMonitor.interval }}
   selector:
     matchLabels:
