@@ -28,11 +28,11 @@ maintainers:
     url: https://github.com/dirtycajunrice
 dependencies:
   - name: postgresql
-    version: 10.4.2
+    version: 10.9.5
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: redis
-    version: 14.1.1
+    version: 15.3.2
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
   - name: common
@@ -41,7 +41,11 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: Don't use lifecycle: sidecar for geoip
+      description: Use new, dedicated metrics port without authentication
+    - kind: removed
+      description: Remove deprecated field authentik.authentik.geoip
+    - kind: changed
+      description: Update dependency charts
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github

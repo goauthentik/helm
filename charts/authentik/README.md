@@ -55,8 +55,8 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | 10.4.2 |
-| https://charts.bitnami.com/bitnami | redis | 14.1.1 |
+| https://charts.bitnami.com/bitnami | postgresql | 10.9.5 |
+| https://charts.bitnami.com/bitnami | redis | 15.3.2 |
 | https://library-charts.k8s-at-home.com | common | 2.4.0 |
 
 ## Values
