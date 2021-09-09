@@ -62,6 +62,9 @@ spec:
             - name: http
               containerPort: 9000
               protocol: TCP
+            - name: http-metrics
+              containerPort: 9300
+              protocol: TCP
             - name: https
               containerPort: 9443
               protocol: TCP
