@@ -42,6 +42,10 @@ spec:
   publishNotReadyAddresses: {{ . }}
   {{- end }}
   ports:
+    - port: 9100
+      name: http-metrics
+      protocol: TCP
+      targetPort: http-metrics
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.name }}
       protocol: {{ .Values.service.protocol }}

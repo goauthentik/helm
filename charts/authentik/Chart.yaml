@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2.3.2
-appVersion: 2021.8.4
+version: 3.0.0-rc1
+appVersion: 2021.9.1-rc1
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -28,11 +28,11 @@ maintainers:
     url: https://github.com/dirtycajunrice
 dependencies:
   - name: postgresql
-    version: 10.4.2
+    version: 10.9.5
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: redis
-    version: 14.1.1
+    version: 15.3.2
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
   - name: common
@@ -41,7 +41,11 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: Don't use lifecycle: sidecar for geoip
+      description: Use new, dedicated metrics port without authentication
+    - kind: removed
+      description: Remove deprecated field authentik.authentik.geoip
+    - kind: changed
+      description: Update dependency charts
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -57,8 +61,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.8.4
+      image: ghcr.io/goauthentik/server:2021.9.1-rc1
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.8.4
+      image: ghcr.io/goauthentik/proxy:2021.9.1-rc1
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.8.4
+      image: ghcr.io/goauthentik/ldap:2021.9.1-rc1

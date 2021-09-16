@@ -7,7 +7,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2021.8.4
+  tag: 2021.9.1-rc1
   pullPolicy: IfNotPresent
 
 ingress:
@@ -22,9 +22,6 @@ ingress:
           pathType: Prefix
 
 authentik:
-  # -- Deprecated, use `authentik.geoip` instead of `authentik.authentik.geoip`
-  authentik:
-    geoip: /geoip/GeoLite2-City.mmdb
   # -- Log level for server and worker
   log_level: info
   # -- Secret key used for cookie singing and unique user IDs,
@@ -163,12 +160,6 @@ prometheus:
     create: false
     interval: 30s
     scrapeTimeout: 3s
-    secret:
-      name: ""
-      # -- username *value* currently _MUST_ be "monitor"
-      usernameKey: username
-      # -- password is the secret key
-      passwordKey: password
   rules:
     create: false
 

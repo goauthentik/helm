@@ -5,8 +5,8 @@
 ---
 
 [![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 2.3.2](https://img.shields.io/badge/Version-2.3.2-informational?style=for-the-badge)
-![AppVersion: 2021.8.4](https://img.shields.io/badge/AppVersion-2021.8.4-informational?style=for-the-badge)
+![Version: 3.0.0-rc1](https://img.shields.io/badge/Version-3.0.0-rc1-informational?style=for-the-badge)
+![AppVersion: 2021.9.1-rc1](https://img.shields.io/badge/AppVersion-2021.9.1-rc1-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -55,8 +55,8 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | 10.4.2 |
-| https://charts.bitnami.com/bitnami | redis | 14.1.1 |
+| https://charts.bitnami.com/bitnami | postgresql | 10.9.5 |
+| https://charts.bitnami.com/bitnami | redis | 15.3.2 |
 | https://library-charts.k8s-at-home.com | common | 2.4.0 |
 
 ## Values
@@ -64,7 +64,6 @@ redis:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` | affinity applied to the deployments |
-| authentik.authentik | object | `{"geoip":"/geoip/GeoLite2-City.mmdb"}` | Deprecated, use `authentik.geoip` instead of `authentik.authentik.geoip` |
 | authentik.avatars | string | `"gravatar"` | Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none' |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
@@ -101,12 +100,12 @@ redis:
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
-| geoip.image | string | `"maxmindinc/geoipupdate:v4.7"` |  |
+| geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2021.8.4"` |  |
+| image.tag | string | `"2021.9.1-rc1"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
@@ -126,9 +125,6 @@ redis:
 | prometheus.serviceMonitor.create | bool | `false` |  |
 | prometheus.serviceMonitor.interval | string | `"30s"` |  |
 | prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
-| prometheus.serviceMonitor.secret.name | string | `""` |  |
-| prometheus.serviceMonitor.secret.passwordKey | string | `"password"` | password is the secret key |
-| prometheus.serviceMonitor.secret.usernameKey | string | `"username"` | username *value* currently _MUST_ be "monitor" |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
