@@ -23,6 +23,10 @@ spec:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "{{ . }}"
     spec:
+      {{- if $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml $.Values.imagePullSecrets | nindent 8 }}
+      {{- end }}
       {{- if $.Values.serviceAccount.create }}
       serviceAccountName: {{ include "common.names.fullname" $ }}
       {{- end }}

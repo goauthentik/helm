@@ -5,6 +5,8 @@ worker:
   # -- worker replicas
   replicas: 1
 
+imagePullSecrets: []
+
 image:
   repository: ghcr.io/goauthentik/server
   tag: 2021.9.1
