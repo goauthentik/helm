@@ -31,6 +31,79 @@ entries:
           url: https://github.com/dirtycajunrice
     apiVersion: v2
     appVersion: 2021.9.1
+    created: "2021-10-11T18:06:05.944568907Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.3.2
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: 8f6d9901016fc9a2284926b99b053c370bbbf730e5bca61e020eb5f819b7b34f
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-3.0.1/authentik-3.0.1.tgz
+    version: 3.0.1
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: Use new, dedicated metrics port without authentication
+        - kind: removed
+          description: Remove deprecated field authentik.authentik.geoip
+        - kind: changed
+          description: Update dependency charts
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2021.9.1
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2021.9.1
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2021.9.1
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.9.1
     created: "2021-09-23T07:57:07.724503875Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1310,4 +1383,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-1.0.0-RC2/authentik-1.0.0-RC2.tgz
     version: 1.0.0-RC2
-generated: "2021-09-23T07:57:07.724721868Z"
+generated: "2021-10-11T18:06:05.944997035Z"
