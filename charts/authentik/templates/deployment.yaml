@@ -51,11 +51,6 @@ spec:
               valueFrom:
                 {{- toYaml $val | nindent 16 }}
             {{- end }}
-            {{- if $.Values.imagePullSecrets }}
-            - name: AUTHENTIK_OUTPOSTS__KUBERNETES_IMAGE_PULL_SECRETS
-              value: |
-                {{ toJson $.Values.imagePullSecrets }}
-            {{- end }}
             {{- with $.Values.envFrom }}
           envFrom:
               {{- toYaml . | nindent 12 }}
