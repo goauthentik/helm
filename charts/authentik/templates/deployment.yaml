@@ -23,9 +23,9 @@ spec:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "{{ . }}"
     spec:
-      {{- if $.Values.imagePullSecrets }}
+      {{- if $.Values.image.pullSecrets }}
       imagePullSecrets:
-        {{- toYaml $.Values.imagePullSecrets | nindent 8 }}
+        {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
       {{- end }}
       {{- if $.Values.serviceAccount.create }}
       serviceAccountName: {{ include "common.names.fullname" $ }}
@@ -50,6 +50,11 @@ spec:
             - name: {{ $name }}
               valueFrom:
                 {{- toYaml $val | nindent 16 }}
+            {{- end }}
+            {{- if $.Values.imagePullSecrets }}
+            - name: AUTHENTIK_OUTPOSTS__KUBERNETES_IMAGE_PULL_SECRETS
+              value: |
+                {{ toJson $.Values.imagePullSecrets }}
             {{- end }}
             {{- with $.Values.envFrom }}
           envFrom:
