@@ -9,6 +9,7 @@ image:
   repository: ghcr.io/goauthentik/server
   tag: 2021.9.1
   pullPolicy: IfNotPresent
+  pullSecrets: []
 
 ingress:
   enabled: false

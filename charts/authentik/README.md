@@ -103,6 +103,7 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
+| imagePullSecrets | object | `{}` |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
 | image.tag | string | `"2021.9.1"` |  |
