@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 3.0.1
-appVersion: 2021.9.1
+version: 3.1.0
+appVersion: 2021.9.8
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -41,11 +41,9 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: Use new, dedicated metrics port without authentication
-    - kind: removed
-      description: Remove deprecated field authentik.authentik.geoip
+      description: add image pull secrets
     - kind: changed
-      description: Update dependency charts
+      description: update images
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -61,8 +59,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.9.1
+      image: ghcr.io/goauthentik/server:2021.9.8
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.9.1
+      image: ghcr.io/goauthentik/proxy:2021.9.8
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.9.1
+      image: ghcr.io/goauthentik/ldap:2021.9.8

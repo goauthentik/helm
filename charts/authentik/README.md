@@ -5,8 +5,8 @@
 ---
 
 [![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 3.0.0](https://img.shields.io/badge/Version-3.0.0-informational?style=for-the-badge)
-![AppVersion: 2021.9.1](https://img.shields.io/badge/AppVersion-2021.9.1-informational?style=for-the-badge)
+![Version: 3.1.0](https://img.shields.io/badge/Version-3.1.0-informational?style=for-the-badge)
+![AppVersion: 2021.9.8](https://img.shields.io/badge/AppVersion-2021.9.8-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -106,7 +106,7 @@ redis:
 | imagePullSecrets | object | `{}` |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2021.9.1"` |  |
+| image.tag | string | `"2021.9.8"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
