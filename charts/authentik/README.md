@@ -5,7 +5,7 @@
 ---
 
 [![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 3.1.0](https://img.shields.io/badge/Version-3.1.0-informational?style=for-the-badge)
+![Version: 3.1.1](https://img.shields.io/badge/Version-3.1.1-informational?style=for-the-badge)
 ![AppVersion: 2021.9.8](https://img.shields.io/badge/AppVersion-2021.9.8-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
@@ -103,8 +103,8 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
-| imagePullSecrets | object | `{}` |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
+| image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
 | image.tag | string | `"2021.9.8"` |  |
 | ingress.annotations | object | `{}` |  |
@@ -117,7 +117,7 @@ redis:
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `15` |  |
+| livenessProbe.initialDelaySeconds | int | `50` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
@@ -129,7 +129,7 @@ redis:
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `15` |  |
+| readinessProbe.initialDelaySeconds | int | `50` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
