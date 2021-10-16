@@ -53,7 +53,7 @@ authentik:
     # %(type)s - the type of the outpost
     # %(version)s - version of your authentik install
     # %(build_hash)s - only for beta versions, the build hash of the image
-    docker_image_base: goauthentik.io/%(type)s:%(version)s
+    container_image_base: goauthentik.io/%(type)s:%(version)s
   error_reporting:
     # -- This sends anonymous usage-data, stack traces on errors and
     # performance data to sentry.beryju.org, and is fully opt-in
