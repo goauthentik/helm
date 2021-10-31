@@ -17,7 +17,7 @@ keywords:
   - idp
   - sp
 version: 4.0.0
-appVersion: 2021.9.8
+appVersion: 2021.10.1
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -57,8 +57,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: goauthentik.io/server:2021.9.8
+      image: goauthentik.io/server:2021.10.1
     - name: authentik-outpost-proxy
-      image: goauthentik.io/proxy:2021.9.8
+      image: goauthentik.io/proxy:2021.10.1
     - name: authentik-outpost-ldap
-      image: goauthentik.io/ldap:2021.9.8
+      image: goauthentik.io/ldap:2021.10.1
