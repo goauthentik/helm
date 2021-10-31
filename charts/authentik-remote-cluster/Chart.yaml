@@ -2,7 +2,7 @@ apiVersion: v2
 name: authentik-remote-cluster
 description: RBAC required for a remote cluster to be connected to authentik.
 type: application
-version: 1.0.0
+version: 1.0.1
 appVersion: "2021.10.1"
 home: https://goauthentik.io
 sources:

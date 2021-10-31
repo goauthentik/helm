@@ -4,147 +4,19 @@
 
 ---
 
-[![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 3.2.0](https://img.shields.io/badge/Version-3.2.0-informational?style=for-the-badge)
-![AppVersion: 2021.9.8](https://img.shields.io/badge/AppVersion-2021.9.8-informational?style=for-the-badge)
+[![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
 
-authentik is an open-source Identity Provider focused on flexibility and versatility
+## authentik Chart
 
-**Homepage:** <https://goauthentik.io>
+![Version: 4.0.0](https://img.shields.io/badge/Version-4.0.0-informational?style=for-the-badge)
+![AppVersion: 2021.10.1](https://img.shields.io/badge/AppVersion-2021.10.1-informational?style=for-the-badge)
 
-## Example values to get started:
+See [README](./charts/authentik/README.md)
 
-```yaml
-authentik:
-  secret_key: "PleaseGenerateA50CharKey"
-  # This sends anonymous usage-data, stack traces on errors and
-  # performance data to sentry.beryju.org, and is fully opt-in
-  error_reporting:
-    enabled: true
-  postgresql:
-    password: "ThisIsNotASecurePassword"
+## authentik-remote-cluster Chart
 
-ingress:
-  enabled: true
-  hosts:
-    - host: authentik.domain.tld
-      paths:
-        - path: "/"
-          pathType: Prefix
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=for-the-badge)
+![AppVersion: 2021.10.1](https://img.shields.io/badge/AppVersion-2021.10.1-informational?style=for-the-badge)
 
-postgresql:
-  enabled: true
-  postgresqlPassword: "ThisIsNotASecurePassword"
-redis:
-  enabled: true
-```
-
-## Maintainers
-
-| Name | Email | Url |
-| ---- | ------ | --- |
-| BeryJu | jens@beryju.org | https://github.com/BeryJu |
-| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
-
-## Source Code
-
-* <https://github.com/goauthentik/authentik>
-* <https://goauthentik.io/docs/>
-
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | 10.9.5 |
-| https://charts.bitnami.com/bitnami | redis | 15.3.2 |
-| https://library-charts.k8s-at-home.com | common | 2.4.0 |
-
-## Values
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| affinity | object | `{}` | affinity applied to the deployments |
-| authentik.avatars | string | `"gravatar"` | Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none' |
-| authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
-| authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
-| authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
-| authentik.email.port | int | `587` |  |
-| authentik.email.timeout | int | `30` | Connection timeout |
-| authentik.email.use_ssl | bool | `false` | Enable either use_tls or use_ssl, they can't be enabled at the same time. |
-| authentik.email.use_tls | bool | `false` | Enable either use_tls or use_ssl, they can't be enabled at the same time. |
-| authentik.email.username | string | `""` | SMTP credentials, when left empty, not authentication will be done |
-| authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
-| authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
-| authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
-| authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the geoip database. If the file doesn't exist, GeoIP features are disabled. |
-| authentik.log_level | string | `"info"` | Log level for server and worker |
-| authentik.outposts.docker_image_base | string | `"goauthentik.io/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
-| authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
-| authentik.postgresql.name | string | `authentik` | postgresql Database name |
-| authentik.postgresql.password | string | `""` |  |
-| authentik.postgresql.port | int | `5432` |  |
-| authentik.postgresql.s3_backup.access_key | string | `""` | optional S3 backup, access key |
-| authentik.postgresql.s3_backup.bucket | string | `""` | optional S3 backup, bucket |
-| authentik.postgresql.s3_backup.host | string | `""` | optional S3 backup, host, including protocol (https://minio.domain.tld) |
-| authentik.postgresql.s3_backup.insecure_skip_verify | bool | `false` | optional S3 backup, set to `true` to disable SSL certificate verification |
-| authentik.postgresql.s3_backup.location | string | `"/"` | optional S3 backup, location in the bucket |
-| authentik.postgresql.s3_backup.region | string | `""` | optional S3 backup, region |
-| authentik.postgresql.s3_backup.secret_key | string | `""` | optional S3 backup, secret key |
-| authentik.postgresql.user | string | `authentik` | postgresql Username |
-| authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
-| authentik.redis.password | string | `""` |  |
-| authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
-| env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
-| envFrom | list | `[]` |  |
-| envValueFrom | object | `{}` |  |
-| geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
-| geoip.editionIds | string | `"GeoLite2-City"` |  |
-| geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
-| geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
-| geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
-| geoip.updateInterval | int | `8` | number of hours between update runs |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.pullSecrets | list | `[]` |  |
-| image.repository | string | `"goauthentik.io/server"` |  |
-| image.tag | string | `"2021.9.8"` |  |
-| ingress.annotations | object | `{}` |  |
-| ingress.enabled | bool | `false` |  |
-| ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
-| ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"Prefix"` |  |
-| ingress.ingressClassName | string | `""` |  |
-| ingress.labels | object | `{}` |  |
-| livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
-| livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
-| livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `50` |  |
-| livenessProbe.periodSeconds | int | `10` |  |
-| postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
-| postgresql.postgresqlDatabase | string | `"authentik"` |  |
-| postgresql.postgresqlUsername | string | `"authentik"` |  |
-| prometheus.rules.create | bool | `false` |  |
-| prometheus.serviceMonitor.create | bool | `false` |  |
-| prometheus.serviceMonitor.interval | string | `"30s"` |  |
-| prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
-| readinessProbe.enabled | bool | `true` |  |
-| readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
-| readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `50` |  |
-| readinessProbe.periodSeconds | int | `10` |  |
-| redis.architecture | string | `"standalone"` |  |
-| redis.auth.enabled | bool | `false` |  |
-| redis.enabled | bool | `false` | enable the bundled bitnami redis chart |
-| replicas | int | `1` | Server replicas |
-| resources.server | object | `{}` |  |
-| resources.worker | object | `{}` |  |
-| service.annotations | object | `{}` |  |
-| service.enabled | bool | `true` | Service that is created to access authentik |
-| service.labels | object | `{}` |  |
-| service.name | string | `"http"` |  |
-| service.port | int | `80` |  |
-| service.protocol | string | `"TCP"` |  |
-| service.type | string | `"ClusterIP"` |  |
-| serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
-| volumeMounts | list | `[]` |  |
-| volumes | list | `[]` |  |
-| worker.replicas | int | `1` | worker replicas |
+See [README](./charts/authentik-remote-cluster/README.md)
