@@ -1,0 +1,43 @@
+apiVersion: v2
+name: authentik-remote-cluster
+description: RBAC required for a remote cluster to be connected to authentik.
+type: application
+version: 1.0.0
+appVersion: "2021.10.1"
+home: https://goauthentik.io
+sources:
+  - https://github.com/goauthentik/authentik
+  - https://goauthentik.io/docs/
+keywords:
+  - proxy
+  - oauth
+  - authentication
+  - saml
+  - sso
+  - identity
+  - single-sign-on
+  - ldap
+  - idp
+  - sp
+icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+maintainers:
+  - name: BeryJu
+    email: jens@beryju.org
+    url: https://github.com/BeryJu
+  - name: dirtycajunrice
+    email: nick@cajun.pro
+    url: https://github.com/dirtycajunrice
+annotations:
+  artifacthub.io/license: GPL-3.0-only
+  artifacthub.io/links: |
+    - name: Github
+      url: https://github.com/goauthentik/authentik
+    - name: Docs
+      url: https://goauthentik.io/docs/
+  artifacthub.io/maintainers: |
+    - name: Jens L. BeryJu
+      email: jens@beryju.org
+      url: https://beryju.org
+    - name: Nicholas St. Germain
+      email: nick@cajun.pro
+      url: https://github.com/dirtycajunrice
