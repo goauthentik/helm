@@ -4,6 +4,75 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: use authentik.outposts.container_image_base to align with upstream config
+      artifacthub.io/images: |
+        - name: authentik
+          image: goauthentik.io/server:2021.10.1
+        - name: authentik-outpost-proxy
+          image: goauthentik.io/proxy:2021.10.1
+        - name: authentik-outpost-ldap
+          image: goauthentik.io/ldap:2021.10.1
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.10.1
+    created: "2021-10-31T11:14:27.342991246Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.3.2
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: ef7a0ad8567b29c0aff4bf24a9ce428e065aa022030e885fb58df3c497d225fa
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-4.0.0/authentik-4.0.0.tgz
+    version: 4.0.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: use vanity URL for images
       artifacthub.io/images: |
         - name: authentik
@@ -1611,6 +1680,53 @@ entries:
           url: https://github.com/dirtycajunrice
     apiVersion: v2
     appVersion: 2021.10.1
+    created: "2021-10-31T11:14:27.511812881Z"
+    description: RBAC required for a remote cluster to be connected to authentik.
+    digest: e2b5ba35b7469d4b42e9bb82c3b2853925bf89428fdc3da06e8a88cf3715445a
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik-remote-cluster
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    type: application
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.1/authentik-remote-cluster-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.10.1
     created: "2021-10-31T10:46:46.870282858Z"
     description: RBAC required for a remote cluster to be connected to authentik.
     digest: 09b7fbbc7746e72772ecd9d5f4e3e0d87c213d97a6724ff8a023f0e627b7a483
@@ -1642,4 +1758,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2021-10-31T10:46:46.87041336Z"
+generated: "2021-10-31T11:14:27.512017184Z"
