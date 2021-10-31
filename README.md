@@ -16,7 +16,7 @@ See [README](./charts/authentik/README.md)
 
 ## authentik-remote-cluster Chart
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=for-the-badge)
+![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=for-the-badge)
 ![AppVersion: 2021.10.1](https://img.shields.io/badge/AppVersion-2021.10.1-informational?style=for-the-badge)
 
 See [README](./charts/authentik-remote-cluster/README.md)
