@@ -5,8 +5,8 @@
 ---
 
 [![](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://discord.gg/jg33eMhnj6)
-![Version: 1.0.1](https://img.shields.io/badge/Version-1.0.1-informational?style=for-the-badge)
-![AppVersion: 2021.9.8](https://img.shields.io/badge/AppVersion-2021.9.8-informational?style=for-the-badge)
+![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-informational?style=for-the-badge)
+![AppVersion: 2021.10.2](https://img.shields.io/badge/AppVersion-2021.10.2-informational?style=for-the-badge)
 
 RBAC required for a remote cluster to be connected to authentik.
 
