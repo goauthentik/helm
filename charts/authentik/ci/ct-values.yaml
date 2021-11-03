@@ -5,7 +5,7 @@ worker:
 
 image:
   repository: goauthentik.io/server
-  tag: 2021.10.1
+  tag: 2021.10.2
   pullPolicy: IfNotPresent
 
 ingress:
