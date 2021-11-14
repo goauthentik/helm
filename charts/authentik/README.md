@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 4.0.1](https://img.shields.io/badge/Version-4.0.1-informational?style=for-the-badge)
-![AppVersion: 2021.10.2](https://img.shields.io/badge/AppVersion-2021.10.2-informational?style=for-the-badge)
+![Version: 4.0.2](https://img.shields.io/badge/Version-4.0.2-informational?style=for-the-badge)
+![AppVersion: 2021.10.4](https://img.shields.io/badge/AppVersion-2021.10.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -107,7 +107,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"goauthentik.io/server"` |  |
-| image.tag | string | `"2021.10.2"` |  |
+| image.tag | string | `"2021.10.4"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |

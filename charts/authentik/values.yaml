@@ -7,7 +7,7 @@ worker:
 
 image:
   repository: goauthentik.io/server
-  tag: 2021.10.2
+  tag: 2021.10.4
   pullPolicy: IfNotPresent
   pullSecrets: []
 
