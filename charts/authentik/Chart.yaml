@@ -16,7 +16,7 @@ keywords:
   - ldap
   - idp
   - sp
-version: 4.0.2
+version: 4.0.3
 appVersion: 2021.10.4
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:

@@ -21,6 +21,11 @@ ingress:
       paths:
         - path: "/"
           pathType: Prefix
+  tls:
+    # -- TLS Configuration passed to the ingress
+    hosts: []
+    # -- TLS Configuration passed to the ingress
+    secretName: ""
 
 authentik:
   # -- Log level for server and worker
