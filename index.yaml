@@ -27,6 +27,75 @@ entries:
           url: https://github.com/dirtycajunrice
     apiVersion: v2
     appVersion: 2021.10.4
+    created: "2021-11-24T08:32:15.628003095Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.3.2
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 2.4.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: ca6cc4312577d65a9c47e84c3bb391152ae7e87f8853b841d8c7741abb6e1818
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-4.0.3/authentik-4.0.3.tgz
+    version: 4.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
+          description: use authentik.outposts.container_image_base to align with upstream config
+      artifacthub.io/images: |
+        - name: authentik
+          image: goauthentik.io/server:2021.10.4
+        - name: authentik-outpost-proxy
+          image: goauthentik.io/proxy:2021.10.4
+        - name: authentik-outpost-ldap
+          image: goauthentik.io/ldap:2021.10.4
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.10.4
     created: "2021-11-14T12:02:00.886435134Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1943,4 +2012,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2021-11-14T12:02:00.886878336Z"
+generated: "2021-11-24T08:32:15.628232298Z"
