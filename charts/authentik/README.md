@@ -115,8 +115,8 @@ redis:
 | ingress.hosts[0].paths[0].pathType | string | `"Prefix"` |  |
 | ingress.ingressClassName | string | `""` |  |
 | ingress.labels | object | `{}` |  |
-| ingress.tls.hosts | list | `[]` | TLS Configuration passed to the ingress |
-| ingress.tls.secretName | string | `""` | TLS Configuration passed to the ingress |
+| ingress.tls[0].hosts | list | `[]` |  |
+| ingress.tls[0].secretName | string | `""` |  |
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
