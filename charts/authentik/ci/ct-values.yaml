@@ -4,8 +4,8 @@ worker:
   replicas: 1
 
 image:
-  repository: goauthentik.io/server
-  tag: 2021.10.4
+  repository: ghcr.io/goauthentik/server
+  tag: 2021.12.3
   pullPolicy: IfNotPresent
 
 ingress:
