@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 4.0.3](https://img.shields.io/badge/Version-4.0.3-informational?style=for-the-badge)
-![AppVersion: 2021.10.4](https://img.shields.io/badge/AppVersion-2021.10.4-informational?style=for-the-badge)
+![Version: 5.0.0](https://img.shields.io/badge/Version-5.0.0-informational?style=for-the-badge)
+![AppVersion: 2021.12.2](https://img.shields.io/badge/AppVersion-2021.12.2-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -58,7 +58,7 @@ redis:
 |------------|------|---------|
 | https://charts.bitnami.com/bitnami | postgresql | 10.9.5 |
 | https://charts.bitnami.com/bitnami | redis | 15.3.2 |
-| https://library-charts.k8s-at-home.com | common | 2.4.0 |
+| https://library-charts.k8s-at-home.com | common | 4.2.0 |
 
 ## Values
 
@@ -79,7 +79,7 @@ redis:
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
 | authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the geoip database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
-| authentik.outposts.container_image_base | string | `"goauthentik.io/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
+| authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `authentik` | postgresql Database name |
 | authentik.postgresql.password | string | `""` |  |
@@ -106,8 +106,8 @@ redis:
 | geoip.updateInterval | int | `8` | number of hours between update runs |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
-| image.repository | string | `"goauthentik.io/server"` |  |
-| image.tag | string | `"2021.10.4"` |  |
+| image.repository | string | `"ghcr.io/goauthentik/server"` |  |
+| image.tag | string | `"2021.12.2"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
