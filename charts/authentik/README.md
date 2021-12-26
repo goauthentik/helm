@@ -6,7 +6,7 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 5.1.0](https://img.shields.io/badge/Version-5.1.0-informational?style=for-the-badge)
+![Version: 5.1.1](https://img.shields.io/badge/Version-5.1.1-informational?style=for-the-badge)
 ![AppVersion: 2021.12.4](https://img.shields.io/badge/AppVersion-2021.12.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
@@ -64,6 +64,7 @@ redis:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
 | affinity | object | `{}` | affinity applied to the deployments |
 | authentik.avatars | string | `"gravatar"` | Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none' |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
@@ -117,6 +118,7 @@ redis:
 | ingress.labels | object | `{}` |  |
 | ingress.tls[0].hosts | list | `[]` |  |
 | ingress.tls[0].secretName | string | `""` |  |
+| initContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
