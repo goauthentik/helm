@@ -11,6 +11,12 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: []
 
+# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+initContainers: {}
+
+# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+additionalContainers: {}
+
 ingress:
   enabled: false
   ingressClassName: ""

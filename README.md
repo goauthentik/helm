@@ -9,7 +9,7 @@
 
 ## authentik Chart
 
-![Version: 5.1.0](https://img.shields.io/badge/Version-5.1.0-informational?style=for-the-badge)
+![Version: 5.1.1](https://img.shields.io/badge/Version-5.1.1-informational?style=for-the-badge)
 ![AppVersion: 2021.12.4](https://img.shields.io/badge/AppVersion-2021.12.4-informational?style=for-the-badge)
 
 See [README](./charts/authentik/README.md)
