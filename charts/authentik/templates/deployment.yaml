@@ -22,6 +22,7 @@ spec:
       labels:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "{{ . }}"
+        app.kubernetes.io/version: "{{ $.Values.image.tag }}"
     spec:
       {{- if $.Values.image.pullSecrets }}
       imagePullSecrets:
