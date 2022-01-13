@@ -4,6 +4,77 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: upgrade to authentik 2021.12.5
+        - kind: changed
+          description: upgrade to latest k8s-at-home common chart
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2021.12.5
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2021.12.5
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2021.12.5
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2021.12.5
+    created: "2022-01-13T17:37:14.675838849Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.3.2
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.2.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: cd7ab0fe072418bdfc541918e0799e3d2dc11ae3c14533f78a53e866bd9366a5
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-5.2.0/authentik-5.2.0.tgz
+    version: 5.2.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: upgrade to authentik 2021.12.4
         - kind: changed
           description: upgrade to latest k8s-at-home common chart
@@ -2225,4 +2296,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2021-12-26T13:08:08.097395363Z"
+generated: "2022-01-13T17:37:14.676244474Z"
