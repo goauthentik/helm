@@ -137,6 +137,9 @@ volumeMounts: []
 # -- affinity applied to the deployments
 affinity: {}
 
+# -- nodeSelector applied to the deployments
+nodeSelector: {}
+
 resources:
   server: {}
   worker: {}
