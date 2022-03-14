@@ -1,9 +1,13 @@
 # -- Server replicas
 replicas: 1
+# -- Custom priority class for different treatment by the scheduler
+priorityClassName:
 
 worker:
   # -- worker replicas
   replicas: 1
+  # -- Custom priority class for different treatment by the scheduler
+  priorityClassName:
 
 image:
   repository: ghcr.io/goauthentik/server
