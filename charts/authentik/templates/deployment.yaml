@@ -52,6 +52,11 @@ spec:
         {{- end }}
         {{- tpl (toYaml $initContainers) $ | nindent 8 }}
       {{- end }}
+      {{ if eq . "server" -}}
+      priorityClassName: {{ $.Values.priorityClassName }}
+      {{- else -}}
+      priorityClassName: {{ $.Values.worker.priorityClassName }}
+      {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
