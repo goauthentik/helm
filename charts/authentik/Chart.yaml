@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 5.2.2
-appVersion: 2021.12.5
+version: 2022.3.1
+appVersion: 2022.3.1
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -41,7 +41,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: upgrade to authentik 2021.12.5
+      description: upgrade to authentik 2022.3.1
     - kind: changed
       description: upgrade to latest k8s-at-home common chart
   artifacthub.io/license: GPL-3.0-only
@@ -59,8 +59,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2021.12.5
+      image: ghcr.io/goauthentik/server:2022.3.1
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2021.12.5
+      image: ghcr.io/goauthentik/proxy:2022.3.1
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2021.12.5
+      image: ghcr.io/goauthentik/ldap:2022.3.1

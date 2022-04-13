@@ -19,7 +19,7 @@
       {{- else -}}
         {{- $v = tpl $v $.root | quote }}
       {{- end -}}
-      {{- if $v }}
+      {{- if and ($v) (ne $v "\"\"") }}
 - name: {{ printf "AUTHENTIK_%s" (upper $k) }}
   value: {{ $v }}
       {{- end }}
