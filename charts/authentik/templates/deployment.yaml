@@ -54,8 +54,12 @@ spec:
       {{- end }}
       {{ if eq . "server" -}}
       priorityClassName: {{ $.Values.priorityClassName }}
+      securityContext:
+        {{- toYaml $.Values.securityContext | nindent 8 }}
       {{- else -}}
       priorityClassName: {{ $.Values.worker.priorityClassName }}
+      securityContext:
+        {{- toYaml $.Values.worker.securityContext | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
