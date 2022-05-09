@@ -44,8 +44,8 @@ redis:
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| BeryJu | jens@beryju.org | https://github.com/BeryJu |
-| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
+| BeryJu | <jens@beryju.org> | <https://github.com/BeryJu> |
+| dirtycajunrice | <nick@cajun.pro> | <https://github.com/dirtycajunrice> |
 
 ## Source Code
 
@@ -128,6 +128,7 @@ redis:
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
+| priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | prometheus.rules.create | bool | `false` |  |
 | prometheus.serviceMonitor.create | bool | `false` |  |
 | prometheus.serviceMonitor.interval | string | `"30s"` |  |
@@ -143,6 +144,7 @@ redis:
 | replicas | int | `1` | Server replicas |
 | resources.server | object | `{}` |  |
 | resources.worker | object | `{}` |  |
+| securityContext | object | `{}` | server securityContext |
 | service.annotations | object | `{}` |  |
 | service.enabled | bool | `true` | Service that is created to access authentik |
 | service.labels | object | `{}` |  |
@@ -153,4 +155,6 @@ redis:
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+| worker.priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | worker.replicas | int | `1` | worker replicas |
+| worker.securityContext | object | `{}` | worker securityContext |
