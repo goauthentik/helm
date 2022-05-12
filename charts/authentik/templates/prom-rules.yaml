@@ -131,7 +131,7 @@ spec:
           expr: sum(increase(authentik_system_tasks{status="TaskResultStatus.ERROR"}[2h])) > 0
           annotations:
             message: |
-              System task {{ $labels.task_name }} has failed
+              System task {{ printf "{{ $labels.task_name }}" }} has failed
             summary: Failed system tasks
           for: 2h
           labels:
@@ -140,7 +140,7 @@ spec:
           expr: sum by (outpost) (max without (pid) (authentik_outposts_connected{uid!~"specific.*"}))  < 1
           annotations:
             message: |
-              Outpost {{ $labels.outpost }} has at least 1 disconnected instance
+              Outpost {{ printf "{{ $labels.outpost }}" }} has at least 1 disconnected instance
             summary: Disconnected outpost
           for: 30m
           labels:
