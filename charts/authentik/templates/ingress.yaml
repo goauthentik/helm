@@ -33,7 +33,7 @@ spec:
               service:
                 name: {{ include "common.names.fullname" $ }}
                 port:
-                  name: http
+                  name: {{ $.Values.service.name }}
               {{- else }}
               serviceName: {{ include "common.names.fullname" $ }}
               servicePort: {{ $.Values.service.port }}
