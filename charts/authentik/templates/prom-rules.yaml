@@ -113,7 +113,7 @@ spec:
           expr: max without (pid) (authentik_admin_workers) < 1
           annotations:
             message: |
-              authentik instance {{ printf "{{ $labels.instance }}" }} 's worker are either not running or not connected.
+              authentik instance {{ printf "{{ $labels.instance }}" }}'s worker are either not running or not connected.
             summary: No workers connected
           for: 10m
           labels:
@@ -145,3 +145,4 @@ spec:
           for: 30m
           labels:
             severity: critical
+  {{- end }}
