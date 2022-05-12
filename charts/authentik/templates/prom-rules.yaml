@@ -110,25 +110,25 @@ spec:
     - name: authentik Alerts
       rules:
         - alert: NoWorkersConnected
-          expr: sum (authentik_admin_workers) == 0
+          expr: max without (pid) (authentik_admin_workers) < 1
           annotations:
             message: |
-              authentik's worker are either not running or not connected.
+              authentik instance {{ printf "{{ $labels.instance }}" }}'s worker are either not running or not connected.
             summary: No workers connected
           for: 10m
           labels:
             severity: critical
         - alert: PendingMigrations
-          expr: max(django_migrations_unapplied_total) BY (job, connection) > 0
+          expr: max without (pid) (django_migrations_unapplied_total) > 0
           annotations:
             message: |
-              authentik has pending database migrations
+              authentik instance {{ printf "{{ $labels.instance }}" }} has pending database migrations
             summary: Pending database migrations
           for: 10m
           labels:
             severity: critical
         - alert: FailedSystemTasks
-          expr: count(authentik_system_tasks{status="TaskResultStatus.ERROR"}) > 0
+          expr: sum(increase(authentik_system_tasks{status="TaskResultStatus.ERROR"}[2h])) > 0
           annotations:
             message: |
               System task {{ printf "{{ $labels.task_name }}" }} has failed
@@ -137,12 +137,12 @@ spec:
           labels:
             severity: critical
         - alert: DisconnectedOutposts
-          expr: sum by (outpost) (authentik_outposts_connected{uid!~"specific.*"}) < 1
+          expr: sum by (outpost) (max without (pid) (authentik_outposts_connected{uid!~"specific.*"}))  < 1
           annotations:
             message: |
               Outpost {{ printf "{{ $labels.outpost }}" }} has at least 1 disconnected instance
             summary: Disconnected outpost
-          for: 2h
+          for: 30m
           labels:
             severity: critical
   {{- end }}
