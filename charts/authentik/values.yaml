@@ -113,6 +113,10 @@ authentik:
     # @default -- `{{ .Release.Name }}-redis-master`
     host: '{{ .Release.Name }}-redis-master'
     password: ""
+  # -- configuration for automated install: https://goauthentik.io/docs/installation/automated-install
+  automatedInstall:
+    existingSecret:
+      secretName: ""
 
 # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
 env: {}

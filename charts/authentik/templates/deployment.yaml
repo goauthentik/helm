@@ -71,6 +71,18 @@ spec:
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
+            {{- if $.Values.authentik.automatedInstall.existingSecret }}
+            - name: AK_ADMIN_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.authentik.automatedInstall.existingSecret.secretName | default (printf "%s-%s" $.Release.Name "automated-install") }}
+                  key: {{ $.Values.authentik.automatedInstall.existingSecret.passwordKey | default "AK_ADMIN_PASS" }}
+            - name: AK_ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.authentik.automatedInstall.existingSecret.secretName | default (printf "%s-%s" $.Release.Name "automated-install") }}
+                  key: {{ $.Values.authentik.automatedInstall.existingSecret.tokenKey | default "AK_ADMIN_TOKEN" }}
+            {{- end }}
             {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
             - name: {{ $name }}

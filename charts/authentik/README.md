@@ -96,6 +96,9 @@ redis:
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| authentik.automatedInstall.existingSecret.secretName | string | `""` | Name of an existing secret key used for the configuration of the automated install https://goauthentik.io/docs/installation/automated-install |
+| authentik.automatedInstall.existingSecret.passwordKey | string | `"AK_ADMIN_PASS"` | Key for the retrieval of the password for akadmin |
+| authentik.automatedInstall.existingSecret.tokenKey | string | `"AK_ADMIN_TOKEN"` | Key for the retrieval of the token for akadmin |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | envFrom | list | `[]` |  |
 | envValueFrom | object | `{}` |  |
