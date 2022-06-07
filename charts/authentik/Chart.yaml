@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2022.5.1
-appVersion: 2022.5.2
+version: 2022.6.1
+appVersion: 2022.6.2
 icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
 maintainers:
   - name: BeryJu
@@ -41,7 +41,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: upgrade to authentik 2022.5.2
+      description: upgrade to authentik 2022.6.2
   artifacthub.io/license: GPL-3.0-only
   artifacthub.io/links: |
     - name: Github
@@ -57,8 +57,8 @@ annotations:
       url: https://github.com/dirtycajunrice
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2022.5.2
+      image: ghcr.io/goauthentik/server:2022.6.2
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2022.5.2
+      image: ghcr.io/goauthentik/proxy:2022.6.2
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2022.5.2
+      image: ghcr.io/goauthentik/ldap:2022.6.2
