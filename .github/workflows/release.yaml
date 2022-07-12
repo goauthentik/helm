@@ -19,7 +19,7 @@ jobs:
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Set up Helm
-        uses: azure/setup-helm@v3.0
+        uses: azure/setup-helm@v3.1
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.0
