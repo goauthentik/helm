@@ -145,6 +145,9 @@ volumeMounts: []
 # -- affinity applied to the deployments
 affinity: {}
 
+#  -- tolerations applied to the deployments
+tolerations: []
+
 # -- nodeSelector applied to the deployments
 nodeSelector: {}
 
