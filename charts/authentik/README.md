@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2022.7.3](https://img.shields.io/badge/Version-2022.7.3-informational?style=for-the-badge)
-![AppVersion: 2022.7.2](https://img.shields.io/badge/AppVersion-2022.7.2-informational?style=for-the-badge)
+![Version: 2022.8.1](https://img.shields.io/badge/Version-2022.8.1-informational?style=for-the-badge)
+![AppVersion: 2022.8.1](https://img.shields.io/badge/AppVersion-2022.8.1-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -56,8 +56,8 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | 10.9.5 |
-| https://charts.bitnami.com/bitnami | redis | 15.3.2 |
+| https://charts.bitnami.com/bitnami | postgresql | 10.16.2 |
+| https://charts.bitnami.com/bitnami | redis | 15.7.6 |
 | https://library-charts.k8s-at-home.com | common | 4.2.0 |
 
 ## Values
@@ -96,6 +96,7 @@ redis:
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| blueprints | list | `[]` | List of config maps to mount blueprints from. Only keys in the configmap ending with ".yaml" wil be discovered and applied |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | envFrom | list | `[]` |  |
 | envValueFrom | object | `{}` |  |
@@ -108,7 +109,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2022.7.2"` |  |
+| image.tag | string | `"2022.8.1"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
@@ -116,8 +117,7 @@ redis:
 | ingress.hosts[0].paths[0].pathType | string | `"Prefix"` |  |
 | ingress.ingressClassName | string | `""` |  |
 | ingress.labels | object | `{}` |  |
-| ingress.tls[0].hosts | list | `[]` |  |
-| ingress.tls[0].secretName | string | `""` |  |
+| ingress.tls | list | `[]` |  |
 | initContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
@@ -153,6 +153,7 @@ redis:
 | service.protocol | string | `"TCP"` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
+| tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
 | worker.priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |

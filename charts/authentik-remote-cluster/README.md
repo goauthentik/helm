@@ -16,8 +16,8 @@ RBAC required for a remote cluster to be connected to authentik.
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| BeryJu | jens@beryju.org | https://github.com/BeryJu |
-| dirtycajunrice | nick@cajun.pro | https://github.com/dirtycajunrice |
+| BeryJu | <jens@beryju.org> | <https://github.com/BeryJu> |
+| dirtycajunrice | <nick@cajun.pro> | <https://github.com/dirtycajunrice> |
 
 ## Source Code
 

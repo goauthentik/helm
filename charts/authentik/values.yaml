@@ -15,7 +15,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2022.7.2
+  tag: 2022.8.1
   pullPolicy: IfNotPresent
   pullSecrets: []
 
@@ -35,9 +35,7 @@ ingress:
       paths:
         - path: "/"
           pathType: Prefix
-  tls:
-    - hosts: []
-      secretName: ""
+  tls: []
 
 authentik:
   # -- Log level for server and worker
@@ -113,6 +111,10 @@ authentik:
     # @default -- `{{ .Release.Name }}-redis-master`
     host: '{{ .Release.Name }}-redis-master'
     password: ""
+
+# -- List of config maps to mount blueprints from. Only keys in the
+# configmap ending with ".yaml" wil be discovered and applied
+blueprints: []
 
 # -- see configuration options at https://goauthentik.io/docs/installation/configuration/
 env: {}
