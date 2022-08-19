@@ -42,4 +42,6 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        run: ct install --config ct.yaml
+        run: |
+          kubectl apply -f charts/authentik/ci/manfiests/
+          ct install --config ct.yaml
