@@ -1,3 +1,9 @@
+{{- $env := .Values.env }}
+{{- range $name, $val := $.Values.envValueFrom }}
+{{- $env = merge $env (dict "name" $name "valueFrom" (toYaml $val)) }}
+{{- end }}
+{{- $envFrom := .Values.envFrom }}
+{{- $envFrom := append $envFrom (dict "secretRef" (dict "name" (printf "%s-secrets" (include "common.names.fullname" .) ))) }}
 {{- range list "server" "worker" }}
 ---
 apiVersion: apps/v1
@@ -70,18 +76,14 @@ spec:
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
           args: [{{ quote . }}]
+            {{- with $env }}
           env:
-            {{- range $k, $v := $.Values.env }}
+            {{- range $k, $v := . }}
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-            {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
-            {{- range $name, $val := $.Values.envValueFrom }}
-            - name: {{ $name }}
-              valueFrom:
-                {{- toYaml $val | nindent 16 }}
             {{- end }}
-            {{- with $.Values.envFrom }}
+            {{- with $envFrom }}
           envFrom:
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -91,6 +93,14 @@ spec:
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+      {{ if eq . "worker" -}}
+            {{- with $.Values.blueprints }}
+              {{- range $name := . }}
+            - name: blueprints-{{ $name }}
+              mountPath: /blueprints/mounted/{{ $name }}
+              {{- end }}
+            {{- end }}
+      {{- end }}
             {{- if eq . "server" }}
           ports:
             - name: http
@@ -123,16 +133,25 @@ spec:
         - name: geoip-sidecar
           image: "{{ $.Values.geoip.image }}"
           env:
+{{- range $name, $val := $.Values.envValueFrom }}
+{{- $env = merge $env (dict "name" $name "valueFrom" (toYaml $val)) }}
+{{- end }}
             - name: GEOIPUPDATE_FREQUENCY
               value: {{ $.Values.geoip.updateInterval | quote }}
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
               value: "1"
-            - name: GEOIPUPDATE_ACCOUNT_ID
-              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
-            - name: GEOIPUPDATE_LICENSE_KEY
-              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-secrets" (include "common.names.fullname" $) }}
+                  key: GEOIPUPDATE_ACCOUNT_ID
+            - name: GEOIPUPDATE_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-secrets" (include "common.names.fullname" $) }}
+                  key: GEOIPUPDATE_LICENSE_KEY
           volumeMounts:
             - name: geoip-db
               mountPath: /usr/share/GeoIP
@@ -153,4 +172,13 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
+    {{ if eq . "worker" -}}
+      {{- with $.Values.blueprints }}
+        {{- range $name := . }}
+        - name: blueprints-{{ $name }}
+          configMap:
+            name: {{ $name }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
 {{- end }}

@@ -42,4 +42,8 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        run: ct install --config ct.yaml
+        run: |
+          namespace=authentik-$(uuidgen)
+          kubectl create ns $namespace
+          kubectl apply -n $namespace -f charts/authentik/ci/manfiests/
+          ct install --namespace=$namespace --config ct.yaml
