@@ -44,5 +44,6 @@ jobs:
       - name: Run chart-testing (install)
         run: |
           namespace=authentik-$(uuidgen)
+          kubectl create ns $namespace
           kubectl apply -n $namespace -f charts/authentik/ci/manfiests/
           ct install --namespace=$namespace --config ct.yaml
