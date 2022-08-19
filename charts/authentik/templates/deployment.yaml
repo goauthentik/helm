@@ -93,12 +93,14 @@ spec:
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+      {{ if eq . "worker" -}}
             {{- with $.Values.blueprints }}
               {{- range $name := . }}
             - name: blueprints-{{ $name }}
               mountPath: /blueprints/mounted/{{ $name }}
               {{- end }}
             {{- end }}
+      {{- end }}
             {{- if eq . "server" }}
           ports:
             - name: http
@@ -170,6 +172,7 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
+    {{ if eq . "worker" -}}
       {{- with $.Values.blueprints }}
         {{- range $name := . }}
         - name: blueprints-{{ $name }}
@@ -177,4 +180,5 @@ spec:
             name: {{ $name }}
         {{- end }}
       {{- end }}
+    {{- end }}
 {{- end }}
