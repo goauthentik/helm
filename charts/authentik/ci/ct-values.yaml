@@ -35,3 +35,6 @@ redis:
   auth:
     enabled: true
     password: au7h3n71k
+
+blueprints:
+  - authentik-ci-blueprint

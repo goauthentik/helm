@@ -94,8 +94,10 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
             {{- with $.Values.blueprints }}
-            - name: blueprints-{{ . }}
-              mountPath: /blueprints/mounted/{{ . }}
+              {{- range $name := . }}
+            - name: blueprints-{{ $name }}
+              mountPath: /blueprints/mounted/{{ $name }}
+              {{- end }}
             {{- end }}
             {{- if eq . "server" }}
           ports:
@@ -169,8 +171,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with $.Values.blueprints }}
-        - name: blueprints-{{ . }}
+        {{- range $name := . }}
+        - name: blueprints-{{ $name }}
           configMap:
-            name: {{ . }}
+            name: {{ $name }}
+        {{- end }}
       {{- end }}
 {{- end }}
