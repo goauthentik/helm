@@ -1,9 +1,3 @@
-{{- $env := .Values.env }}
-{{- range $name, $val := $.Values.envValueFrom }}
-{{- $env = merge $env (dict "name" $name "valueFrom" (toYaml $val)) }}
-{{- end }}
-{{- $envFrom := .Values.envFrom }}
-{{- $envFrom := append $envFrom (dict "secretRef" (dict "name" (printf "%s-secrets" (include "common.names.fullname" .) ))) }}
 {{- range list "server" "worker" }}
 ---
 apiVersion: apps/v1
@@ -76,17 +70,14 @@ spec:
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
           args: [{{ quote . }}]
-            {{- with $env }}
           env:
-            {{- range $k, $v := . }}
-            - name: {{ quote $k }}
-              value: {{ quote $v }}
-            {{- end }}
-            {{- end }}
-            {{- with $envFrom }}
+            {{- include "authentik.env" $ | indent 12 }}
           envFrom:
-              {{- toYaml . | nindent 12 }}
+            {{- with $.Values.envFrom }}
+            {{- toYaml . | nindent 12 }}
             {{- end }}
+            - secretRef:
+                name: {{ include "common.names.fullname" $ }}-secrets
           volumeMounts:
             - name: geoip-db
               mountPath: /geoip
@@ -133,9 +124,6 @@ spec:
         - name: geoip-sidecar
           image: "{{ $.Values.geoip.image }}"
           env:
-{{- range $name, $val := $.Values.envValueFrom }}
-{{- $env = merge $env (dict "name" $name "valueFrom" (toYaml $val)) }}
-{{- end }}
             - name: GEOIPUPDATE_FREQUENCY
               value: {{ $.Values.geoip.updateInterval | quote }}
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES

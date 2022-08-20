@@ -7,24 +7,15 @@
 {{- end -}}
 
 {{- define "authentik.env" -}}
-  {{- range $k, $v := .values -}}
-    {{- if kindIs "map" $v -}}
-      {{- range $sk, $sv := $v -}}
-        {{- include "authentik.env" (dict "root" $.root "values" (dict (printf "%s__%s" (upper $k) (upper $sk)) $sv)) -}}
-      {{- end -}}
-    {{- else -}}
-      {{- $value := $v -}}
-      {{- if or (kindIs "bool" $v) (kindIs "float64" $v) -}}
-        {{- $v = quote $v -}}
-      {{- else -}}
-        {{- $v = tpl $v $.root | quote }}
-      {{- end -}}
-      {{- if and ($v) (ne $v "\"\"") }}
-- name: {{ printf "AUTHENTIK_%s" (upper $k) }}
-  value: {{ $v }}
-      {{- end }}
-    {{- end -}}
-  {{- end -}}
+{{- range $name, $val := .Values.env }}
+  - name: {{ $name }}
+    value: {{ $val }}
+{{- end }}
+{{- range $name, $val := .Values.envValueFrom }}
+  - name: {{ $name }}
+    valueFrom:
+      {{- toYaml $val | nindent 6 }}
+{{- end }}
 {{- end -}}
 
 {{- define "authentik.secret" -}}
