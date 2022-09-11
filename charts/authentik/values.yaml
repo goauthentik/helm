@@ -16,6 +16,7 @@ worker:
 image:
   repository: ghcr.io/goauthentik/server
   tag: 2022.8.2
+  digest:
   pullPolicy: IfNotPresent
   pullSecrets: []
 

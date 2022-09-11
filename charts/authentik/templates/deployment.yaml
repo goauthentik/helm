@@ -67,7 +67,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
-          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}"
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}{{- if $.Values.image.digest -}}@{{ $.Values.image.digest }}{{- end -}}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
           args: [{{ quote . }}]
           env:
