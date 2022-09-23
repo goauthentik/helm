@@ -110,6 +110,7 @@ redis:
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
 | image.tag | string | `"2022.8.2"` |  |
+| image.digest | string | `nil` | optional container image digest |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
