@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2022.8.3](https://img.shields.io/badge/Version-2022.8.3-informational?style=for-the-badge)
-![AppVersion: 2022.8.2](https://img.shields.io/badge/AppVersion-2022.8.2-informational?style=for-the-badge)
+![Version: 2022.9.0](https://img.shields.io/badge/Version-2022.9.0-informational?style=for-the-badge)
+![AppVersion: 2022.9.0](https://img.shields.io/badge/AppVersion-2022.9.0-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -106,11 +106,11 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
+| image.digest | string | `""` | optional container image digest |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2022.8.2"` |  |
-| image.digest | string | `nil` | optional container image digest |
+| image.tag | string | `"2022.9.0"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
