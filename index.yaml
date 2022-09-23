@@ -4,6 +4,75 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: upgrade to authentik 2022.9.0
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2022.9.0
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2022.9.0
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2022.9.0
+      artifacthub.io/license: GPL-3.0-only
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: Jens L. BeryJu
+          email: jens@beryju.org
+          url: https://beryju.org
+        - name: Nicholas St. Germain
+          email: nick@cajun.pro
+          url: https://github.com/dirtycajunrice
+    apiVersion: v2
+    appVersion: 2022.9.0
+    created: "2022-09-23T16:22:07.181140597Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.16.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.7.6
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.2.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: 147e4878e4f5a2b5d74fa6e6666e3915eec015bb417302938af5a14661bf0eba
+    home: https://goauthentik.io
+    icon: https://raw.githubusercontent.com/BeryJu/authentik/master/web/icons/icon.svg
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: jens@beryju.org
+      name: BeryJu
+      url: https://github.com/BeryJu
+    - email: nick@cajun.pro
+      name: dirtycajunrice
+      url: https://github.com/dirtycajunrice
+    name: authentik
+    sources:
+    - https://github.com/goauthentik/authentik
+    - https://goauthentik.io/docs/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-2022.9.0/authentik-2022.9.0.tgz
+    version: 2022.9.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: upgrade to authentik 2022.8.2
       artifacthub.io/images: |
         - name: authentik
@@ -3317,4 +3386,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2022-08-20T12:40:04.275432205Z"
+generated: "2022-09-23T16:22:07.181476402Z"
