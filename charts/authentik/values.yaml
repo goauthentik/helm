@@ -193,11 +193,13 @@ prometheus:
 
 geoip:
   # -- optional GeoIP, deploys a cronjob to download the maxmind database
+  # -- sign up under https://www.maxmind.com/en/geolite2/signup
   enabled: false
-  # -- sign up under https://www.maxmind.com/en/geolite2/signup
-  accountId: ""
-  # -- sign up under https://www.maxmind.com/en/geolite2/signup
-  licenseKey: ""
+  # -- secret name with the keys "accountId" and "licenseKey" instead of plaintext
+  secretName: null
+  # -- only use either secretName OR accountId/licenseKey
+  accountId: null
+  licenseKey: null
   editionIds: "GeoLite2-City"
   image: maxmindinc/geoipupdate:v4.8
   # -- number of hours between update runs

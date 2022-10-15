@@ -135,10 +135,23 @@ spec:
               value: {{ $.Values.geoip.updateInterval | quote }}
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
               value: "1"
+            {{- if $.Values.geoip.secretName }}
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "geoip secret name or plaintext values required" $.Values.geoip.secretName | quote }}
+                  key: accountId
+            - name: GEOIPUPDATE_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "geoip secret name or plaintext values required" $.Values.geoip.secretName | quote }}
+                  key: licenseKey
+            {{ else }}
             - name: GEOIPUPDATE_ACCOUNT_ID
               value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
             - name: GEOIPUPDATE_LICENSE_KEY
               value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
+            {{ end }}
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
           volumeMounts:
