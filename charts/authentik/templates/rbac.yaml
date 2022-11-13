@@ -6,6 +6,7 @@ metadata:
   name: {{ include "common.names.fullname" . }}
   namespace: {{ .Release.Namespace }}
 ---
+{{- if semverCompare ">= 1.24" .Capabilities.KubeVersion.Version }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -15,6 +16,7 @@ metadata:
     kubernetes.io/service-account.name: {{ include "common.names.fullname" . }}
 type: kubernetes.io/service-account-token
 ---
+{{- end }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
