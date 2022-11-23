@@ -44,13 +44,12 @@ redis:
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| BeryJu | <jens@beryju.org> | <https://github.com/BeryJu> |
-| dirtycajunrice | <nick@cajun.pro> | <https://github.com/dirtycajunrice> |
+| authentik Team | <hello@goauthentik.io> | <https://goauthentik.io/> |
 
 ## Source Code
 
-* <https://github.com/goauthentik/authentik>
 * <https://goauthentik.io/docs/>
+* <https://github.com/goauthentik/authentik>
 
 ## Requirements
 
@@ -85,13 +84,6 @@ redis:
 | authentik.postgresql.name | string | `authentik` | postgresql Database name |
 | authentik.postgresql.password | string | `""` |  |
 | authentik.postgresql.port | int | `5432` |  |
-| authentik.postgresql.s3_backup.access_key | string | `""` | optional S3 backup, access key |
-| authentik.postgresql.s3_backup.bucket | string | `""` | optional S3 backup, bucket |
-| authentik.postgresql.s3_backup.host | string | `""` | optional S3 backup, host, including protocol (https://minio.domain.tld) |
-| authentik.postgresql.s3_backup.insecure_skip_verify | bool | `false` | optional S3 backup, set to `true` to disable SSL certificate verification |
-| authentik.postgresql.s3_backup.location | string | `"/"` | optional S3 backup, location in the bucket |
-| authentik.postgresql.s3_backup.region | string | `""` | optional S3 backup, region |
-| authentik.postgresql.s3_backup.secret_key | string | `""` | optional S3 backup, secret key |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
@@ -110,7 +102,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2022.9.0"` |  |
+| image.tag | string | `"2022.11.1"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
