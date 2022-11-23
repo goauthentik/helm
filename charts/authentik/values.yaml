@@ -15,7 +15,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2022.10.0
+  tag: 2022.11.1
   # -- optional container image digest
   digest: ""
   pullPolicy: IfNotPresent
@@ -92,22 +92,6 @@ authentik:
     user: "authentik"
     password: ""
     port: 5432
-    s3_backup:
-      # -- optional S3 backup, access key
-      access_key: ""
-      # -- optional S3 backup, secret key
-      secret_key: ""
-      # -- optional S3 backup, bucket
-      bucket: ""
-      # -- optional S3 backup, region
-      region: ""
-      # -- optional S3 backup, host, including protocol (https://minio.domain.tld)
-      host: ""
-      # -- optional S3 backup, location in the bucket
-      # @default -- `"/"`
-      location: ""
-      # -- optional S3 backup, set to `true` to disable SSL certificate verification
-      insecure_skip_verify: false
   redis:
     # -- set the redis hostname to talk to
     # @default -- `{{ .Release.Name }}-redis-master`
