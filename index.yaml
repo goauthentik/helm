@@ -4,6 +4,77 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: upgrade to authentik 2022.11.1
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2022.11.1
+          whitelisted: true
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2022.11.1
+          whitelisted: true
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2022.11.1
+          whitelisted: true
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: authentik Team
+          email: hello@goauthentik.io
+          url: https://goauthentik.io
+      artifacthub.io/screenshots: |
+        - title: User interface
+          url: https://goauthentik.io/img/screen_apps_light.jpg
+        - title: Admin interface
+          url: https://goauthentik.io/img/screen_admin_light.jpg
+    apiVersion: v2
+    appVersion: 2022.11.1
+    created: "2022-11-23T10:44:11.192025268Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.16.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.7.6
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.2.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: b64f3ff5915e74c2c99fd4968c3664ca3506f753f2e09b2dbe0fe33cd7408a4d
+    home: https://goauthentik.io
+    icon: https://goauthentik.io/img/icon.png
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: hello@goauthentik.io
+      name: authentik Team
+      url: https://goauthentik.io
+    name: authentik
+    sources:
+    - https://goauthentik.io/docs/
+    - https://github.com/goauthentik/authentik
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-2022.11.0/authentik-2022.11.0.tgz
+    version: 2022.11.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: upgrade to authentik 2022.10.0
       artifacthub.io/images: |
         - name: authentik
@@ -3455,4 +3526,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2022-10-22T20:19:20.587153765Z"
+generated: "2022-11-23T10:44:11.192745076Z"
