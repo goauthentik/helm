@@ -4,3 +4,4 @@ chart-repos:
   - k8s-at-home=https://library-charts.k8s-at-home.com
 helm-extra-args: --timeout 180s
 check-version-increment: false
+validate-maintainers: false

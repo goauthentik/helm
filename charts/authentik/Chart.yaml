@@ -22,7 +22,7 @@ icon: https://goauthentik.io/img/icon.png
 maintainers:
   - name: authentik Team
     email: hello@goauthentik.io
-    url: https://goauthentik.io/
+    url: https://goauthentik.io
 dependencies:
   - name: postgresql
     version: 10.16.2
