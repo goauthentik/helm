@@ -50,7 +50,7 @@ spec:
       protocol: TCP
       targetPort: http-metrics
     - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.name }}
+      targetPort: http
       protocol: {{ .Values.service.protocol }}
       name: {{ .Values.service.name }}
       {{- if and (eq $type "NodePort") .Values.service.nodePort }}
