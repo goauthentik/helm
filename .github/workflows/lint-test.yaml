@@ -5,10 +5,6 @@ on:
     branches:
       - main
   pull_request:
-    paths:
-      - 'charts/**'
-      - '!charts/**/README.md'
-      - '!charts/**/README.md.gotmpl'
 
 jobs:
   lint-and-test:
@@ -45,6 +41,7 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
+        if: steps.list-changed.outputs.changed == 'true'
         run: |
           namespace=authentik-$(uuidgen)
           kubectl create ns $namespace
