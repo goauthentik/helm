@@ -5,7 +5,7 @@
 ---
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/goauthentik/helm/Lint%20and%20Test%20Chart?label=cid&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
 ![Version: 2022.11.4](https://img.shields.io/badge/Version-2022.11.4-informational?style=for-the-badge)
 ![AppVersion: 2022.11.4](https://img.shields.io/badge/AppVersion-2022.11.4-informational?style=for-the-badge)
 
