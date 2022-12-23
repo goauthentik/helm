@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2022.11.3
-appVersion: 2022.11.3
+version: 2022.11.4
+appVersion: 2022.11.4
 icon: https://goauthentik.io/img/icon.png
 maintainers:
   - name: authentik Team
@@ -26,11 +26,11 @@ maintainers:
 dependencies:
   - name: postgresql
     version: 10.16.2
-    repository: https://charts.bitnami.com/bitnami
+    repository: https://charts.goauthentik.io
     condition: postgresql.enabled
   - name: redis
     version: 15.7.6
-    repository: https://charts.bitnami.com/bitnami
+    repository: https://charts.goauthentik.io
     condition: redis.enabled
   - name: common
     repository: https://library-charts.k8s-at-home.com
@@ -38,7 +38,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: upgrade to authentik 2022.11.3
+      description: upgrade to authentik 2022.11.4
   artifacthub.io/license: MIT
   artifacthub.io/links: |
     - name: Github
@@ -51,13 +51,13 @@ annotations:
       url: https://goauthentik.io
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2022.11.3
+      image: ghcr.io/goauthentik/server:2022.11.4
       whitelisted: true
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2022.11.3
+      image: ghcr.io/goauthentik/proxy:2022.11.4
       whitelisted: true
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2022.11.3
+      image: ghcr.io/goauthentik/ldap:2022.11.4
       whitelisted: true
   artifacthub.io/screenshots: |
     - title: User interface
