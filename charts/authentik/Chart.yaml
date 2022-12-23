@@ -26,11 +26,11 @@ maintainers:
 dependencies:
   - name: postgresql
     version: 10.16.2
-    repository: https://charts.bitnami.com/bitnami
+    repository: https://charts.goauthentik.io
     condition: postgresql.enabled
   - name: redis
     version: 15.7.6
-    repository: https://charts.bitnami.com/bitnami
+    repository: https://charts.goauthentik.io
     condition: redis.enabled
   - name: common
     repository: https://library-charts.k8s-at-home.com
