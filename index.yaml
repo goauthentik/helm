@@ -3237,4 +3237,72 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.0.0/authentik-remote-cluster-1.0.0.tgz
     version: 1.0.0
-generated: "2022-12-05T11:32:38.531685167Z"
+  postgresql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 11.14.0
+    created: "2022-12-23T14:52:38.774540706Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: 97eb1ed190b80eea6ee0fabfa0c354d00943c8aa3912f94008f3fb2053d705fc
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/postgresql-10.16.2/postgresql-10.16.2.tgz
+    version: 10.16.2
+  redis:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 6.2.6
+    created: "2022-12-23T14:52:38.959875615Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Open source, advanced key-value store. It is often referred to as
+      a data structure server since keys can contain strings, hashes, lists, sets
+      and sorted sets.
+    digest: 02f8c2984ebfcb80cec9f7be31e06e09689573036c7cc6e2944900bf0238ebb2
+    home: https://github.com/bitnami/charts/tree/master/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    - http://redis.io/
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/redis-15.7.6/redis-15.7.6.tgz
+    version: 15.7.6
+generated: "2022-12-23T14:52:38.960030915Z"
