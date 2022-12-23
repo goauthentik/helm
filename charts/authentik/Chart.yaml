@@ -25,11 +25,11 @@ maintainers:
     url: https://goauthentik.io
 dependencies:
   - name: postgresql
-    version: 10.16.2
+    version: 12.x.x
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
   - name: redis
-    version: 15.7.6
+    version: 17.x.x
     repository: https://charts.bitnami.com/bitnami
     condition: redis.enabled
   - name: common

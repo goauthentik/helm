@@ -198,6 +198,10 @@ postgresql:
   #   storageClass:
   #   accessModes:
   #     - ReadWriteOnce
+  # This allows us to use newer chart releases without forcing a postgres updates
+  # previous chart version 10.x used postgres 11, and this is the latest 11.x image
+  image:
+    tag: 11.18.0-debian-11-r14
 redis:
   # -- enable the bundled bitnami redis chart
   enabled: false
