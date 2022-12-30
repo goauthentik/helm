@@ -15,7 +15,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2022.12.0
+  tag: 2022.12.1
   # -- optional container image digest
   digest: ""
   pullPolicy: IfNotPresent
