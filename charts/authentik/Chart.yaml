@@ -16,7 +16,7 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2022.12.2
+version: 2022.12.3
 appVersion: 2022.12.2
 icon: https://goauthentik.io/img/icon.png
 maintainers:
