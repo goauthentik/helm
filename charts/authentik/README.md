@@ -6,7 +6,7 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2022.12.3](https://img.shields.io/badge/Version-2022.12.3-informational?style=for-the-badge)
+![Version: 2022.12.4](https://img.shields.io/badge/Version-2022.12.4-informational?style=for-the-badge)
 ![AppVersion: 2022.12.2](https://img.shields.io/badge/AppVersion-2022.12.2-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
@@ -55,8 +55,8 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.bitnami.com/bitnami | postgresql | 10.16.2 |
-| https://charts.bitnami.com/bitnami | redis | 15.7.6 |
+| https://charts.goauthentik.io | postgresql | 10.16.2 |
+| https://charts.goauthentik.io | redis | 15.7.6 |
 | https://library-charts.k8s-at-home.com | common | 4.2.0 |
 
 ## Values
@@ -145,6 +145,7 @@ redis:
 | service.port | int | `80` |  |
 | service.protocol | string | `"TCP"` |  |
 | service.type | string | `"ClusterIP"` |  |
+| serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
