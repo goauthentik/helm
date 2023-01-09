@@ -166,6 +166,7 @@ readinessProbe:
 serviceAccount:
   # -- Service account is needed for managed outposts
   create: true
+  annotations: {}
 
 prometheus:
   serviceMonitor:
