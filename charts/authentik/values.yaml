@@ -39,6 +39,8 @@ ingress:
           pathType: Prefix
   tls: []
 
+podAnnotations: {}
+
 authentik:
   # -- Log level for server and worker
   log_level: info
