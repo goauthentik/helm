@@ -118,6 +118,7 @@ redis:
 | livenessProbe.initialDelaySeconds | int | `50` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
+| podAnnotations | object | `{}` |  |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
