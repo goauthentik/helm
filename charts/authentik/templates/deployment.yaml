@@ -23,6 +23,10 @@ spec:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "{{ . }}"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
+      {{- if $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml $.Values.podAnnotations | nindent 8 }}
+      {{- end }}
     spec:
       {{- if $.Values.image.pullSecrets }}
       imagePullSecrets:
