@@ -4,6 +4,77 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: upgrade to authentik 2023.1.2
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2023.1.2
+          whitelisted: true
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2023.1.2
+          whitelisted: true
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2023.1.2
+          whitelisted: true
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: authentik Team
+          email: hello@goauthentik.io
+          url: https://goauthentik.io
+      artifacthub.io/screenshots: |
+        - title: User interface
+          url: https://goauthentik.io/img/screen_apps_light.jpg
+        - title: Admin interface
+          url: https://goauthentik.io/img/screen_admin_light.jpg
+    apiVersion: v2
+    appVersion: 2023.1.2
+    created: "2023-01-23T15:31:24.258982581Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.goauthentik.io
+      version: 10.16.2
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.goauthentik.io
+      version: 15.7.6
+    - name: common
+      repository: https://library-charts.k8s-at-home.com
+      version: 4.2.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: 19ca422d329556604c8631b519fe238f9cb077c9639e81364400491d92324cc4
+    home: https://goauthentik.io
+    icon: https://goauthentik.io/img/icon.png
+    keywords:
+    - proxy
+    - oauth
+    - authentication
+    - saml
+    - sso
+    - identity
+    - single-sign-on
+    - ldap
+    - idp
+    - sp
+    maintainers:
+    - email: hello@goauthentik.io
+      name: authentik Team
+      url: https://goauthentik.io
+    name: authentik
+    sources:
+    - https://goauthentik.io/docs/
+    - https://github.com/goauthentik/authentik
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-2023.1.2/authentik-2023.1.2.tgz
+    version: 2023.1.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: upgrade to authentik 2023.1.1
       artifacthub.io/images: |
         - name: authentik
@@ -3802,4 +3873,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/redis-15.7.6/redis-15.7.6.tgz
     version: 15.7.6
-generated: "2023-01-23T11:15:35.143334135Z"
+generated: "2023-01-23T15:31:24.259414394Z"
