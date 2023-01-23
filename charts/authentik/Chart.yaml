@@ -16,8 +16,8 @@ keywords:
   - ldap
   - idp
   - sp
-version: 2023.1.1
-appVersion: 2023.1.1
+version: 2023.1.2
+appVersion: 2023.1.2
 icon: https://goauthentik.io/img/icon.png
 maintainers:
   - name: authentik Team
@@ -38,7 +38,7 @@ dependencies:
 annotations:
   artifacthub.io/changes: |
     - kind: changed
-      description: upgrade to authentik 2023.1.1
+      description: upgrade to authentik 2023.1.2
   artifacthub.io/license: MIT
   artifacthub.io/links: |
     - name: Github
@@ -51,13 +51,13 @@ annotations:
       url: https://goauthentik.io
   artifacthub.io/images: |
     - name: authentik
-      image: ghcr.io/goauthentik/server:2023.1.1
+      image: ghcr.io/goauthentik/server:2023.1.2
       whitelisted: true
     - name: authentik-outpost-proxy
-      image: ghcr.io/goauthentik/proxy:2023.1.1
+      image: ghcr.io/goauthentik/proxy:2023.1.2
       whitelisted: true
     - name: authentik-outpost-ldap
-      image: ghcr.io/goauthentik/ldap:2023.1.1
+      image: ghcr.io/goauthentik/ldap:2023.1.2
       whitelisted: true
   artifacthub.io/screenshots: |
     - title: User interface
