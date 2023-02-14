@@ -15,7 +15,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2023.1.2
+  tag: 2023.2.1
   # -- optional container image digest
   digest: ""
   pullPolicy: IfNotPresent
@@ -193,6 +193,7 @@ geoip:
 postgresql:
   # -- enable the bundled bitnami postgresql chart
   enabled: false
+  postgresqlMaxConnections: 500
   postgresqlUsername: "authentik"
   # postgresqlPassword: ""
   postgresqlDatabase: "authentik"
