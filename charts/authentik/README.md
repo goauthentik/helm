@@ -6,7 +6,7 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2023.2.2](https://img.shields.io/badge/Version-2023.2.2-informational?style=for-the-badge)
+![Version: 2023.2.3](https://img.shields.io/badge/Version-2023.2.3-informational?style=for-the-badge)
 ![AppVersion: 2023.2.2](https://img.shields.io/badge/AppVersion-2023.2.2-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
@@ -120,7 +120,9 @@ redis:
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
 | podAnnotations | object | `{}` |  |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
+| postgresql.image.tag | string | `"11.19.0-debian-11-r4"` |  |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
+| postgresql.postgresqlMaxConnections | int | `500` |  |
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
 | priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | prometheus.rules.create | bool | `false` |  |
@@ -135,6 +137,7 @@ redis:
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | enable the bundled bitnami redis chart |
+| redis.image.tag | string | `"6.2.10-debian-11-r13"` |  |
 | replicas | int | `1` | Server replicas |
 | resources.server | object | `{}` |  |
 | resources.worker | object | `{}` |  |
