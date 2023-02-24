@@ -202,9 +202,13 @@ postgresql:
   #   storageClass:
   #   accessModes:
   #     - ReadWriteOnce
+  image:
+    tag: 11.19.0-debian-11-r4
 redis:
   # -- enable the bundled bitnami redis chart
   enabled: false
   architecture: standalone
   auth:
     enabled: false
+  image:
+    tag: 6.2.10-debian-11-r13
