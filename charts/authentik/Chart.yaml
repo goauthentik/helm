@@ -41,7 +41,7 @@ dependencies:
     version: 4.2.0
   - name: authentik-remote-cluster
     repository: https://charts.goauthentik.io
-    version: 1.0.3
+    version: 1.1.0
     condition: serviceAccount.create
     alias: serviceAccount
 annotations:
