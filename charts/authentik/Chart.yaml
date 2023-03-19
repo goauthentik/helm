@@ -38,6 +38,11 @@ dependencies:
   - name: common
     repository: https://library-charts.k8s-at-home.com
     version: 4.2.0
+  - name: authentik-remote-cluster
+    repository: https://charts.goauthentik.io
+    version: 1.0.3
+    condition: serviceAccount.create
+    alias: serviceAccount
 annotations:
   artifacthub.io/changes: |
     - kind: changed
