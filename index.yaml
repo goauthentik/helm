@@ -4047,6 +4047,50 @@ entries:
     version: 1.0.0-RC2
   authentik-remote-cluster:
   - annotations:
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Github
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: authentik Team
+          email: hello@goauthentik.io
+          url: https://goauthentik.io
+    apiVersion: v2
+    appVersion: 2021.10.2
+    created: "2023-03-19T19:49:50.024551533Z"
+    description: RBAC required for a remote cluster to be connected to authentik.
+    digest: 3443d30a2075c3b4a584051584c72bfa87b6f9b8f60a4c1f1250b9fbe4986fda
+    home: https://goauthentik.io
+    icon: https://goauthentik.io/img/icon.png
+    keywords:
+    - authentication
+    - directory
+    - identity
+    - idp
+    - ldap
+    - oauth
+    - oidc
+    - proxy
+    - saml
+    - scim
+    - single-sign-on
+    - sp
+    - sso
+    maintainers:
+    - email: hello@goauthentik.io
+      name: authentik Team
+      url: https://goauthentik.io
+    name: authentik-remote-cluster
+    sources:
+    - https://goauthentik.io/docs/
+    - https://github.com/goauthentik/authentik
+    type: application
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-remote-cluster-1.1.0/authentik-remote-cluster-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
       artifacthub.io/license: GPL-3.0-only
       artifacthub.io/links: |
         - name: Github
@@ -4302,4 +4346,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/redis-15.7.6/redis-15.7.6.tgz
     version: 15.7.6
-generated: "2023-03-16T21:46:27.674966826Z"
+generated: "2023-03-19T19:49:50.024720761Z"
