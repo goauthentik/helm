@@ -55,6 +55,7 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
+| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.0.3 |
 | https://charts.goauthentik.io | postgresql | 10.16.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
 | https://library-charts.k8s-at-home.com | common | 4.2.0 |
