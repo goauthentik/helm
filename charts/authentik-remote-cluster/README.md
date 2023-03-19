@@ -16,13 +16,12 @@ RBAC required for a remote cluster to be connected to authentik.
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| BeryJu | <jens@beryju.org> | <https://github.com/BeryJu> |
-| dirtycajunrice | <nick@cajun.pro> | <https://github.com/dirtycajunrice> |
+| authentik Team | <hello@goauthentik.io> | <https://goauthentik.io> |
 
 ## Source Code
 
-* <https://github.com/goauthentik/authentik>
 * <https://goauthentik.io/docs/>
+* <https://github.com/goauthentik/authentik>
 
 ## Values
 
