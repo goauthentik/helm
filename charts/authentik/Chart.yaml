@@ -1,6 +1,9 @@
 apiVersion: v2
-description: authentik is an open-source Identity Provider focused on flexibility and versatility
+version: 2023.3.1
+appVersion: 2023.3.1
 name: authentik
+description: authentik is an open-source Identity Provider focused on flexibility and versatility
+type: application
 home: https://goauthentik.io
 sources:
   - https://goauthentik.io/docs/
@@ -19,8 +22,6 @@ keywords:
   - single-sign-on
   - sp
   - sso
-version: 2023.3.1
-appVersion: 2023.3.1
 icon: https://goauthentik.io/img/icon.png
 maintainers:
   - name: authentik Team
@@ -38,6 +39,11 @@ dependencies:
   - name: common
     repository: https://library-charts.k8s-at-home.com
     version: 4.2.0
+  - name: authentik-remote-cluster
+    repository: https://charts.goauthentik.io
+    version: 1.1.0
+    condition: serviceAccount.create
+    alias: serviceAccount
 annotations:
   artifacthub.io/changes: |
     - kind: changed
