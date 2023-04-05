@@ -175,8 +175,12 @@ prometheus:
     create: false
     interval: 30s
     scrapeTimeout: 3s
+    # -- labels additional on ServiceMonitor
+    labels: {}
   rules:
     create: false
+    # -- labels additional on PrometheusRule
+    labels: {}
 
 geoip:
   # -- optional GeoIP, deploys a cronjob to download the maxmind database

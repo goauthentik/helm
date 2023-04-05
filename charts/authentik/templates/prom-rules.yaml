@@ -1,10 +1,14 @@
-{{- if .Values.prometheus.rules.create -}}
+{{- with .Values.prometheus.rules }}
+{{- if .create -}}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "common.names.fullname" $ }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "common.labels" $ | nindent 4 }}
+    {{- with .labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   groups:
     - name: authentik Aggregate request counters
@@ -47,6 +51,7 @@ spec:
           expr: sum(rate(django_http_exceptions_total_by_type[30s])) by (job,type)
         - record: job:django_http_exceptions_total_by_view:sum_rate30s
           expr: sum(rate(django_http_exceptions_total_by_view[30s])) by (job,view)
+
     - name: authentik Aggregate latency histograms
       rules:
         - record: job:django_http_requests_latency_including_middlewares_seconds:quantile_rate30s
@@ -81,6 +86,7 @@ spec:
           expr: histogram_quantile(0.999, sum(rate(django_http_requests_latency_seconds_bucket[30s])) by (job, le))
           labels:
             quantile: "99.9"
+
     - name: authentik Aggregate model operations
       rules:
         - record: job:django_model_inserts_total:sum_rate1m
@@ -101,48 +107,59 @@ spec:
           expr: sum(rate(django_db_execute_many_total[30s])) by (alias, vendor)
         - record: job:django_db_errors_total:sum_rate30s
           expr: sum(rate(django_db_errors_total[30s])) by (alias, vendor, type)
+
     - name: authentik Aggregate migrations
       rules:
         - record: job:django_migrations_applied_total:max
           expr: max(django_migrations_applied_total) by (job, connection)
         - record: job:django_migrations_unapplied_total:max
           expr: max(django_migrations_unapplied_total) by (job, connection)
+
     - name: authentik Alerts
       rules:
         - alert: NoWorkersConnected
+          labels:
+            severity: critical
           expr: max without (pid) (authentik_admin_workers) < 1
+          for: 10m
           annotations:
-            message: |
-              authentik instance {{ printf "{{ $labels.instance }}" }}'s worker are either not running or not connected.
+            {{`
             summary: No workers connected
-          for: 10m
-          labels:
-            severity: critical
+            message: authentik instance {{ $labels.instance }}'s worker are either not running or not connected.
+            `}}
+          
+
         - alert: PendingMigrations
+          labels:
+            severity: critical
           expr: max without (pid) (django_migrations_unapplied_total) > 0
-          annotations:
-            message: |
-              authentik instance {{ printf "{{ $labels.instance }}" }} has pending database migrations
-            summary: Pending database migrations
           for: 10m
-          labels:
-            severity: critical
+          annotations:
+            {{`
+            summary: Pending database migrations
+            message: authentik instance {{ $labels.instance }} has pending database migrations
+            `}}
+
         - alert: FailedSystemTasks
+          labels:
+            severity: critical
           expr: sum(increase(authentik_system_tasks{status="TaskResultStatus.ERROR"}[2h])) > 0
-          annotations:
-            message: |
-              System task {{ printf "{{ $labels.task_name }}" }} has failed
-            summary: Failed system tasks
           for: 2h
-          labels:
-            severity: critical
-        - alert: DisconnectedOutposts
-          expr: sum by (outpost) (max without (pid) (authentik_outposts_connected{uid!~"specific.*"}))  < 1
           annotations:
-            message: |
-              Outpost {{ printf "{{ $labels.outpost }}" }} has at least 1 disconnected instance
-            summary: Disconnected outpost
-          for: 30m
+            {{`
+            summary: Failed system tasks
+            message: System task {{ $labels.task_name }} has failed
+            `}}
+
+        - alert: DisconnectedOutposts
           labels:
             severity: critical
-  {{- end }}
+          expr: sum by (outpost) (max without (pid) (authentik_outposts_connected{uid!~"specific.*"}))  < 1
+          for: 30m
+          annotations:
+            {{`
+            summary: Disconnected outpost
+            message: Outpost {{ $labels.outpost }} has at least 1 disconnected instance
+            `}}
+{{- end }}
+{{- end }}
