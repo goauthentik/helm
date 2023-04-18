@@ -127,9 +127,11 @@ redis:
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
 | priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | prometheus.rules.create | bool | `false` |  |
+| prometheus.rules.labels | object | `{}` | labels additional on PrometheusRule |
 | prometheus.serviceMonitor.create | bool | `false` |  |
 | prometheus.serviceMonitor.interval | string | `"30s"` |  |
 | prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
+| prometheus.serviceMonitor.labels | object | `{}` | labels additional on ServiceMonitor |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
