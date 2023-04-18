@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2023.3.1](https://img.shields.io/badge/Version-2023.3.1-informational?style=for-the-badge)
-![AppVersion: 2023.3.1](https://img.shields.io/badge/AppVersion-2023.3.1-informational?style=for-the-badge)
+![Version: 2023.4.0](https://img.shields.io/badge/Version-2023.4.0-informational?style=for-the-badge)
+![AppVersion: 2023.4.0](https://img.shields.io/badge/AppVersion-2023.4.0-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -55,7 +55,7 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.0.3 |
+| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.1.0 |
 | https://charts.goauthentik.io | postgresql | 10.16.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
 | https://library-charts.k8s-at-home.com | common | 4.2.0 |
@@ -103,7 +103,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2023.3.1"` |  |
+| image.tag | string | `"2023.4.0"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
