@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2023.4.0](https://img.shields.io/badge/Version-2023.4.0-informational?style=for-the-badge)
-![AppVersion: 2023.4.0](https://img.shields.io/badge/AppVersion-2023.4.0-informational?style=for-the-badge)
+![Version: 2023.4.1](https://img.shields.io/badge/Version-2023.4.1-informational?style=for-the-badge)
+![AppVersion: 2023.4.1](https://img.shields.io/badge/AppVersion-2023.4.1-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -103,7 +103,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2023.4.0"` |  |
+| image.tag | string | `"2023.4.1"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
@@ -130,8 +130,8 @@ redis:
 | prometheus.rules.labels | object | `{}` | labels additional on PrometheusRule |
 | prometheus.serviceMonitor.create | bool | `false` |  |
 | prometheus.serviceMonitor.interval | string | `"30s"` |  |
-| prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
 | prometheus.serviceMonitor.labels | object | `{}` | labels additional on ServiceMonitor |
+| prometheus.serviceMonitor.scrapeTimeout | string | `"3s"` |  |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
