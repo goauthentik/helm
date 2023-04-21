@@ -1,11 +1,12 @@
 Run the commands below to get a kubeconfig file for authentik:
 
-# your server name goes here
+# your kubeconfig's server endpoint goes here
 KUBE_API=https://localhost:8443
 
+NAMESPACE={{ .Release.Namespace }}
 SECRET_NAME=$(kubectl get serviceaccount {{ include "authentik-remote-cluster.fullname" . }} -o jsonpath='{.secrets[0].name}')
-KUBE_CA=$(kubectl get secret/$SECRET_NAME -o jsonpath='{.data.ca\.crt}')
-KUBE_TOKEN=$(kubectl get secret/$SECRET_NAME -o jsonpath='{.data.token}' | base64 --decode)
+KUBE_CA=$(kubectl -n $NAMESPACE get secret/$SECRET_NAME -o jsonpath='{.data.ca\.crt}')
+KUBE_TOKEN=$(kubectl -n $NAMESPACE get secret/$SECRET_NAME -o jsonpath='{.data.token}' | base64 --decode)
 
 echo "apiVersion: v1
 kind: Config
@@ -18,7 +19,7 @@ contexts:
 - name: default-context
   context:
     cluster: default-cluster
-    namespace: {{ .Release.Namespace }}
+    namespace: $NAMESPACE
     user: authentik-user
 current-context: default-context
 users:
