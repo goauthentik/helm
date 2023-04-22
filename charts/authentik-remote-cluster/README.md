@@ -30,3 +30,4 @@ RBAC required for a remote cluster to be connected to authentik.
 | annotations | object | `{}` |  |
 | fullnameOverride | string | `""` |  |
 | nameOverride | string | `""` |  |
+| serviceAccountSecret.enabled | bool | `true` |  |
