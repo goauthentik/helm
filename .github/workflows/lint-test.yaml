@@ -38,5 +38,5 @@ jobs:
         run: |
           namespace=authentik-$(uuidgen)
           kubectl create ns $namespace
-          kubectl apply -n $namespace -f charts/authentik/ci/manfiests/
+          kubectl apply -n $namespace -f charts/authentik/ci/manifests/
           ct install --namespace=$namespace --config ct.yaml
