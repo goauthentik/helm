@@ -169,10 +169,6 @@ serviceAccount:
   # -- Service account is needed for managed outposts
   create: true
   annotations: {}
-  serviceAccountSecret:
-    # -- As we use the authentik-remote-cluster chart as subchart, and that chart
-    # creates a service account secret by default which we don't need here, disable its creation
-    enabled: false
 
 prometheus:
   serviceMonitor:
