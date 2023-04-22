@@ -88,6 +88,7 @@ redis:
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
+| authentik.redis.tls | bool | false | Use TLS to connect to Redis |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | blueprints | list | `[]` | List of config maps to mount blueprints from. Only keys in the configmap ending with ".yaml" wil be discovered and applied |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
