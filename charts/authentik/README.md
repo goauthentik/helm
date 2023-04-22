@@ -154,7 +154,7 @@ redis:
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
-| serviceAccount.serviceAccountSecret | object | `{"enabled":false}` | As we use the authentik-remote-cluster chart as subchart, and that chart creates a service account secret by default which we don't need here, disable its creation |
+| serviceAccount.serviceAccountSecret.enabled | bool | `false` | As we use the authentik-remote-cluster chart as subchart, and that chart creates a service account secret by default which we don't need here, disable its creation |
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
