@@ -49,8 +49,6 @@ authentik:
   secret_key: ""
   # -- Path for the geoip database. If the file doesn't exist, GeoIP features are disabled.
   geoip: /geoip/GeoLite2-City.mmdb
-  # -- Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none'
-  avatars: gravatar
   email:
     # -- SMTP Server emails are sent from, fully optional
     host: ""
@@ -169,6 +167,10 @@ serviceAccount:
   # -- Service account is needed for managed outposts
   create: true
   annotations: {}
+  serviceAccountSecret:
+    # -- As we use the authentik-remote-cluster chart as subchart, and that chart
+    # creates a service account secret by default which we don't need here, disable its creation
+    enabled: false
 
 prometheus:
   serviceMonitor:

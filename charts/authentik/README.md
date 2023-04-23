@@ -55,7 +55,7 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.1.0 |
+| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.1.2 |
 | https://charts.goauthentik.io | postgresql | 10.16.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
 | https://library-charts.k8s-at-home.com | common | 4.2.0 |
@@ -66,7 +66,6 @@ redis:
 |-----|------|---------|-------------|
 | additionalContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
 | affinity | object | `{}` | affinity applied to the deployments |
-| authentik.avatars | string | `"gravatar"` | Mode for the avatars. Defaults to gravatar. Possible options 'gravatar' and 'none' |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
@@ -154,6 +153,7 @@ redis:
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
+| serviceAccount.serviceAccountSecret.enabled | bool | `false` | As we use the authentik-remote-cluster chart as subchart, and that chart creates a service account secret by default which we don't need here, disable its creation |
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
