@@ -164,7 +164,7 @@ readinessProbe:
   periodSeconds: 10
 
 serviceAccount:
-  # -- Service account is needed for managed outposts
+  # -- Service account is needed for managed outposts and sidecar for blueprints
   create: true
   annotations: {}
   serviceAccountSecret:
@@ -183,6 +183,16 @@ prometheus:
     create: false
     # -- labels additional on PrometheusRule
     labels: {}
+
+sidecar:
+  blueprints:
+    enabled: false
+    image:
+      repository: "ghcr.io/kiwigrid/k8s-sidecar"
+      tag: "1.23.0"
+    namespace: ""
+    resource: "both"
+    uniqueFilenames: true
 
 geoip:
   # -- optional GeoIP, deploys a cronjob to download the maxmind database

@@ -36,5 +36,12 @@ redis:
     enabled: true
     password: au7h3n71k
 
+serviceAccount:
+  create: true
+
+sidecar:
+  blueprints:
+    enabled: true
+
 blueprints:
   - authentik-ci-blueprint

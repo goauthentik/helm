@@ -1,4 +1,4 @@
-{{- range list "server" "worker" }}
+{{- range $component := list "server" "worker" }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -6,31 +6,31 @@ metadata:
   name: {{ printf "%s-%s" (include "common.names.fullname" $) . }}
   labels:
     {{- include "common.labels" $ | nindent 4 }}
-    app.kubernetes.io/component: "{{ . }}"
+    app.kubernetes.io/component: "{{ $component }}"
 spec:
-  {{ if eq . "server" -}}
+  {{- if eq . "server" }}
   replicas: {{ $.Values.replicas }}
-  {{- else -}}
+  {{- else }}
   replicas: {{ $.Values.worker.replicas }}
   {{- end }}
   selector:
     matchLabels:
       {{- include "common.labels.selectorLabels" $ | nindent 6 }}
-      app.kubernetes.io/component: "{{ . }}"
+      app.kubernetes.io/component: "{{ $component }}"
   template:
     metadata:
       labels:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
-        app.kubernetes.io/component: "{{ . }}"
+        app.kubernetes.io/component: "{{ $component }}"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
-      {{- if $.Values.podAnnotations }}
+      {{- with $.Values.podAnnotations }}
       annotations:
-        {{- toYaml $.Values.podAnnotations | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
     spec:
-      {{- if $.Values.image.pullSecrets }}
+      {{- with $.Values.image.pullSecrets }}
       imagePullSecrets:
-        {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if $.Values.serviceAccount.create }}
       serviceAccountName: {{ include "common.names.fullname" $ }}
@@ -60,20 +60,25 @@ spec:
         {{- end }}
         {{- tpl (toYaml $initContainers) $ | nindent 8 }}
       {{- end }}
-      {{ if eq . "server" -}}
+      {{- if eq $component "server" }}
       priorityClassName: {{ $.Values.priorityClassName }}
+      {{- with $.Values.securityContext }}
       securityContext:
-        {{- toYaml $.Values.securityContext | nindent 8 }}
-      {{- else -}}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- else }}
       priorityClassName: {{ $.Values.worker.priorityClassName }}
+      {{- with $.Values.worker.securityContext }}
       securityContext:
-        {{- toYaml $.Values.worker.securityContext | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}{{- if $.Values.image.digest -}}@{{ $.Values.image.digest }}{{- end -}}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
-          args: [{{ quote . }}]
+          args:
+            - {{ $component | quote }}
           env:
             {{- range $k, $v := $.Values.env }}
             - name: {{ quote $k }}
@@ -85,27 +90,32 @@ spec:
               valueFrom:
                 {{- toYaml $val | nindent 16 }}
             {{- end }}
-            {{- with $.Values.envFrom }}
+          {{- with $.Values.envFrom }}
           envFrom:
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+
           volumeMounts:
-          {{- if $.Values.geoip.enabled }}
+            {{- if $.Values.geoip.enabled }}
             - name: geoip-db
               mountPath: /geoip
-          {{- end }}
+            {{- end }}
+            
+            {{- if $.Values.sidecar.blueprints.enabled }}
+            - name: sidecar-blueprints
+              mountPath: /blueprints/sidecar
+            {{- end }}
+            
+            {{- range $name := $.Values.blueprints }}
+            - name: blueprints-{{ $name }}
+              mountPath: /blueprints/mounted/{{ $name }}
+            {{- end }}
+
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-      {{ if eq . "worker" -}}
-            {{- with $.Values.blueprints }}
-              {{- range $name := . }}
-            - name: blueprints-{{ $name }}
-              mountPath: /blueprints/mounted/{{ $name }}
-              {{- end }}
-            {{- end }}
-      {{- end }}
-            {{- if eq . "server" }}
+
+          {{- if eq $component "server" }}
           ports:
             - name: http
               containerPort: 9000
@@ -116,24 +126,25 @@ spec:
             - name: https
               containerPort: 9443
               protocol: TCP
-              {{- if $.Values.livenessProbe.enabled }}
-                {{- with omit $.Values.livenessProbe "enabled" }}
+          {{- with $.Values.livenessProbe }}
+          {{- if .enabled }}
           livenessProbe:
-                  {{- toYaml . | nindent 12 }}
-                {{- end }}
-              {{- end }}
-              {{- if $.Values.readinessProbe.enabled }}
-                {{- with omit $.Values.readinessProbe "enabled" }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- with $.Values.readinessProbe }}
+          {{- if .enabled }}
           readinessProbe:
-                  {{- toYaml . | nindent 12 }}
-                {{- end }}
-              {{- end }}
-            {{- end }}
-            {{- with index $.Values.resources . }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- end }}
+          {{- end }}{{/* end server */}}
+
+          {{- with (get $.Values.resources $component) }}
           resources:
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
-      {{- if $.Values.geoip.enabled }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+        {{- if $.Values.geoip.enabled }}
         - name: geoip-sidecar
           image: "{{ $.Values.geoip.image }}"
           env:
@@ -150,8 +161,36 @@ spec:
           volumeMounts:
             - name: geoip-db
               mountPath: /usr/share/GeoIP
-      {{- end }}
-      {{- with $.Values.additionalContainers }}
+        {{- end }}
+        {{- with $.Values.sidecar.blueprints }}
+        {{- if .enabled }}
+        - name: sidecar-blueprints
+          image: "{{ .image.repository }}:{{ .image.tag }}"
+          env:
+            - name: "FOLDER"
+              value: "/blueprints/sidecar"
+            - name: "LABEL"
+              value: "goauthentik_blueprint"
+            - name: "LABEL_VALUE"
+              value: "1"
+            {{- with .namespace }}
+            - name: "NAMESPACE"
+              value: "{{ . }}"
+            {{- end }}
+            {{- with .resource }}
+            - name: "RESOURCE"
+              value: "{{ . }}"
+            {{- end }}
+            {{- with .uniqueFilenames }}
+            - name: "UNIQUE_FILENAMES"
+              value: "{{ . }}"
+            {{- end }}
+          volumeMounts:
+            - name: sidecar-blueprints
+              mountPath: /blueprints/sidecar
+        {{- end }}
+        {{- end }}
+        {{- with $.Values.additionalContainers }}
         {{- $additionalContainers := list }}
         {{- range $name, $container := . }}
           {{- if not $container.name -}}
@@ -162,20 +201,22 @@ spec:
         {{- tpl (toYaml $additionalContainers) $ | nindent 8 }}
       {{- end }}
       volumes:
-      {{- if $.Values.geoip.enabled }}
+        {{- if $.Values.geoip.enabled }}
         - name: geoip-db
           emptyDir: {}
-      {{- end }}
-      {{- with $.Values.volumes }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{ if eq . "worker" -}}
-      {{- with $.Values.blueprints }}
-        {{- range $name := . }}
+        {{- end }}
+        {{- if $.Values.sidecar.blueprints.enabled }}
+        - name: sidecar-blueprints
+          emptyDir: {}
+        {{- end }}
+        {{- range $name := $.Values.blueprints }}
         - name: blueprints-{{ $name }}
           configMap:
             name: {{ $name }}
         {{- end }}
-      {{- end }}
-    {{- end }}
+
+        {{- with $.Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+        
 {{- end }}
