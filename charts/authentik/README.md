@@ -118,7 +118,8 @@ redis:
 | livenessProbe.initialDelaySeconds | int | `50` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
-| podAnnotations | object | `{}` |  |
+| annotations | object | `{}` | Annotations to add to the server and worker deployments |
+| podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.image.tag | string | `"11.19.0-debian-11-r4"` |  |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |

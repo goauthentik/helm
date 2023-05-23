@@ -39,6 +39,10 @@ ingress:
           pathType: Prefix
   tls: []
 
+# -- Annotations to add to the server and worker deployments
+annotations: {}
+
+# -- Annotations to add to the server and worker pods
 podAnnotations: {}
 
 authentik:
@@ -83,7 +87,7 @@ authentik:
     # -- set the postgresql hostname to talk to
     # if unset and .Values.postgresql.enabled == true, will generate the default
     # @default -- `{{ .Release.Name }}-postgresql`
-    host: '{{ .Release.Name }}-postgresql'
+    host: "{{ .Release.Name }}-postgresql"
     # -- postgresql Database name
     # @default -- `authentik`
     name: "authentik"
@@ -95,7 +99,7 @@ authentik:
   redis:
     # -- set the redis hostname to talk to
     # @default -- `{{ .Release.Name }}-redis-master`
-    host: '{{ .Release.Name }}-redis-master'
+    host: "{{ .Release.Name }}-redis-master"
     password: ""
 
 # -- List of config maps to mount blueprints from. Only keys in the

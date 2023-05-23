@@ -7,6 +7,10 @@ metadata:
   labels:
     {{- include "common.labels" $ | nindent 4 }}
     app.kubernetes.io/component: "{{ . }}"
+  {{- if $.Values.annotations }}
+  annotations:
+    {{- toYaml $.Values.annotations | nindent 4 }}
+  {{- end }}
 spec:
   {{ if eq . "server" -}}
   replicas: {{ $.Values.replicas }}
