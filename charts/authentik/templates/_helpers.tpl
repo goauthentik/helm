@@ -15,13 +15,12 @@
     {{- else -}}
       {{- $value := $v -}}
       {{- if or (kindIs "bool" $v) (kindIs "float64" $v) -}}
-        {{- $v = quote $v -}}
+        {{- $v = $v | quote | b64enc -}}
       {{- else -}}
-        {{- $v = tpl $v $.root | quote }}
+        {{- $v = tpl $v $.root | quote | b64enc }}
       {{- end -}}
       {{- if and ($v) (ne $v "\"\"") }}
-- name: {{ printf "AUTHENTIK_%s" (upper $k) }}
-  value: {{ $v }}
+{{ printf "AUTHENTIK_%s" (upper $k) }}: {{ $v }}
       {{- end }}
     {{- end -}}
   {{- end -}}

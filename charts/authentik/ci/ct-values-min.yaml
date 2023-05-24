@@ -38,3 +38,8 @@ redis:
 
 blueprints:
   - authentik-ci-blueprint
+
+geoip:
+  enabled: true
+  accountId: "foo-account-id"
+  licenseKey: "foo-license-key"

@@ -22,8 +22,9 @@ spec:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "server"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
-      {{- if $.Values.podAnnotations }}
       annotations:
+        goauthentik.io/config-checksum: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- if $.Values.podAnnotations }}
         {{- toYaml $.Values.podAnnotations | nindent 8 }}
       {{- end }}
     spec:
@@ -56,7 +57,9 @@ spec:
         {{- end }}
         {{- tpl (toYaml $initContainers) $ | nindent 8 }}
       {{- end }}
+      {{- if $.Values.priorityClassName }}
       priorityClassName: {{ $.Values.priorityClassName }}
+      {{- end }}
       securityContext:
         {{- toYaml $.Values.securityContext | nindent 8 }}
       containers:
@@ -69,14 +72,15 @@ spec:
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-            {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
             - name: {{ $name }}
               valueFrom:
                 {{- toYaml $val | nindent 16 }}
             {{- end }}
-            {{- with $.Values.envFrom }}
           envFrom:
+            - secretRef:
+                name: {{ include "common.names.fullname" $ }}
+            {{- with $.Values.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
           volumeMounts:
@@ -122,9 +126,15 @@ spec:
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
               value: "1"
             - name: GEOIPUPDATE_ACCOUNT_ID
-              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "common.names.fullname" $ }}
+                  key: GEOIPUPDATE_ACCOUNT_ID
             - name: GEOIPUPDATE_LICENSE_KEY
-              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "common.names.fullname" $ }}
+                  key: GEOIPUPDATE_LICENSE_KEY
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
           volumeMounts:
