@@ -66,6 +66,7 @@ redis:
 |-----|------|---------|-------------|
 | additionalContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
 | affinity | object | `{}` | affinity applied to the deployments |
+| annotations | object | `{}` | Annotations to add to the server and worker deployments |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, not authentication will be done |
@@ -88,6 +89,14 @@ redis:
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| autoscaling.server.enabled | bool | `false` | Create a HPA for the server deployment |
+| autoscaling.server.maxReplicas | int | `5` |  |
+| autoscaling.server.minReplicas | int | `1` |  |
+| autoscaling.server.targetCPUUtilizationPercentage | int | `50` |  |
+| autoscaling.worker.enabled | bool | `false` | Create a HPA for the server deployment |
+| autoscaling.worker.maxReplicas | int | `5` |  |
+| autoscaling.worker.minReplicas | int | `1` |  |
+| autoscaling.worker.targetCPUUtilizationPercentage | int | `80` |  |
 | blueprints | list | `[]` | List of config maps to mount blueprints from. Only keys in the configmap ending with ".yaml" wil be discovered and applied |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | envFrom | list | `[]` |  |
@@ -118,7 +127,6 @@ redis:
 | livenessProbe.initialDelaySeconds | int | `50` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
-| annotations | object | `{}` | Annotations to add to the server and worker deployments |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.image.tag | string | `"11.19.0-debian-11-r4"` |  |

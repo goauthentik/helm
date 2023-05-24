@@ -147,6 +147,20 @@ resources:
   server: {}
   worker: {}
 
+autoscaling:
+  server:
+    # -- Create a HPA for the server deployment
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+  worker:
+    # -- Create a HPA for the server deployment
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+
 # WARNING! When initially deploying, authentik has to do a few DB migrations. This may cause it to die from probe
 # failure, but will continue on reboot. You can disable this during deployment if this is not desired
 livenessProbe:
