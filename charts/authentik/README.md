@@ -58,7 +58,6 @@ redis:
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.1.2 |
 | https://charts.goauthentik.io | postgresql | 10.16.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
-| https://library-charts.k8s-at-home.com | common | 4.2.0 |
 
 ## Values
 
@@ -124,7 +123,7 @@ redis:
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `50` |  |
+| livenessProbe.initialDelaySeconds | int | `30` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
@@ -143,7 +142,7 @@ redis:
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `50` |  |
+| readinessProbe.initialDelaySeconds | int | `30` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |

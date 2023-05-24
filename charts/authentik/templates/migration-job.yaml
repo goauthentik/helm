@@ -1,0 +1,126 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ printf "%s-%s" (include "authentik.names.fullname" $) "migration-job" }}
+  labels:
+    {{- include "authentik.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: "server"
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "-5"
+    helm.sh/hook-delete-policy: hook-succeeded
+  {{- if $.Values.annotations }}
+    {{- toYaml $.Values.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  template:
+    spec:
+      {{- if $.Values.image.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      enableServiceLinks: true
+      {{- if $.Values.initContainers }}
+      initContainers:
+        {{- $initContainers := list }}
+        {{- range $index, $key := (keys $.Values.initContainers | uniq | sortAlpha) }}
+          {{- $container := get $.Values.initContainers $key }}
+          {{- if not $container.name -}}
+            {{- $_ := set $container "name" $key }}
+          {{- end }}
+          {{- $initContainers = append $initContainers $container }}
+        {{- end }}
+        {{- tpl (toYaml $initContainers) $ | nindent 8 }}
+      {{- end }}
+      {{- if $.Values.priorityClassName }}
+      priorityClassName: {{ $.Values.priorityClassName }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $.Values.securityContext | nindent 8 }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}{{- if $.Values.image.digest -}}@{{ $.Values.image.digest }}{{- end -}}"
+          imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
+          args: ["migrate"]
+          env:
+            {{- range $k, $v := $.Values.env }}
+            - name: {{ quote $k }}
+              value: {{ quote $v }}
+            {{- end }}
+            {{- range $name, $val := $.Values.envValueFrom }}
+            - name: {{ $name }}
+              valueFrom:
+                {{- toYaml $val | nindent 16 }}
+            {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ include "authentik.names.fullname" $ }}
+            {{- with $.Values.envFrom }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+          {{- if $.Values.geoip.enabled }}
+            - name: geoip-db
+              mountPath: /geoip
+          {{- end }}
+            {{- with $.Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- with index $.Values.resources.server }}
+          resources:
+              {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- if $.Values.geoip.enabled }}
+        - name: geoip-sidecar
+          image: "{{ $.Values.geoip.image }}"
+          env:
+            - name: GEOIPUPDATE_FREQUENCY
+              value: {{ $.Values.geoip.updateInterval | quote }}
+            - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
+              value: "1"
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "authentik.names.fullname" $ }}
+                  key: GEOIPUPDATE_ACCOUNT_ID
+            - name: GEOIPUPDATE_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "authentik.names.fullname" $ }}
+                  key: GEOIPUPDATE_LICENSE_KEY
+            - name: GEOIPUPDATE_EDITION_IDS
+              value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
+          volumeMounts:
+            - name: geoip-db
+              mountPath: /usr/share/GeoIP
+      {{- end }}
+      {{- with $.Values.additionalContainers }}
+        {{- $additionalContainers := list }}
+        {{- range $name, $container := . }}
+          {{- if not $container.name -}}
+            {{- $_ := set $container "name" $name }}
+          {{- end }}
+          {{- $additionalContainers = append $additionalContainers $container }}
+        {{- end }}
+        {{- tpl (toYaml $additionalContainers) $ | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- if $.Values.geoip.enabled }}
+        - name: geoip-db
+          emptyDir: {}
+      {{- end }}
+      {{- with $.Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
