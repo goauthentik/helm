@@ -107,6 +107,12 @@ spec:
                   {{- toYaml . | nindent 12 }}
                 {{- end }}
               {{- end }}
+              {{- if $.Values.startupProbe.enabled }}
+                {{- with omit $.Values.startupProbe "enabled" }}
+          startupProbe:
+                  {{- toYaml . | nindent 12 }}
+                {{- end }}
+              {{- end }}
               {{- if $.Values.readinessProbe.enabled }}
                 {{- with omit $.Values.readinessProbe "enabled" }}
           readinessProbe:
