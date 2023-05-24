@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" (include "common.names.fullname" $) "server" }}
+  name: {{ printf "%s-%s" (include "authentik.names.fullname" $) "server" }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "authentik.labels" $ | nindent 4 }}
     app.kubernetes.io/component: "server"
   {{- if $.Values.annotations }}
   annotations:
@@ -14,12 +14,12 @@ spec:
   replicas: {{ $.Values.replicas }}
   selector:
     matchLabels:
-      {{- include "common.labels.selectorLabels" $ | nindent 6 }}
+      {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}
       app.kubernetes.io/component: "server"
   template:
     metadata:
       labels:
-        {{- include "common.labels.selectorLabels" $ | nindent 8 }}
+        {{- include "authentik.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "server"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
       annotations:
@@ -79,7 +79,7 @@ spec:
             {{- end }}
           envFrom:
             - secretRef:
-                name: {{ include "common.names.fullname" $ }}
+                name: {{ include "authentik.names.fullname" $ }}
             {{- with $.Values.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -128,12 +128,12 @@ spec:
             - name: GEOIPUPDATE_ACCOUNT_ID
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "common.names.fullname" $ }}
+                  name: {{ include "authentik.names.fullname" $ }}
                   key: GEOIPUPDATE_ACCOUNT_ID
             - name: GEOIPUPDATE_LICENSE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "common.names.fullname" $ }}
+                  name: {{ include "authentik.names.fullname" $ }}
                   key: GEOIPUPDATE_LICENSE_KEY
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}

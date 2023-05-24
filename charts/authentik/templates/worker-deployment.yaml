@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" (include "common.names.fullname" $) "worker" }}
+  name: {{ printf "%s-%s" (include "authentik.names.fullname" $) "worker" }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "authentik.labels" $ | nindent 4 }}
     app.kubernetes.io/component: "worker"
   {{- if $.Values.annotations }}
   annotations:
@@ -14,12 +14,12 @@ spec:
   replicas: {{ $.Values.worker.replicas }}
   selector:
     matchLabels:
-      {{- include "common.labels.selectorLabels" $ | nindent 6 }}
+      {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}
       app.kubernetes.io/component: "worker"
   template:
     metadata:
       labels:
-        {{- include "common.labels.selectorLabels" $ | nindent 8 }}
+        {{- include "authentik.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "worker"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
       annotations:
@@ -33,7 +33,7 @@ spec:
         {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
       {{- end }}
       {{- if $.Values.serviceAccount.create }}
-      serviceAccountName: {{ include "common.names.fullname" $ }}
+      serviceAccountName: {{ include "authentik.names.fullname" $ }}
       {{- end }}
       {{- with $.Values.affinity }}
       affinity:
@@ -82,7 +82,7 @@ spec:
             {{- end }}
           envFrom:
             - secretRef:
-                name: {{ include "common.names.fullname" $ }}
+                name: {{ include "authentik.names.fullname" $ }}
             {{- with $.Values.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -115,12 +115,12 @@ spec:
             - name: GEOIPUPDATE_ACCOUNT_ID
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "common.names.fullname" $ }}
+                  name: {{ include "authentik.names.fullname" $ }}
                   key: GEOIPUPDATE_ACCOUNT_ID
             - name: GEOIPUPDATE_LICENSE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "common.names.fullname" $ }}
+                  name: {{ include "authentik.names.fullname" $ }}
                   key: GEOIPUPDATE_LICENSE_KEY
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
