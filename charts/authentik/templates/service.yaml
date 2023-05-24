@@ -45,7 +45,7 @@ spec:
   publishNotReadyAddresses: {{ . }}
   {{- end }}
   ports:
-    - port: 9100
+    - port: 9300
       name: http-metrics
       protocol: TCP
       targetPort: http-metrics
