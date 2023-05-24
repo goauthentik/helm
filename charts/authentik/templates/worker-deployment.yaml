@@ -1,31 +1,26 @@
-{{- range list "server" "worker" }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" (include "common.names.fullname" $) . }}
+  name: {{ printf "%s-%s" (include "common.names.fullname" $) "worker" }}
   labels:
     {{- include "common.labels" $ | nindent 4 }}
-    app.kubernetes.io/component: "{{ . }}"
+    app.kubernetes.io/component: "worker"
   {{- if $.Values.annotations }}
   annotations:
     {{- toYaml $.Values.annotations | nindent 4 }}
   {{- end }}
 spec:
-  {{ if eq . "server" -}}
-  replicas: {{ $.Values.replicas }}
-  {{- else -}}
   replicas: {{ $.Values.worker.replicas }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "common.labels.selectorLabels" $ | nindent 6 }}
-      app.kubernetes.io/component: "{{ . }}"
+      app.kubernetes.io/component: "worker"
   template:
     metadata:
       labels:
         {{- include "common.labels.selectorLabels" $ | nindent 8 }}
-        app.kubernetes.io/component: "{{ . }}"
+        app.kubernetes.io/component: "worker"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
       {{- if $.Values.podAnnotations }}
       annotations:
@@ -64,20 +59,14 @@ spec:
         {{- end }}
         {{- tpl (toYaml $initContainers) $ | nindent 8 }}
       {{- end }}
-      {{ if eq . "server" -}}
-      priorityClassName: {{ $.Values.priorityClassName }}
-      securityContext:
-        {{- toYaml $.Values.securityContext | nindent 8 }}
-      {{- else -}}
       priorityClassName: {{ $.Values.worker.priorityClassName }}
       securityContext:
         {{- toYaml $.Values.worker.securityContext | nindent 8 }}
-      {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}{{- if $.Values.image.digest -}}@{{ $.Values.image.digest }}{{- end -}}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
-          args: [{{ quote . }}]
+          args: ["worker"]
           env:
             {{- range $k, $v := $.Values.env }}
             - name: {{ quote $k }}
@@ -101,39 +90,13 @@ spec:
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-      {{ if eq . "worker" -}}
             {{- with $.Values.blueprints }}
               {{- range $name := . }}
             - name: blueprints-{{ $name }}
               mountPath: /blueprints/mounted/{{ $name }}
               {{- end }}
             {{- end }}
-      {{- end }}
-            {{- if eq . "server" }}
-          ports:
-            - name: http
-              containerPort: 9000
-              protocol: TCP
-            - name: http-metrics
-              containerPort: 9300
-              protocol: TCP
-            - name: https
-              containerPort: 9443
-              protocol: TCP
-              {{- if $.Values.livenessProbe.enabled }}
-                {{- with omit $.Values.livenessProbe "enabled" }}
-          livenessProbe:
-                  {{- toYaml . | nindent 12 }}
-                {{- end }}
-              {{- end }}
-              {{- if $.Values.readinessProbe.enabled }}
-                {{- with omit $.Values.readinessProbe "enabled" }}
-          readinessProbe:
-                  {{- toYaml . | nindent 12 }}
-                {{- end }}
-              {{- end }}
-            {{- end }}
-            {{- with index $.Values.resources . }}
+            {{- with index $.Values.resources "worker" }}
           resources:
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -173,7 +136,6 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{ if eq . "worker" -}}
       {{- with $.Values.blueprints }}
         {{- range $name := . }}
         - name: blueprints-{{ $name }}
@@ -181,5 +143,3 @@ spec:
             name: {{ $name }}
         {{- end }}
       {{- end }}
-    {{- end }}
-{{- end }}
