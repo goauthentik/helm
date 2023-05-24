@@ -21,10 +21,10 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: []
 
-# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+# -- Specify any initContainers here as dictionary items. Each initContainer should have its own key. The dictionary item key will determine the order. Helm templates can be used
 initContainers: {}
 
-# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+# -- Specify any additional containers here as dictionary items. Each additional container should have its own key. Helm templates can be used.
 additionalContainers: {}
 
 ingress:

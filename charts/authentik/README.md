@@ -63,7 +63,7 @@ redis:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| additionalContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
+| additionalContainers | object | `{}` | Specify any additional containers here as dictionary items. Each additional container should have its own key. Helm templates can be used. |
 | affinity | object | `{}` | affinity applied to the deployments |
 | annotations | object | `{}` | Annotations to add to the server and worker deployments |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
@@ -119,7 +119,7 @@ redis:
 | ingress.ingressClassName | string | `""` |  |
 | ingress.labels | object | `{}` |  |
 | ingress.tls | list | `[]` |  |
-| initContainers | object | `{}` | See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values |
+| initContainers | object | `{}` | Specify any initContainers here as dictionary items. Each initContainer should have its own key. The dictionary item key will determine the order. Helm templates can be used |
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
