@@ -27,9 +27,9 @@
     {{- else -}}
       {{- $value := $v -}}
       {{- if or (kindIs "bool" $v) (kindIs "float64" $v) -}}
-        {{- $v = $v | b64enc | quote -}}
+        {{- $v = $v | toString | b64enc | quote -}}
       {{- else -}}
-        {{- $v = tpl $v $.root | b64enc | quote }}
+        {{- $v = tpl $v $.root | toString | b64enc | quote }}
       {{- end -}}
       {{- if and ($v) (ne $v "\"\"") }}
 {{ printf "AUTHENTIK_%s" (upper $k) }}: {{ $v }}
