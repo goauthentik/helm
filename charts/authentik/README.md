@@ -123,7 +123,7 @@ redis:
 | livenessProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | livenessProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | livenessProbe.httpGet.port | string | `"http"` |  |
-| livenessProbe.initialDelaySeconds | int | `30` |  |
+| livenessProbe.initialDelaySeconds | int | `50` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
@@ -142,7 +142,7 @@ redis:
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
-| readinessProbe.initialDelaySeconds | int | `30` |  |
+| readinessProbe.initialDelaySeconds | int | `50` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
