@@ -15,7 +15,6 @@ metadata:
 spec:
   template:
     spec:
-      restartPolicy: OnFailure
       {{- if $.Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
