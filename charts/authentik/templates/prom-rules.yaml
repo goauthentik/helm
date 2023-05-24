@@ -3,9 +3,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ include "common.names.fullname" $ }}
+  name: {{ include "authentik.names.fullname" $ }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "authentik.labels" $ | nindent 4 }}
     {{- with .labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -127,7 +127,7 @@ spec:
             summary: No workers connected
             message: authentik instance {{ $labels.instance }}'s worker are either not running or not connected.
             `}}
-          
+
 
         - alert: PendingMigrations
           labels:

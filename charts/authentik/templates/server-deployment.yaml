@@ -1,43 +1,36 @@
-{{- range list "server" "worker" }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ printf "%s-%s" (include "common.names.fullname" $) . }}
+  name: {{ printf "%s-%s" (include "authentik.names.fullname" $) "server" }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
-    app.kubernetes.io/component: "{{ . }}"
+    {{- include "authentik.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: "server"
   {{- if $.Values.annotations }}
   annotations:
     {{- toYaml $.Values.annotations | nindent 4 }}
   {{- end }}
 spec:
-  {{ if eq . "server" -}}
-  replicas: {{ $.Values.replicas }}
-  {{- else -}}
-  replicas: {{ $.Values.worker.replicas }}
-  {{- end }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      {{- include "common.labels.selectorLabels" $ | nindent 6 }}
-      app.kubernetes.io/component: "{{ . }}"
+      {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: "server"
   template:
     metadata:
       labels:
-        {{- include "common.labels.selectorLabels" $ | nindent 8 }}
-        app.kubernetes.io/component: "{{ . }}"
+        {{- include "authentik.labels.selectorLabels" $ | nindent 8 }}
+        app.kubernetes.io/component: "server"
         app.kubernetes.io/version: "{{ $.Values.image.tag }}"
-      {{- if $.Values.podAnnotations }}
       annotations:
+        goauthentik.io/config-checksum: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      {{- if $.Values.podAnnotations }}
         {{- toYaml $.Values.podAnnotations | nindent 8 }}
       {{- end }}
     spec:
       {{- if $.Values.image.pullSecrets }}
       imagePullSecrets:
         {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
-      {{- end }}
-      {{- if $.Values.serviceAccount.create }}
-      serviceAccountName: {{ include "common.names.fullname" $ }}
       {{- end }}
       {{- with $.Values.affinity }}
       affinity:
@@ -64,33 +57,30 @@ spec:
         {{- end }}
         {{- tpl (toYaml $initContainers) $ | nindent 8 }}
       {{- end }}
-      {{ if eq . "server" -}}
+      {{- if $.Values.priorityClassName }}
       priorityClassName: {{ $.Values.priorityClassName }}
+      {{- end }}
       securityContext:
         {{- toYaml $.Values.securityContext | nindent 8 }}
-      {{- else -}}
-      priorityClassName: {{ $.Values.worker.priorityClassName }}
-      securityContext:
-        {{- toYaml $.Values.worker.securityContext | nindent 8 }}
-      {{- end }}
       containers:
         - name: {{ $.Chart.Name }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag }}{{- if $.Values.image.digest -}}@{{ $.Values.image.digest }}{{- end -}}"
           imagePullPolicy: "{{ $.Values.image.pullPolicy }}"
-          args: [{{ quote . }}]
+          args: ["server"]
           env:
             {{- range $k, $v := $.Values.env }}
             - name: {{ quote $k }}
               value: {{ quote $v }}
             {{- end }}
-            {{- include "authentik.env" (dict "root" $ "values" $.Values.authentik) | indent 12 }}
             {{- range $name, $val := $.Values.envValueFrom }}
             - name: {{ $name }}
               valueFrom:
                 {{- toYaml $val | nindent 16 }}
             {{- end }}
-            {{- with $.Values.envFrom }}
           envFrom:
+            - secretRef:
+                name: {{ include "authentik.names.fullname" $ }}
+            {{- with $.Values.envFrom }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
           volumeMounts:
@@ -101,15 +91,6 @@ spec:
             {{- with $.Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-      {{ if eq . "worker" -}}
-            {{- with $.Values.blueprints }}
-              {{- range $name := . }}
-            - name: blueprints-{{ $name }}
-              mountPath: /blueprints/mounted/{{ $name }}
-              {{- end }}
-            {{- end }}
-      {{- end }}
-            {{- if eq . "server" }}
           ports:
             - name: http
               containerPort: 9000
@@ -126,14 +107,19 @@ spec:
                   {{- toYaml . | nindent 12 }}
                 {{- end }}
               {{- end }}
+              {{- if $.Values.startupProbe.enabled }}
+                {{- with omit $.Values.startupProbe "enabled" }}
+          startupProbe:
+                  {{- toYaml . | nindent 12 }}
+                {{- end }}
+              {{- end }}
               {{- if $.Values.readinessProbe.enabled }}
                 {{- with omit $.Values.readinessProbe "enabled" }}
           readinessProbe:
                   {{- toYaml . | nindent 12 }}
                 {{- end }}
               {{- end }}
-            {{- end }}
-            {{- with index $.Values.resources . }}
+            {{- with index $.Values.resources.server }}
           resources:
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -146,9 +132,15 @@ spec:
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
               value: "1"
             - name: GEOIPUPDATE_ACCOUNT_ID
-              value: {{ required "geoip account id required" $.Values.geoip.accountId | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "authentik.names.fullname" $ }}
+                  key: GEOIPUPDATE_ACCOUNT_ID
             - name: GEOIPUPDATE_LICENSE_KEY
-              value: {{ required "geoip license key required" $.Values.geoip.licenseKey | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "authentik.names.fullname" $ }}
+                  key: GEOIPUPDATE_LICENSE_KEY
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" $.Values.geoip.editionIds | quote }}
           volumeMounts:
@@ -173,13 +165,3 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{ if eq . "worker" -}}
-      {{- with $.Values.blueprints }}
-        {{- range $name := . }}
-        - name: blueprints-{{ $name }}
-          configMap:
-            name: {{ $name }}
-        {{- end }}
-      {{- end }}
-    {{- end }}
-{{- end }}

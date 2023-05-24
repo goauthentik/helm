@@ -21,10 +21,10 @@ image:
   pullPolicy: IfNotPresent
   pullSecrets: []
 
-# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+# -- Specify any initContainers here as dictionary items. Each initContainer should have its own key. The dictionary item key will determine the order. Helm templates can be used
 initContainers: {}
 
-# -- See https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common#values
+# -- Specify any additional containers here as dictionary items. Each additional container should have its own key. Helm templates can be used.
 additionalContainers: {}
 
 ingress:
@@ -147,8 +147,20 @@ resources:
   server: {}
   worker: {}
 
-# WARNING! When initially deploying, authentik has to do a few DB migrations. This may cause it to die from probe
-# failure, but will continue on reboot. You can disable this during deployment if this is not desired
+autoscaling:
+  server:
+    # -- Create a HPA for the server deployment
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+  worker:
+    # -- Create a HPA for the server deployment
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 80
+
 livenessProbe:
   # -- enables or disables the livenessProbe
   enabled: true
@@ -156,15 +168,24 @@ livenessProbe:
     # -- liveness probe url path
     path: /-/health/live/
     port: http
-  initialDelaySeconds: 50
+  initialDelaySeconds: 5
   periodSeconds: 10
+
+startupProbe:
+  # -- enables or disables the livenessProbe
+  enabled: true
+  httpGet:
+    # -- liveness probe url path
+    path: /-/health/live/
+    port: http
+  failureThreshold: 60
+  periodSeconds: 5
 
 readinessProbe:
   enabled: true
   httpGet:
     path: /-/health/ready/
     port: http
-  initialDelaySeconds: 50
   periodSeconds: 10
 
 serviceAccount:

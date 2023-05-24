@@ -1,0 +1,42 @@
+{
+    "cSpell.words": [
+        "akadmin",
+        "asgi",
+        "authentik",
+        "authn",
+        "goauthentik",
+        "jwks",
+        "oidc",
+        "openid",
+        "plex",
+        "saml",
+        "totp",
+        "webauthn",
+        "traefik",
+        "passwordless",
+        "kubernetes",
+        "sso",
+        "slo",
+        "scim",
+    ],
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.tree.showBadges": true,
+    "yaml.customTags": [
+        "!Find sequence",
+        "!KeyOf scalar",
+        "!Context scalar",
+        "!Context sequence",
+        "!Format sequence",
+        "!Condition sequence",
+        "!Env sequence",
+        "!Env scalar"
+    ],
+    "gitlens.autolinks": [
+        {
+            "alphanumeric": true,
+            "prefix": "#<num>",
+            "url": "https://github.com/goauthentik/helm/issues/<num>",
+            "ignoreCase": false
+        }
+    ]
+}

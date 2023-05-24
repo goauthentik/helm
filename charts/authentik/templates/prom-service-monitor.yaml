@@ -3,9 +3,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "common.names.fullname" $ }}
+  name: {{ include "authentik.names.fullname" $ }}
   labels:
-    {{- include "common.labels" $ | nindent 4 }}
+    {{- include "authentik.labels" $ | nindent 4 }}
     {{- with .labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -16,6 +16,6 @@ spec:
       interval: {{ .interval }}
   selector:
     matchLabels:
-      {{- include "common.labels.selectorLabels" $ | nindent 6 }}
+      {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}
 {{- end }}
 {{- end }}

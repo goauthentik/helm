@@ -1,11 +1,11 @@
 {{- if .Values.ingress.enabled -}}
-  {{- $apiIsStable := include "authentik.ingress.isStable" . -}}
-apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
+  {{- $apiIsStable := include "authentik.capabilities.ingress.isStable" . -}}
+apiVersion: {{ include "authentik.capabilities.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
-  name: {{ include "common.names.fullname" . }}
+  name: {{ include "authentik.names.fullname" . }}
   labels:
-    {{- include "common.labels" . | nindent 4 }}
+    {{- include "authentik.labels" . | nindent 4 }}
     {{- with .Values.ingress.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -34,11 +34,11 @@ spec:
             backend:
               {{- if $apiIsStable }}
               service:
-                name: {{ include "common.names.fullname" $ }}
+                name: {{ include "authentik.names.fullname" $ }}
                 port:
                   name: {{ $.Values.service.name }}
               {{- else }}
-              serviceName: {{ include "common.names.fullname" $ }}
+              serviceName: {{ include "authentik.names.fullname" $ }}
               servicePort: {{ $.Values.service.port }}
               {{- end }}
           {{- end }}
