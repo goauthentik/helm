@@ -11,7 +11,9 @@ metadata:
     {{- toYaml $.Values.annotations | nindent 4 }}
   {{- end }}
 spec:
+  {{- if not $.Values.autoscaling.worker.enabled }}
   replicas: {{ $.Values.worker.replicas }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}

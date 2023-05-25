@@ -155,7 +155,7 @@ autoscaling:
     maxReplicas: 5
     targetCPUUtilizationPercentage: 50
   worker:
-    # -- Create a HPA for the server deployment
+    # -- Create a HPA for the worker deployment
     enabled: false
     minReplicas: 1
     maxReplicas: 5
