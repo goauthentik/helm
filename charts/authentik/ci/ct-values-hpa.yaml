@@ -8,7 +8,7 @@ autoscaling:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2023.5.1
+  tag: 2023.5.2
   pullPolicy: IfNotPresent
 
 ingress:
