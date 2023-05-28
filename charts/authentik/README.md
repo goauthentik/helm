@@ -92,7 +92,7 @@ redis:
 | autoscaling.server.maxReplicas | int | `5` |  |
 | autoscaling.server.minReplicas | int | `1` |  |
 | autoscaling.server.targetCPUUtilizationPercentage | int | `50` |  |
-| autoscaling.worker.enabled | bool | `false` | Create a HPA for the server deployment |
+| autoscaling.worker.enabled | bool | `false` | Create a HPA for the worker deployment |
 | autoscaling.worker.maxReplicas | int | `5` |  |
 | autoscaling.worker.minReplicas | int | `1` |  |
 | autoscaling.worker.targetCPUUtilizationPercentage | int | `80` |  |
