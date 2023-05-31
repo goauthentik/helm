@@ -4,6 +4,8 @@ replicas: 1
 priorityClassName:
 # -- server securityContext
 securityContext: {}
+# -- server containerSecurityContext
+containerSecurityContext: {}
 
 worker:
   # -- worker replicas
@@ -12,6 +14,8 @@ worker:
   priorityClassName:
   # -- worker securityContext
   securityContext: {}
+  # -- server containerSecurityContext
+  containerSecurityContext: {}
 
 image:
   repository: ghcr.io/goauthentik/server
@@ -220,7 +224,8 @@ geoip:
   image: maxmindinc/geoipupdate:v4.8
   # -- number of hours between update runs
   updateInterval: 8
-
+  # -- server containerSecurityContext
+  containerSecurityContext: {}
 postgresql:
   # -- enable the bundled bitnami postgresql chart
   enabled: false

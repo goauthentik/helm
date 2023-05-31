@@ -106,6 +106,8 @@ spec:
           resources:
               {{- toYaml . | nindent 12 }}
             {{- end }}
+          securityContext:
+            {{- toYaml $.Values.worker.containerSecurityContext | nindent 12 }}
       {{- if $.Values.geoip.enabled }}
         - name: geoip-sidecar
           image: "{{ $.Values.geoip.image }}"
@@ -129,6 +131,8 @@ spec:
           volumeMounts:
             - name: geoip-db
               mountPath: /usr/share/GeoIP
+          securityContext:
+            {{- toYaml $.Values.geoip.containerSecurityContext | nindent 12 }}
       {{- end }}
       {{- with $.Values.additionalContainers }}
         {{- $additionalContainers := list }}

@@ -106,6 +106,7 @@ redis:
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
+| geoip.containerSecurityContext | object | `{}` | geoip containerSecurityContext |
 | image.digest | string | `""` | optional container image digest |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
@@ -151,6 +152,7 @@ redis:
 | resources.server | object | `{}` |  |
 | resources.worker | object | `{}` |  |
 | securityContext | object | `{}` | server securityContext |
+| containerSecurityContext | object | `{}` | server containerSecurityContext |
 | service.annotations | object | `{}` |  |
 | service.enabled | bool | `true` | Service that is created to access authentik |
 | service.labels | object | `{}` |  |
@@ -172,3 +174,4 @@ redis:
 | worker.priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | worker.replicas | int | `1` | worker replicas |
 | worker.securityContext | object | `{}` | worker securityContext |
+| worker.containerSecurityContext | object | `{}` | worker containerSecurityContext |
