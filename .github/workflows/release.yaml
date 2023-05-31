@@ -27,10 +27,16 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v3.5
 
+      - id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: ${{ steps.generate_token.outputs.token }}
           CR_SKIP_EXISTING: "true"
           CR_GENERATE_RELEASE_NOTES: "true"
 
