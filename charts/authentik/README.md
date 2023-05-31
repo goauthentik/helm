@@ -97,16 +97,17 @@ redis:
 | autoscaling.worker.minReplicas | int | `1` |  |
 | autoscaling.worker.targetCPUUtilizationPercentage | int | `80` |  |
 | blueprints | list | `[]` | List of config maps to mount blueprints from. Only keys in the configmap ending with ".yaml" wil be discovered and applied |
+| containerSecurityContext | object | `{}` | server containerSecurityContext |
 | env | object | `{}` | see configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | envFrom | list | `[]` |  |
 | envValueFrom | object | `{}` |  |
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
+| geoip.containerSecurityContext | object | `{}` | server containerSecurityContext |
 | geoip.editionIds | string | `"GeoLite2-City"` |  |
 | geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.updateInterval | int | `8` | number of hours between update runs |
-| geoip.containerSecurityContext | object | `{}` | geoip containerSecurityContext |
 | image.digest | string | `""` | optional container image digest |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
@@ -152,7 +153,6 @@ redis:
 | resources.server | object | `{}` |  |
 | resources.worker | object | `{}` |  |
 | securityContext | object | `{}` | server securityContext |
-| containerSecurityContext | object | `{}` | server containerSecurityContext |
 | service.annotations | object | `{}` |  |
 | service.enabled | bool | `true` | Service that is created to access authentik |
 | service.labels | object | `{}` |  |
@@ -171,7 +171,7 @@ redis:
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
+| worker.containerSecurityContext | object | `{}` | server containerSecurityContext |
 | worker.priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | worker.replicas | int | `1` | worker replicas |
 | worker.securityContext | object | `{}` | worker securityContext |
-| worker.containerSecurityContext | object | `{}` | worker containerSecurityContext |
