@@ -32,6 +32,7 @@ rules:
     verbs: {{- include "authentik-remote-cluster.api-verbs-rw" . | nindent 6 }}
   - apiGroups:
       - traefik.containo.us
+      - traefik.io
     resources:
       - middlewares
     verbs: {{- include "authentik-remote-cluster.api-verbs-rw" . | nindent 6 }}
