@@ -3,8 +3,5 @@ fullnameOverride: ""
 
 annotations: {}
 
-
-clusterRoleBinding: true
-
 serviceAccountSecret:
   enabled: true
