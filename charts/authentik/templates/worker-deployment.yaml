@@ -35,7 +35,7 @@ spec:
         {{- toYaml $.Values.image.pullSecrets | nindent 8 }}
       {{- end }}
       {{- if $.Values.serviceAccount.create }}
-      serviceAccountName: {{ include "authentik.names.fullname" $ }}
+      serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
       {{- end }}
       {{- with $.Values.affinity }}
       affinity:
