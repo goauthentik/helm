@@ -143,7 +143,7 @@ spec:
         - alert: FailedSystemTasks
           labels:
             severity: critical
-          expr: sum(increase(authentik_system_tasks{status="TaskResultStatus.ERROR"}[2h])) > 0
+          expr: sum(increase(authentik_system_tasks{status="error"}[2h])) > 0
           for: 2h
           annotations:
             {{`
