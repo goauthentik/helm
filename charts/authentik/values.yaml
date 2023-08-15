@@ -241,7 +241,7 @@ postgresql:
   #   accessModes:
   #     - ReadWriteOnce
   image:
-    tag: 11.19.0-debian-11-r4
+    tag: 12.16.0-debian-11-r2
 redis:
   # -- enable the bundled bitnami redis chart
   enabled: false
