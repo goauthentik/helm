@@ -1,7 +1,12 @@
+{{/*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 
 {{/* vim: set filetype=mustache: */}}
 {{/*
-Validate Redis&trade; required passwords are not empty.
+Validate Redis&reg; required passwords are not empty.
 
 Usage:
 {{ include "common.validations.values.redis.passwords" (dict "secret" "secretName" "subchart" false "context" $) }}

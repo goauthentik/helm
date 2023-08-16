@@ -1,3 +1,8 @@
+{{/*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Validate MongoDB&reg; required passwords are not empty.
@@ -97,7 +102,7 @@ Auxiliary function to get the right value for architecture
 Usage:
 {{ include "common.mongodb.values.architecture" (dict "subchart" "true" "context" $) }}
 Params:
-  - subchart - Boolean - Optional. Whether MariaDB is used as subchart or not. Default: false
+  - subchart - Boolean - Optional. Whether MongoDB&reg; is used as subchart or not. Default: false
 */}}
 {{- define "common.mongodb.values.architecture" -}}
   {{- if .subchart -}}
