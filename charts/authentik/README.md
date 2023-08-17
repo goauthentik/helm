@@ -56,7 +56,7 @@ redis:
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.2.2 |
-| https://charts.goauthentik.io | postgresql | 12.8.2 |
+| https://charts.goauthentik.io | postgresql | 10.16.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
 
 ## Values

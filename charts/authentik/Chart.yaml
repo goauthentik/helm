@@ -29,7 +29,7 @@ maintainers:
     url: https://goauthentik.io
 dependencies:
   - name: postgresql
-    version: 12.8.2
+    version: 10.16.2
     repository: https://charts.goauthentik.io
     condition: postgresql.enabled
   - name: redis
