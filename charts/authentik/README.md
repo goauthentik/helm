@@ -55,8 +55,8 @@ redis:
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.1.2 |
-| https://charts.goauthentik.io | postgresql | 10.16.2 |
+| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 1.2.2 |
+| https://charts.goauthentik.io | postgresql | 12.8.2 |
 | https://charts.goauthentik.io | redis | 15.7.6 |
 
 ## Values
@@ -130,7 +130,7 @@ redis:
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
-| postgresql.image.tag | string | `"11.19.0-debian-11-r4"` |  |
+| postgresql.image.tag | string | `"15.4.0-debian-11-r0"` |  |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |
 | postgresql.postgresqlMaxConnections | int | `500` |  |
 | postgresql.postgresqlUsername | string | `"authentik"` |  |
@@ -162,6 +162,8 @@ redis:
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` | Service account is needed for managed outposts |
+| serviceAccount.fullnameOverride | string | `"authentik"` |  |
+| serviceAccount.nameOverride | string | `"authentik"` |  |
 | serviceAccount.serviceAccountSecret.enabled | bool | `false` | As we use the authentik-remote-cluster chart as subchart, and that chart creates a service account secret by default which we don't need here, disable its creation |
 | startupProbe.enabled | bool | `true` | enables or disables the livenessProbe |
 | startupProbe.failureThreshold | int | `60` |  |
