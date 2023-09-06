@@ -232,9 +232,10 @@ postgresql:
   # -- enable the bundled bitnami postgresql chart
   enabled: false
   postgresqlMaxConnections: 500
-  postgresqlUsername: "authentik"
-  # postgresqlPassword: ""
-  postgresqlDatabase: "authentik"
+  auth:
+    username: "authentik"
+    database: "authentik"
+    # password: ""
   # persistence:
   #   enabled: true
   #   storageClass:
