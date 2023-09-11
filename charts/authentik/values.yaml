@@ -49,6 +49,9 @@ annotations: {}
 # -- Annotations to add to the server and worker pods
 podAnnotations: {}
 
+# -- Labels to add to the server and worker pods
+podLabels: {}
+
 authentik:
   # -- Log level for server and worker
   log_level: info

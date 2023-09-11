@@ -24,6 +24,9 @@ spec:
         {{- include "authentik.labels.selectorLabels" $ | nindent 8 }}
         app.kubernetes.io/component: "worker"
         app.kubernetes.io/version: "{{ trunc 63 $.Values.image.tag }}"
+        {{- with $.Values.podLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       annotations:
         goauthentik.io/config-checksum: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       {{- if $.Values.podAnnotations }}

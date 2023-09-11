@@ -129,6 +129,7 @@ redis:
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
+| podLabels | object | `{}` | Labels to add to the server and worker pods |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.image.tag | string | `"15.4.0-debian-11-r0"` |  |
 | postgresql.postgresqlDatabase | string | `"authentik"` |  |

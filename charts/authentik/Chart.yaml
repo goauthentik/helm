@@ -43,8 +43,8 @@ dependencies:
     alias: serviceAccount
 annotations:
   artifacthub.io/changes: |
-    - kind: changed
-      description: upgrade to authentik 2023.8.3
+    - kind: added
+      description: add custom pod labels
   artifacthub.io/license: GPL
   artifacthub.io/links: |
     - name: GitHub
