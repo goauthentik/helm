@@ -5,7 +5,7 @@ worker:
 
 image:
   repository: ghcr.io/goauthentik/server
-  tag: 2023.8.2
+  tag: 2023.8.3
   pullPolicy: IfNotPresent
 
 ingress:
