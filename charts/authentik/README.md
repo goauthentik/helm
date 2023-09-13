@@ -180,10 +180,12 @@ redis:
 | startupProbe.httpGet.path | string | `"/-/health/live/"` | liveness probe url path |
 | startupProbe.httpGet.port | string | `"http"` |  |
 | startupProbe.periodSeconds | int | `5` |  |
+| strategy | object | `{}` | server deployment strategy |
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
-| worker.containerSecurityContext | object | `{}` | server containerSecurityContext |
+| worker.containerSecurityContext | object | `{}` | worker containerSecurityContext |
 | worker.priorityClassName | string | `nil` | Custom priority class for different treatment by the scheduler |
 | worker.replicas | int | `1` | worker replicas |
 | worker.securityContext | object | `{}` | worker securityContext |
+| worker.strategy | object | `{}` | worker strategy |
