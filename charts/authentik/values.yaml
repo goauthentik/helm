@@ -6,6 +6,12 @@ priorityClassName:
 securityContext: {}
 # -- server containerSecurityContext
 containerSecurityContext: {}
+# -- server deployment strategy
+strategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #  maxSurge: 25%
+  #  maxUnavailable: 25%
 
 worker:
   # -- worker replicas
@@ -14,8 +20,14 @@ worker:
   priorityClassName:
   # -- worker securityContext
   securityContext: {}
-  # -- server containerSecurityContext
+  # -- worker containerSecurityContext
   containerSecurityContext: {}
+  # -- worker strategy
+  strategy: {}
+    # type: RollingUpdate
+    # rollingUpdate:
+    #  maxSurge: 25%
+    #  maxUnavailable: 25%
 
 image:
   repository: ghcr.io/goauthentik/server
