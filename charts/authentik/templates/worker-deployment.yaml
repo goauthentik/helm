@@ -14,6 +14,8 @@ spec:
   {{- if not $.Values.autoscaling.worker.enabled }}
   replicas: {{ $.Values.worker.replicas }}
   {{- end }}
+  strategy:
+    {{- toYaml $.Values.worker.strategy | nindent 4 }}
   selector:
     matchLabels:
       {{- include "authentik.labels.selectorLabels" $ | nindent 6 }}
