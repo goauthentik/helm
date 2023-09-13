@@ -128,6 +128,16 @@ redis:
 | livenessProbe.initialDelaySeconds | int | `5` |  |
 | livenessProbe.periodSeconds | int | `10` |  |
 | nodeSelector | object | `{}` | nodeSelector applied to the deployments |
+| pdb.server.annotations | object | `{}` | Annotations to be added to the server pdb |
+| pdb.server.enabled | bool | `false` | Deploy a PodDistrubtionBudget for the server |
+| pdb.server.labels | object | `{}` | Labels to be added to the server pdb |
+| pdb.server.maxUnavailable | string | `""` | Number of pods that are unavailable after eviction as number or percentage (eg.: 50%) # Has higher precedence over `pdb.server.minAvailable` |
+| pdb.server.minAvailable | string | `""` (defaults to 0 if not specified) | Number of pods that are available after eviction as number or percentage (eg.: 50%) |
+| pdb.worker.annotations | object | `{}` | Annotations to be added to the worker pdb |
+| pdb.worker.enabled | bool | `false` | Deploy a PodDistrubtionBudget for the worker |
+| pdb.worker.labels | object | `{}` | Labels to be added to the worker pdb |
+| pdb.worker.maxUnavailable | string | `""` | Number of pods that are unavailable after eviction as number or percentage (eg.: 50%) # Has higher precedence over `pdb.worker.minAvailable` |
+| pdb.worker.minAvailable | string | `""` (defaults to 0 if not specified) | Number of pods that are available after eviction as number or percentage (eg.: 50%) |
 | podAnnotations | object | `{}` | Annotations to add to the server and worker pods |
 | postgresql.enabled | bool | `false` | enable the bundled bitnami postgresql chart |
 | postgresql.image.tag | string | `"15.4.0-debian-11-r0"` |  |
