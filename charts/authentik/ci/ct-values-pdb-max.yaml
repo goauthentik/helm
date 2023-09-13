@@ -1,0 +1,48 @@
+pdb:
+  server:
+    enabled: true
+    maxUnavailable: 25%
+  worker:
+    enabled: true
+    maxUnavailable: 25%
+
+image:
+  repository: ghcr.io/goauthentik/server
+  tag: 2023.8.3
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: true
+  hosts:
+    - host: authentik.domain.tld
+      paths:
+        - path: "/"
+          pathType: Prefix
+
+authentik:
+  log_level: debug
+  secret_key: 5up3r53cr37K3y
+  postgresql:
+    password: au7h3n71k
+  redis:
+    password: au7h3n71k
+
+postgresql:
+  enabled: false
+  postgresqlPassword: au7h3n71k
+  persistence:
+    enabled: false
+
+redis:
+  enabled: false
+  auth:
+    enabled: true
+    password: au7h3n71k
+
+blueprints:
+  - authentik-ci-blueprint
+
+geoip:
+  enabled: true
+  accountId: "foo-account-id"
+  licenseKey: "foo-license-key"
