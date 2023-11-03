@@ -154,6 +154,11 @@ spec:
       {{- with $.Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with $.Values.worker.dns }}
+      dnsPolicy: {{ default "Default" .policy }}
+      dnsConfig:
+        {{- toYaml .config | nindent 8  }}
+      {{- end }}
       {{- with $.Values.blueprints }}
         {{- range $name := . }}
         - name: blueprints-{{ $name }}

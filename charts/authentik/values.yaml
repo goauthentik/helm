@@ -28,6 +28,17 @@ worker:
     # rollingUpdate:
     #  maxSurge: 25%
     #  maxUnavailable: 25%
+  # -- worker dns configuration
+  dns: {}
+    # policy: None
+    # config:
+    #   nameservers:
+    #     - 1.1.1.1
+    #   searches:
+    #     - ns1.svc.cluster-domain.example
+    #   options:
+    #     - name: ndots
+    #       value: 2
 
 image:
   repository: ghcr.io/goauthentik/server
