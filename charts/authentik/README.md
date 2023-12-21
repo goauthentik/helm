@@ -77,7 +77,8 @@ redis:
 | authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
 | authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
-| authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the geoip database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.events.context_processors.asn | string | `"/geoip/GeoLite2-ASN.mmdb"` | Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.events.context_processors.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
@@ -103,7 +104,7 @@ redis:
 | envValueFrom | object | `{}` |  |
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.containerSecurityContext | object | `{}` | server containerSecurityContext |
-| geoip.editionIds | string | `"GeoLite2-City"` |  |
+| geoip.editionIds | string | `"GeoLite2-City GeoLite2-ASN"` |  |
 | geoip.enabled | bool | `false` | optional GeoIP, deploys a cronjob to download the maxmind database |
 | geoip.image | string | `"maxmindinc/geoipupdate:v4.8"` |  |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
@@ -112,7 +113,7 @@ redis:
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecrets | list | `[]` |  |
 | image.repository | string | `"ghcr.io/goauthentik/server"` |  |
-| image.tag | string | `"2023.10.2"` |  |
+| image.tag | string | `"2023.10.5"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
 | ingress.hosts[0].host | string | `"authentik.domain.tld"` |  |
