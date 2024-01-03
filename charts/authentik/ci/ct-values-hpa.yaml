@@ -1,3 +1,4 @@
+---
 autoscaling:
   server:
     enabled: true
@@ -29,7 +30,8 @@ authentik:
 
 postgresql:
   enabled: false
-  postgresqlPassword: au7h3n71k
+  auth:
+    password: au7h3n71k
   persistence:
     enabled: false
 

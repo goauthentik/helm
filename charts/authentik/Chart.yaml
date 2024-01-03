@@ -1,3 +1,4 @@
+---
 apiVersion: v2
 version: 2023.10.5
 appVersion: 2023.10.5
@@ -29,12 +30,12 @@ maintainers:
     url: https://goauthentik.io
 dependencies:
   - name: postgresql
-    version: 10.16.2
-    repository: https://charts.goauthentik.io
+    version: 12.12.10
+    repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis
-    version: 15.7.6
-    repository: https://charts.goauthentik.io
+    version: 18.6.1
+    repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled
   - name: authentik-remote-cluster
     repository: https://charts.goauthentik.io
