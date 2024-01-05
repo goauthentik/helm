@@ -27,8 +27,12 @@ RBAC required for a remote cluster to be connected to authentik.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| annotations | object | `{}` |  |
-| clusterRole.enabled | bool | `true` |  |
-| fullnameOverride | string | `""` |  |
-| nameOverride | string | `""` |  |
-| serviceAccountSecret.enabled | bool | `true` |  |
+| annotations | object | `{}` | Annotations to apply to all resources |
+| clusterRole.enabled | bool | `true` | Create a clusterole in addition to a namespaced role. |
+| fullnameOverride | string | `""` | String to fully override `"authentik.fullname"`. Prefer using global.fullnameOverride if possible |
+| global.additionalLabels | object | `{}` | Common labels for all resources. |
+| global.fullnameOverride | string | `""` | String to fully override `"authentik.fullname"` |
+| global.nameOverride | string | `""` | Provide a name in place of `authentik` |
+| kubeVersionOverride | string | `""` | Override the Kubernetes version, which is used to evaluate certain manifests |
+| nameOverride | string | `""` | Provide a name in place of `authentik`. Prefer using global.nameOverride if possible |
+| serviceAccountSecret.enabled | bool | `true` | Create a secret with the service account credentials |

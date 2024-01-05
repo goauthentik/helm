@@ -1,14 +1,21 @@
-{{- with .Values.prometheus.rules }}
-{{- if .create -}}
+{{- if .Values.prometheus.rules.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: {{ include "authentik.names.fullname" $ }}
+  name: {{ template "authentik.fullname" . }}
+  namespace {{ default .Release.Namespace .Values.prometheus.rules.namespace | quote }}
   labels:
-    {{- include "authentik.labels" $ | nindent 4 }}
-    {{- with .labels }}
-    {{- toYaml . | nindent 4 }}
+    {{- include "authentik.labels" (dict "context" .) | nindent 4 }}
+    {{- if .Values.prometheus.rules.selector }}
+    {{- toYaml .Values.prometheus.rules.selector | nindent 4 }}
     {{- end }}
+    {{- if .Values.prometheus.rules.labels }}
+    {{- toYaml .Values.prometheus.rules.labels | nindent 4 }}
+    {{- end }}
+  {{- with .Values.prometheus.rules.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   groups:
     - name: authentik Aggregate request counters
@@ -161,5 +168,4 @@ spec:
             summary: Disconnected outpost
             message: Outpost {{ $labels.outpost }} has at least 1 disconnected instance
             `}}
-{{- end }}
 {{- end }}

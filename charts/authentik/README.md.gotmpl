@@ -21,23 +21,23 @@
 authentik:
   secret_key: "PleaseGenerateA50CharKey"
   # This sends anonymous usage-data, stack traces on errors and
-  # performance data to sentry.beryju.org, and is fully opt-in
+  # performance data to authentik.error-reporting.a7k.io, and is fully opt-in
   error_reporting:
     enabled: true
   postgresql:
     password: "ThisIsNotASecurePassword"
 
-ingress:
-  enabled: true
-  hosts:
-    - host: authentik.domain.tld
-      paths:
-        - path: "/"
-          pathType: Prefix
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - authentik.domain.tld
 
 postgresql:
   enabled: true
-  postgresqlPassword: "ThisIsNotASecurePassword"
+  auth:
+    password: "ThisIsNotASecurePassword"
+
 redis:
   enabled: true
 ```
@@ -49,3 +49,16 @@ redis:
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
+
+---
+[affinity]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+[DNS configuration]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
+[HPA]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+[MetricRelabelConfigs]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs
+[Node selector]: https://kubernetes.io/docs/user-guide/node-selection/
+[PodDisruptionBudget]: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets
+[probe]: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+[RelabelConfigs]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+[Tolerations]: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+[TopologySpreadConstraints]: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+[values.yaml]: values.yaml
