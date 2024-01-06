@@ -85,7 +85,8 @@ redis:
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
-| blueprints | list | `[]` | List of config maps to mount blueprints from. Only keys in the configmap ending with ".yaml" wil be discovered and applied |
+| blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
+| blueprints.secrets | list | `[]` | List of secrets to mount blueprints from. Only keys in the secret ending with `.yaml` will be discovered and applied. |
 | fullnameOverride | string | `""` | String to fully override `"authentik.fullname"`. Prefer using global.fullnameOverride if possible |
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.containerSecurityContext | object | See [values.yaml] | GeoIP container-level security context |

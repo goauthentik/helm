@@ -1,6 +1,7 @@
 ---
 blueprints:
-  - authentik-ci-blueprint
+  configMaps:
+    - authentik-ci-blueprint
 
 ### Required values below
 

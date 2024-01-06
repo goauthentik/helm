@@ -79,7 +79,7 @@ spec:
             {{- with (concat .Values.global.envFrom .Values.worker.envFrom) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-          {{- if or .Values.geoip.enabled .Values.worker.volumeMounts .Values.blueprints }}
+          {{- if or .Values.geoip.enabled .Values.worker.volumeMounts .Values.blueprints.configMaps .Values.blueprints.secrets }}
           volumeMounts:
             {{- with .Values.worker.volumeMounts }}
               {{- toYaml . | nindent 12 }}
@@ -88,11 +88,13 @@ spec:
             - name: geoip-db
               mountPath: /geoip
             {{- end }}
-            {{- with .Values.blueprints }}
-            {{- range $name := . }}
-            - name: blueprints-{{ $name }}
-              mountPath: /blueprints/mounted/{{ $name }}
+            {{- range $name := .Values.blueprints.configMaps }}
+            - name: blueprints-cm-{{ $name }}
+              mountPath: /blueprints/mounted/cm-{{ $name }}
             {{- end }}
+            {{- range $name := .Values.blueprints.secrets }}
+            - name: blueprints-secret-{{ $name }}
+              mountPath: /blueprints/mounted/secret-{{ $name }}
             {{- end }}
           {{- end }}
           resources:
@@ -172,7 +174,7 @@ spec:
         {{- end }}
         {{- end }}
       {{- end }}
-      {{- if or .Values.geoip.enabled .Values.worker.volumes .Values.blueprints }}
+      {{- if or .Values.geoip.enabled .Values.worker.volumes .Values.blueprints.configMaps .Values.blueprints.secrets }}
       volumes:
       {{- with .Values.worker.volumes }}
         {{- toYaml . | nindent 6 }}
@@ -181,12 +183,15 @@ spec:
         - name: geoip-db
           emptyDir: {}
       {{- end }}
-      {{- with .Values.blueprints }}
-        {{- range $name := . }}
-        - name: blueprints-{{ $name }}
+      {{- range $name := .Values.blueprints.configMaps }}
+        - name: blueprints-cm-{{ $name }}
           configMap:
             name: {{ $name }}
-        {{- end }}
+      {{- end }}
+      {{- range $name := .Values.blueprints.secrets }}
+        - name: blueprints-secret-{{ $name }}
+          configMap:
+            name: {{ $name }}
       {{- end }}
       {{- end }}
       enableServiceLinks: true

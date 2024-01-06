@@ -184,9 +184,13 @@ authentik:
     password: ""
 
 
-# -- List of config maps to mount blueprints from. Only keys in the
-# configmap ending with ".yaml" wil be discovered and applied
-blueprints: []
+blueprints:
+  # -- List of config maps to mount blueprints from.
+  # Only keys in the configMap ending with `.yaml` will be discovered and applied.
+  configMaps: []
+  # -- List of secrets to mount blueprints from.
+  # Only keys in the secret ending with `.yaml` will be discovered and applied.
+  secrets: []
 
 
 ## authentik server
