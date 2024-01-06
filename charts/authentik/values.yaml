@@ -784,6 +784,7 @@ worker:
     #   maxSurge: 25%
     #   maxUnavailable: 25%
 
+
 serviceAccount:
   # -- Create service account. Needed for managed outposts
   create: true
@@ -794,6 +795,7 @@ serviceAccount:
     # creates a service account secret by default which we don't need here,
     # disable its creation
     enabled: false
+
 
 geoip:
   # -- enable GeoIP sidecars for the authentik server and worker pods
@@ -867,6 +869,7 @@ geoip:
     #   drop:
     #     - ALL
 
+
 prometheus:
   rules:
     enabled: false
@@ -880,6 +883,7 @@ prometheus:
     labels: {}
     # -- PrometheusRule annotations
     annotations: {}
+
 
 postgresql:
   # -- enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values.
@@ -897,9 +901,14 @@ postgresql:
     #   accessModes:
     #     - ReadWriteOnce
 
+
 redis:
   # -- enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values.
   enabled: false
   architecture: standalone
   auth:
     enabled: false
+
+
+# -- additional resources to deploy. Those objects are templated.
+additionalObjects: []

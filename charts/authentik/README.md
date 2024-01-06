@@ -63,6 +63,7 @@ redis:
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| additionalObjects | list | `[]` | additional resources to deploy. Those objects are templated. |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, no authentication will be done |
