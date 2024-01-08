@@ -131,6 +131,9 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | geoip.enabled | bool | `false` | enable GeoIP sidecars for the authentik server and worker pods |
 | geoip.env | list | `[]` (See [values.yaml]) | Environment variables to pass to the GeoIP containers |
 | geoip.envFrom | list | `[]` (See [values.yaml]) | envFrom to pass to the GeoIP containers |
+| geoip.existingSecret.accountId | string | `"account_id"` | key in the secret containing the account ID |
+| geoip.existingSecret.licenseKey | string | `"license_key"` | key in the secret containing the license key |
+| geoip.existingSecret.secretName | string | `""` | name of an existing secret to use instead of values above |
 | geoip.image.digest | string | `""` | If defined, an image digest for GeoIP images |
 | geoip.image.pullPolicy | string | `"IfNotPresent"` | If defined, an imagePullPolicy for GeoIP images |
 | geoip.image.repository | string | `"maxmindinc/geoipupdate"` | If defined, a repository for GeoIP images |

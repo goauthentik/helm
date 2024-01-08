@@ -808,6 +808,14 @@ geoip:
   accountId: ""
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
   licenseKey: ""
+  ## use existing secret instead of values above
+  existingSecret:
+    # -- name of an existing secret to use instead of values above
+    secretName: ""
+    # -- key in the secret containing the account ID
+    accountId: "account_id"
+    # -- key in the secret containing the license key
+    licenseKey: "license_key"
 
   image:
     # -- If defined, a repository for GeoIP images

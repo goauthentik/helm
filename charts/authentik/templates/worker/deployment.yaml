@@ -119,6 +119,7 @@ spec:
               value: {{ .Values.geoip.updateInterval | quote }}
             - name: GEOIPUPDATE_PRESERVE_FILE_TIMES
               value: "1"
+            {{- if not .Values.geoip.existingSecret.secretName }}
             - name: GEOIPUPDATE_ACCOUNT_ID
               valueFrom:
                 secretKeyRef:
@@ -129,6 +130,18 @@ spec:
                 secretKeyRef:
                   name: {{ template "authentik.fullname" . }}
                   key: GEOIPUPDATE_LICENSE_KEY
+            {{- else }}
+            - name: GEOIPUPDATE_ACCOUNT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.geoip.existingSecret.secretName }}
+                  key: {{ .Values.geoip.existingSecret.accountId }}
+            - name: GEOIPUPDATE_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.geoip.existingSecret.secretName }}
+                  key: {{ .Values.geoip.existingSecret.licenseKey }}
+            {{- end }}
             - name: GEOIPUPDATE_EDITION_IDS
               value: {{ required "geoip edition id required" .Values.geoip.editionIds | quote }}
           {{- with .Values.geoip.envFrom }}
