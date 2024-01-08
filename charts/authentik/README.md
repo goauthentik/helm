@@ -40,6 +40,42 @@ redis:
   enabled: true
 ```
 
+## Advanced values examples
+
+<details>
+<summary>External PostgreSQL and Redis</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: postgres.domain.tld
+    user: file:///postgres-creds/username
+    password: file:///postgres-creds/password
+  redis:
+    host: redis.domain.tld
+server:
+  volumes:
+    - name: postgres-creds
+      secret:
+        secretName: authentik-postgres-credentials
+  volumeMounts:
+    - name: postgres-creds
+      mountPath: /postgres-creds
+      readOnly: true
+worker:
+  volumes:
+    - name: postgres-creds
+      secret:
+        secretName: authentik-postgres-credentials
+  volumeMounts:
+    - name: postgres-creds
+      mountPath: /postgres-creds
+      readOnly: true
+```
+
+The secret `authentik-postgres-credentials` must have `username` and `password` keys.
+</details>
+
 ## Maintainers
 
 | Name | Email | Url |
