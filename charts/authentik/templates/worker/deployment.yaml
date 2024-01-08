@@ -193,10 +193,10 @@ spec:
       {{- if or .Values.geoip.enabled .Values.global.volumes .Values.worker.volumes .Values.blueprints.configMaps .Values.blueprints.secrets }}
       volumes:
       {{- with .Values.global.volumes }}
-        {{- toYaml . | nindent 6 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.worker.volumes }}
-        {{- toYaml . | nindent 6 }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .Values.geoip.enabled }}
         - name: geoip-db
