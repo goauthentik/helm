@@ -111,7 +111,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
 | authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
-| authentik.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the geoip database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.events.context_processors.asn | string | `"/geoip/GeoLite2-ASN.mmdb"` | Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.events.context_processors.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
@@ -127,7 +128,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | fullnameOverride | string | `""` | String to fully override `"authentik.fullname"`. Prefer using global.fullnameOverride if possible |
 | geoip.accountId | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.containerSecurityContext | object | See [values.yaml] | GeoIP container-level security context |
-| geoip.editionIds | string | `"GeoLite2-City"` |  |
+| geoip.editionIds | string | `"GeoLite2-City GeoLite2-ASN"` |  |
 | geoip.enabled | bool | `false` | enable GeoIP sidecars for the authentik server and worker pods |
 | geoip.env | list | `[]` (See [values.yaml]) | Environment variables to pass to the GeoIP containers |
 | geoip.envFrom | list | `[]` (See [values.yaml]) | envFrom to pass to the GeoIP containers |
@@ -136,7 +137,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | geoip.existingSecret.secretName | string | `""` | name of an existing secret to use instead of values above |
 | geoip.image.digest | string | `""` | If defined, an image digest for GeoIP images |
 | geoip.image.pullPolicy | string | `"IfNotPresent"` | If defined, an imagePullPolicy for GeoIP images |
-| geoip.image.repository | string | `"maxmindinc/geoipupdate"` | If defined, a repository for GeoIP images |
+| geoip.image.repository | string | `"ghcr.io/maxmind/geoipupdate"` | If defined, a repository for GeoIP images |
 | geoip.image.tag | string | `"v6.0.0"` | If defined, a tag for GeoIP images |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.resources | object | `{}` | Resource limits and requests for GeoIP containers |

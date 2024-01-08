@@ -143,8 +143,12 @@ authentik:
   # -- Secret key used for cookie singing and unique user IDs,
   # don't change this after the first install
   secret_key: ""
-  # -- Path for the geoip database. If the file doesn't exist, GeoIP features are disabled.
-  geoip: /geoip/GeoLite2-City.mmdb
+  events:
+    context_processors:
+      # -- Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled.
+      geoip: /geoip/GeoLite2-City.mmdb
+      # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
+      asn: /geoip/GeoLite2-ASN.mmdb
   email:
     # -- SMTP Server emails are sent from, fully optional
     host: ""
@@ -813,7 +817,7 @@ geoip:
   # -- enable GeoIP sidecars for the authentik server and worker pods
   enabled: false
 
-  editionIds: "GeoLite2-City"
+  editionIds: "GeoLite2-City GeoLite2-ASN"
   # -- GeoIP update frequency, in hours
   updateInterval: 8
   # -- sign up under https://www.maxmind.com/en/geolite2/signup
