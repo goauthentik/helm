@@ -167,6 +167,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | global.securityContext | object | `{}` (See [values.yaml]) | Toggle and define pod-level security context. |
 | global.tolerations | list | `[]` | Default tolerations for all components |
 | global.topologySpreadConstraints | list | `[]` | Default [TopologySpreadConstraints] rules for all components # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |
+| global.volumeMounts | list | `[]` (See [values.yaml]) | Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP |
+| global.volumes | list | `[]` (See [values.yaml]) | Additional volumes to all deployed Deployments. |
 | kubeVersionOverride | string | `""` | Override the Kubernetes version, which is used to evaluate certain manifests |
 | nameOverride | string | `""` | Provide a name in place of `authentik`. Prefer using global.nameOverride if possible |
 | postgresql.auth.database | string | `"authentik"` |  |

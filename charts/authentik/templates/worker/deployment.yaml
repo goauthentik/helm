@@ -79,8 +79,11 @@ spec:
             {{- with (concat .Values.global.envFrom .Values.worker.envFrom) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-          {{- if or .Values.geoip.enabled .Values.worker.volumeMounts .Values.blueprints.configMaps .Values.blueprints.secrets }}
+          {{- if or .Values.geoip.enabled .Values.global.volumeMounts .Values.worker.volumeMounts .Values.blueprints.configMaps .Values.blueprints.secrets }}
           volumeMounts:
+            {{- with .Values.global.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
             {{- with .Values.worker.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -187,8 +190,11 @@ spec:
         {{- end }}
         {{- end }}
       {{- end }}
-      {{- if or .Values.geoip.enabled .Values.worker.volumes .Values.blueprints.configMaps .Values.blueprints.secrets }}
+      {{- if or .Values.geoip.enabled .Values.global.volumes .Values.worker.volumes .Values.blueprints.configMaps .Values.blueprints.secrets }}
       volumes:
+      {{- with .Values.global.volumes }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
       {{- with .Values.worker.volumes }}
         {{- toYaml . | nindent 6 }}
       {{- end }}

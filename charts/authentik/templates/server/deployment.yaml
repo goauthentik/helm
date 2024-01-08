@@ -82,8 +82,11 @@ spec:
             {{- with (concat .Values.global.envFrom .Values.server.envFrom) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-          {{- if or .Values.geoip.enabled .Values.server.volumeMounts }}
+          {{- if or .Values.geoip.enabled .Values.global.volumeMounts .Values.server.volumeMounts }}
           volumeMounts:
+            {{- with .Values.global.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
             {{- with .Values.server.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
@@ -204,8 +207,11 @@ spec:
         {{- end }}
         {{- end }}
       {{- end }}
-      {{- if or .Values.geoip.enabled .Values.server.volumes }}
+      {{- if or .Values.geoip.enabled .Values.global.volumes .Values.server.volumes }}
       volumes:
+      {{- with .Values.global.volumes }}
+        {{- toYaml . | nindent 6 }}
+      {{- end }}
       {{- with .Values.server.volumes }}
         {{- toYaml . | nindent 6 }}
       {{- end }}

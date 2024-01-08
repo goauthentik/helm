@@ -123,6 +123,18 @@ global:
     # - secretRef:
     #     name: secret-name
 
+  # -- Additional volumeMounts to all deployed Deployments. Does not apply to GeoIP
+  # @default -- `[]` (See [values.yaml])
+  volumeMounts: []
+    # - name: custom
+    #   mountPath: /custom
+
+  # -- Additional volumes to all deployed Deployments.
+  # @default -- `[]` (See [values.yaml])
+  volumes: []
+    # - name: custom
+    #   emptyDir: {}
+
 
 ## Authentik configuration
 authentik:
