@@ -120,30 +120,30 @@ spec:
         - alert: NoWorkersConnected
           labels:
             severity: critical
-          expr: max without (pid) (authentik_admin_workers) < 1
+          expr: max without (endpoint,instance,container,job,service) (authentik_admin_workers) < 1
           for: 10m
           annotations:
             {{`
             summary: No workers connected
-            message: authentik instance {{ $labels.instance }}'s worker are either not running or not connected.
+            message: authentik instance {{ $labels.pod }}'s worker are either not running or not connected.
             `}}
 
 
         - alert: PendingMigrations
           labels:
             severity: critical
-          expr: max without (pid) (django_migrations_unapplied_total) > 0
+          expr: max without (endpoint,instance,container,job,service) (django_migrations_unapplied_total) > 0
           for: 10m
           annotations:
             {{`
             summary: Pending database migrations
-            message: authentik instance {{ $labels.instance }} has pending database migrations
+            message: authentik instance {{ $labels.pod }} has pending database migrations
             `}}
 
         - alert: FailedSystemTasks
           labels:
             severity: critical
-          expr: sum(increase(authentik_system_tasks{status="error"}[2h])) > 0
+          expr: sum(increase(authentik_system_tasks{status="error"}[2h])) without(endpoint,instance,pod,container,job,service,status,pid) > 0
           for: 2h
           annotations:
             {{`
@@ -154,7 +154,7 @@ spec:
         - alert: DisconnectedOutposts
           labels:
             severity: critical
-          expr: sum by (outpost) (max without (pid) (authentik_outposts_connected{uid!~"specific.*"}))  < 1
+          expr: max without (endpoint,instance,container,pod,job,service) (authentik_outposts_connected{uid!~"specific.*"})  < 1
           for: 30m
           annotations:
             {{`
