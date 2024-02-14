@@ -264,6 +264,7 @@ server:
     maxUnavailable: ""
 
   ## authentik server image
+  ## This should match what is deployed in the worker. Prefer using global.image
   image:
     # -- Repository to use to the authentik server
     # @default -- `""` (defaults to global.image.repository)
@@ -648,6 +649,7 @@ worker:
     maxUnavailable: ""
 
   ## authentik worker image
+  ## This should match what is deployed in the server. Prefer using global.image
   image:
     # -- Repository to use to the authentik worker
     # @default -- `""` (defaults to global.image.repository)
