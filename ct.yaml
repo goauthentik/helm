@@ -1,7 +1,0 @@
-target-branch: main
-chart-repos:
-  - bitnami=https://charts.bitnami.com/bitnami
-  - authentik=https://charts.goauthentik.io
-helm-extra-args: --timeout 180s
-check-version-increment: false
-validate-maintainers: false

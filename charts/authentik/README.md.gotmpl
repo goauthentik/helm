@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2023.10.7](https://img.shields.io/badge/Version-2023.10.7-informational?style=for-the-badge)
-![AppVersion: 2023.10.7](https://img.shields.io/badge/AppVersion-2023.10.7-informational?style=for-the-badge)
+![Version: 2024.2.0-rc1](https://img.shields.io/badge/Version-2024.2.0-rc1-informational?style=for-the-badge)
+![AppVersion: 2024.2.0-rc1](https://img.shields.io/badge/AppVersion-2024.2.0-rc1-informational?style=for-the-badge)
 
 {{ template "chart.deprecationWarning" . }}
 
@@ -21,26 +21,62 @@
 authentik:
   secret_key: "PleaseGenerateA50CharKey"
   # This sends anonymous usage-data, stack traces on errors and
-  # performance data to sentry.beryju.org, and is fully opt-in
+  # performance data to authentik.error-reporting.a7k.io, and is fully opt-in
   error_reporting:
     enabled: true
   postgresql:
     password: "ThisIsNotASecurePassword"
 
-ingress:
-  enabled: true
-  hosts:
-    - host: authentik.domain.tld
-      paths:
-        - path: "/"
-          pathType: Prefix
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - authentik.domain.tld
 
 postgresql:
   enabled: true
-  postgresqlPassword: "ThisIsNotASecurePassword"
+  auth:
+    password: "ThisIsNotASecurePassword"
+
 redis:
   enabled: true
 ```
+
+## Advanced values examples
+
+<details>
+<summary>External PostgreSQL and Redis</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: postgres.domain.tld
+    user: file:///postgres-creds/username
+    password: file:///postgres-creds/password
+  redis:
+    host: redis.domain.tld
+server:
+  volumes:
+    - name: postgres-creds
+      secret:
+        secretName: authentik-postgres-credentials
+  volumeMounts:
+    - name: postgres-creds
+      mountPath: /postgres-creds
+      readOnly: true
+worker:
+  volumes:
+    - name: postgres-creds
+      secret:
+        secretName: authentik-postgres-credentials
+  volumeMounts:
+    - name: postgres-creds
+      mountPath: /postgres-creds
+      readOnly: true
+```
+
+The secret `authentik-postgres-credentials` must have `username` and `password` keys.
+</details>
 
 {{ template "chart.maintainersSection" . }}
 
@@ -49,3 +85,16 @@ redis:
 {{ template "chart.requirementsSection" . }}
 
 {{ template "chart.valuesSection" . }}
+
+---
+[affinity]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+[DNS configuration]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
+[HPA]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+[MetricRelabelConfigs]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs
+[Node selector]: https://kubernetes.io/docs/user-guide/node-selection/
+[PodDisruptionBudget]: https://kubernetes.io/docs/concepts/workloads/pods/disruptions/#pod-disruption-budgets
+[probe]: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+[RelabelConfigs]: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config
+[Tolerations]: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+[TopologySpreadConstraints]: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+[values.yaml]: values.yaml
