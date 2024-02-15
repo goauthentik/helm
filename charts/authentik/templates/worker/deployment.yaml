@@ -71,7 +71,7 @@ spec:
             - worker
           env:
             {{- with (concat .Values.global.env .Values.worker.env) }}
-              {{- toYaml . | nindent 10 }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
           envFrom:
             - secretRef:
@@ -116,7 +116,7 @@ spec:
           imagePullPolicy: {{ .Values.geoip.image.pullPolicy }}
           env:
             {{- with .Values.geoip.env }}
-              {{- toYaml . | nindent 10 }}
+              {{- toYaml . | nindent 12 }}
             {{- end }}
             - name: GEOIPUPDATE_FREQUENCY
               value: {{ .Values.geoip.updateInterval | quote }}
@@ -161,7 +161,7 @@ spec:
             {{- toYaml .Values.geoip.resources | nindent 10 }}
           {{- with .Values.geoip.containerSecurityContext }}
           securityContext:
-            {{- toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
         {{- end }}
         {{- with .Values.worker.extraContainers }}
