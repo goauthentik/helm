@@ -1,9 +1,15 @@
+{{/* vim: set filetype=mustache: */}}
+
 {{/*
-Expand the name of the chart.
+Expand the name of the chart
 */}}
 {{- define "authentik-remote-cluster.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
-{{- end }}
+{{- $globalNameOverride := "" -}}
+{{- if hasKey .Values "global" -}}
+{{- $globalNameOverride = (default $globalNameOverride .Values.global.nameOverride) -}}
+{{- end -}}
+{{- default .Chart.Name (default .Values.nameOverride $globalNameOverride) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 
 {{/*
 Create a default fully qualified app name.
@@ -11,21 +17,22 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 If release name contains chart name it will be used as a full name.
 */}}
 {{- define "authentik-remote-cluster.fullname" -}}
-{{- if not .Chart.IsRoot }}
-{{- .Release.Name }}
-{{- else }}
-{{- if .Values.fullnameOverride }}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- $name := default .Chart.Name .Values.nameOverride }}
-{{- if contains $name .Release.Name }}
-{{- .Release.Name | trunc 63 | trimSuffix "-" }}
-{{- else }}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
-{{- end }}
-{{- end }}
-{{- end }}
-{{- end }}
+{{- $name := include "authentik-remote-cluster.name" . -}}
+{{- $globalFullNameOverride := "" -}}
+{{- if hasKey .Values "global" -}}
+{{- $globalFullNameOverride = (default $globalFullNameOverride .Values.global.fullnameOverride) -}}
+{{- end -}}
+{{- if or .Values.fullnameOverride $globalFullNameOverride -}}
+{{- $name = default .Values.fullnameOverride $globalFullNameOverride -}}
+{{- else -}}
+{{- if contains $name .Release.Name -}}
+{{- $name = .Release.Name -}}
+{{- else -}}
+{{- $name = printf "%s-%s" .Release.Name $name -}}
+{{- end -}}
+{{- end -}}
+{{- trunc 63 $name | trimSuffix "-" -}}
+{{- end -}}
 
 {{/*
 Create chart name and version as used by the chart label.
@@ -38,13 +45,15 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "authentik-remote-cluster.labels" -}}
-helm.sh/chart: {{ include "authentik-remote-cluster.chart" . }}
-app.kubernetes.io/name: {{ include "authentik-remote-cluster.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+helm.sh/chart: {{ include "authentik-remote-cluster.chart" .context | quote }}
+app.kubernetes.io/name: {{ include "authentik-remote-cluster.name" .context | quote }}
+app.kubernetes.io/instance: {{ .context.Release.Name | quote }}
+app.kubernetes.io/managed-by: {{ .context.Release.Service | quote }}
+app.kubernetes.io/part-of: "authentik"
+app.kubernetes.io/version: {{ .context.Chart.Version | quote }}
+{{- with .context.Values.global.additionalLabels }}
+{{ toYaml . }}
 {{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{- define "authentik-remote-cluster.api-verbs-rw" -}}
