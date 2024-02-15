@@ -20,7 +20,7 @@ jobs:
         working-directory: ./charts
         run: ah lint
 
-  chart-test:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
