@@ -295,6 +295,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.volumes | list | `[]` | Additional volumes to the authentik server pod |
 | serviceAccount.annotations | object | `{}` | additional service account annotations |
 | serviceAccount.create | bool | `true` | Create service account. Needed for managed outposts |
+| serviceAccount.fullnameOverride | string | `"authentik"` |  |
 | serviceAccount.serviceAccountSecret.enabled | bool | `false` |  |
 | worker.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
 | worker.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
