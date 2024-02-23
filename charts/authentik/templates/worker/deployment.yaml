@@ -112,7 +112,7 @@ spec:
           {{- end }}
         {{- if .Values.geoip.enabled }}
         - name: geoip
-          image: {{ .Values.geoip.image.repository }}:{{ .Values.geoip.image.tag }}{{- if .Values.geoip.image.digest -}}@{{ .Values.geoip.image.digest }}{{- end -}}
+          image: {{ .Values.geoip.image.repository }}:{{ .Values.geoip.image.tag }}{{- if .Values.geoip.image.digest -}}@{{ .Values.geoip.image.digest }}{{- end }}
           imagePullPolicy: {{ .Values.geoip.image.pullPolicy }}
           env:
             {{- with .Values.geoip.env }}
@@ -158,7 +158,7 @@ spec:
             - name: geoip-db
               mountPath: /usr/share/GeoIP
           resources:
-            {{- toYaml .Values.geoip.resources | nindent 10 }}
+            {{- toYaml .Values.geoip.resources | nindent 12 }}
           {{- with .Values.geoip.containerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
