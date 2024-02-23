@@ -175,7 +175,7 @@ spec:
             - name: geoip-db
               mountPath: /usr/share/GeoIP
           resources:
-            {{- toYaml .Values.geoip.resources | nindent 10 }}{{ end }}
+            {{- toYaml .Values.geoip.resources | nindent 12 }}
           {{- with .Values.geoip.containerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
