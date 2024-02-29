@@ -25,7 +25,7 @@ jobs:
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Set up Helm
-        uses: azure/setup-helm@v3.5
+        uses: azure/setup-helm@v4
 
       - id: generate_token
         uses: tibdex/github-app-token@v2
