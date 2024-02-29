@@ -1,0 +1,8 @@
+worker:
+  extraContainers:
+    - name: sidecar-blueprints
+      image: ghcr.io/kiwigrid/k8s-sidecar:1.26.0
+server:
+  extraContainers:
+    - name: sidecar-blueprints
+      image: ghcr.io/kiwigrid/k8s-sidecar:1.26.0
