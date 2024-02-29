@@ -165,7 +165,7 @@ spec:
           {{- end }}
         {{- end }}
         {{- with .Values.worker.extraContainers }}
-          {{- tpl (toYaml . ) $ | nindent 6 }}
+          {{- tpl (toYaml . ) $ | nindent 8 }}
         {{- end }}
       {{- with include "authentik.affinity" (dict "context" . "component" .Values.worker) }}
       affinity:
