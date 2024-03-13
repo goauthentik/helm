@@ -370,6 +370,9 @@ server:
   # -- Alternative DNS policy for authentik server pods
   dnsPolicy: ""
 
+  # -- serviceAccount for usage of server pods
+  serviceAccount:
+
   # -- authentik server pod-level security context
   # @default -- `{}` (See [values.yaml])
   securityContext: {}
@@ -745,6 +748,9 @@ worker:
   dnsConfig: {}
   # -- Alternative DNS policy for authentik worker pods
   dnsPolicy: ""
+
+  # -- serviceAccount for usage of worker pods
+  serviceAccount:
 
   # -- authentik worker pod-level security context
   # @default -- `{}` (See [values.yaml])
