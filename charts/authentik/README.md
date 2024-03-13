@@ -281,6 +281,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.service.sessionAffinity | string | `""` | Used to maintain session affinity. Supports `ClientIP` and `None` |
 | server.service.sessionAffinityConfig | object | `{}` | Session affinity configuration |
 | server.service.type | string | `"ClusterIP"` | authentik server service type |
+| server.serviceAccount | string | `nil` | serviceAccount for usage of server pods |
 | server.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
 | server.startupProbe.httpGet.path | string | `"/-/health/live/"` |  |
 | server.startupProbe.httpGet.port | string | `"http"` |  |
@@ -334,6 +335,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.replicas | int | `1` | The number of worker pods to run |
 | worker.resources | object | `{}` | Resource limits and requests for the authentik worker |
 | worker.securityContext | object | `{}` (See [values.yaml]) | authentik worker pod-level security context |
+| worker.serviceAccount | string | `nil` | serviceAccount for usage of worker pods |
 | worker.terminationGracePeriodSeconds | int | `30` | terminationGracePeriodSeconds for container lifecycle hook |
 | worker.tolerations | list | `[]` (defaults to global.tolerations) | [Tolerations] for use with node taints |
 | worker.topologySpreadConstraints | list | `[]` (defaults to global.topologySpreadConstraints) | Assign custom [TopologySpreadConstraints] rules to the authentik worker # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # If labelSelector is left out, it will default to the labelSelector configuration of the deployment |
