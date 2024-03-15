@@ -2,11 +2,11 @@
 server:
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 1
 worker:
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 1
 
 ### Required values below
 
