@@ -1,0 +1,25 @@
+---
+authentik:
+  log_level: debug
+  secret_key: 5up3r53cr37K3y
+  postgresql:
+    password: au7h3n71k
+
+postgresql:
+  enabled: true
+  auth:
+    password: au7h3n71k
+  persistence:
+    enabled: false
+
+redis:
+  enabled: true
+
+worker:
+  extraContainers:
+    - name: sidecar-blueprints
+      image: ghcr.io/kiwigrid/k8s-sidecar:latest
+server:
+  extraContainers:
+    - name: sidecar-blueprints
+      image: ghcr.io/kiwigrid/k8s-sidecar:latest
