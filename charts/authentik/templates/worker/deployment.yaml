@@ -100,6 +100,18 @@ spec:
               mountPath: /blueprints/mounted/secret-{{ $name }}
             {{- end }}
           {{- end }}
+          {{- with .Values.worker.livenessProbe }}
+          livenessProbe:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.worker.readinessProbe }}
+          readinessProbe:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.worker.startupProbe }}
+          startupProbe:
+            {{ toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
           {{- with .Values.worker.containerSecurityContext }}

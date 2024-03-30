@@ -321,6 +321,13 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.imagePullSecrets | list | `[]` (defaults to global.imagePullSecrets) | Secrets with credentials to pull images from a private registry |
 | worker.initContainers | list | `[]` | Init containers to add to the authentik worker pod # Note: Supports use of custom Helm templates |
 | worker.lifecycle | object | `{}` | Specify postStart and preStop lifecycle hooks for you authentik worker container |
+| worker.livenessProbe.exec.command[0] | string | `"ak"` |  |
+| worker.livenessProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.livenessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.livenessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.livenessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.livenessProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.name | string | `"worker"` | authentik worker name |
 | worker.nodeSelector | object | `{}` (defaults to global.nodeSelector) | [Node selector] |
 | worker.pdb.annotations | object | `{}` | Annotations to be added to the authentik worker pdb |
@@ -331,9 +338,23 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.podAnnotations | object | `{}` | Annotations to be added to the authentik worker pods |
 | worker.podLabels | object | `{}` | Labels to be added to the authentik worker pods |
 | worker.priorityClassName | string | `""` (defaults to global.priorityClassName) | Prority class for the authentik worker pods |
+| worker.readinessProbe.exec.command[0] | string | `"ak"` |  |
+| worker.readinessProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.readinessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.readinessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.readinessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.readinessProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.readinessProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.replicas | int | `1` | The number of worker pods to run |
 | worker.resources | object | `{}` | Resource limits and requests for the authentik worker |
 | worker.securityContext | object | `{}` (See [values.yaml]) | authentik worker pod-level security context |
+| worker.startupProbe.exec.command[0] | string | `"ak"` |  |
+| worker.startupProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.startupProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.startupProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.startupProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.startupProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.terminationGracePeriodSeconds | int | `30` | terminationGracePeriodSeconds for container lifecycle hook |
 | worker.tolerations | list | `[]` (defaults to global.tolerations) | [Tolerations] for use with node taints |
 | worker.topologySpreadConstraints | list | `[]` (defaults to global.topologySpreadConstraints) | Assign custom [TopologySpreadConstraints] rules to the authentik worker # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # If labelSelector is left out, it will default to the labelSelector configuration of the deployment |
