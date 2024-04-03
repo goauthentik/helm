@@ -209,7 +209,7 @@ spec:
       {{- end }}
       {{- range $name := .Values.blueprints.secrets }}
         - name: blueprints-secret-{{ $name }}
-          configMap:
+          secret:
             name: {{ $name }}
       {{- end }}
       {{- end }}
