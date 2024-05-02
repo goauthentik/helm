@@ -804,7 +804,7 @@ worker:
     # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
     failureThreshold: 60
     # -- Number of seconds after the container has started before [probe] is initiated
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     # -- How often (in seconds) to perform the [probe]
     periodSeconds: 10
     # -- Minimum consecutive successes for the [probe] to be considered successful after having failed
