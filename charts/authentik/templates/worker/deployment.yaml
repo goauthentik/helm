@@ -221,8 +221,8 @@ spec:
       {{- end }}
       {{- range $name := .Values.blueprints.secrets }}
         - name: blueprints-secret-{{ $name }}
-          configMap:
-            name: {{ $name }}
+          secret:
+            secretName: {{ $name }}
       {{- end }}
       {{- end }}
       enableServiceLinks: true
