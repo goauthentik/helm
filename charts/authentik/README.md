@@ -351,7 +351,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.startupProbe.exec.command[0] | string | `"ak"` |  |
 | worker.startupProbe.exec.command[1] | string | `"healthcheck"` |  |
 | worker.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
-| worker.startupProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.startupProbe.initialDelaySeconds | int | `30` | Number of seconds after the container has started before [probe] is initiated |
 | worker.startupProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
 | worker.startupProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
 | worker.startupProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
