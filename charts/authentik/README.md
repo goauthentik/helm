@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2024.2.2](https://img.shields.io/badge/Version-2024.2.2-informational?style=for-the-badge)
-![AppVersion: 2024.2.2](https://img.shields.io/badge/AppVersion-2024.2.2-informational?style=for-the-badge)
+![Version: 2024.4.2](https://img.shields.io/badge/Version-2024.4.2-informational?style=for-the-badge)
+![AppVersion: 2024.4.2](https://img.shields.io/badge/AppVersion-2024.4.2-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -281,7 +281,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.service.sessionAffinity | string | `""` | Used to maintain session affinity. Supports `ClientIP` and `None` |
 | server.service.sessionAffinityConfig | object | `{}` | Session affinity configuration |
 | server.service.type | string | `"ClusterIP"` | authentik server service type |
-| server.serviceAccount | string | `nil` | serviceAccount for usage of server pods |
+| server.serviceAccountName | string | `nil` | serviceAccount to use for authentik server pods |
 | server.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
 | server.startupProbe.httpGet.path | string | `"/-/health/live/"` |  |
 | server.startupProbe.httpGet.port | string | `"http"` |  |
@@ -322,6 +322,13 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.imagePullSecrets | list | `[]` (defaults to global.imagePullSecrets) | Secrets with credentials to pull images from a private registry |
 | worker.initContainers | list | `[]` | Init containers to add to the authentik worker pod # Note: Supports use of custom Helm templates |
 | worker.lifecycle | object | `{}` | Specify postStart and preStop lifecycle hooks for you authentik worker container |
+| worker.livenessProbe.exec.command[0] | string | `"ak"` |  |
+| worker.livenessProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.livenessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.livenessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.livenessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.livenessProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.name | string | `"worker"` | authentik worker name |
 | worker.nodeSelector | object | `{}` (defaults to global.nodeSelector) | [Node selector] |
 | worker.pdb.annotations | object | `{}` | Annotations to be added to the authentik worker pdb |
@@ -332,10 +339,24 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.podAnnotations | object | `{}` | Annotations to be added to the authentik worker pods |
 | worker.podLabels | object | `{}` | Labels to be added to the authentik worker pods |
 | worker.priorityClassName | string | `""` (defaults to global.priorityClassName) | Prority class for the authentik worker pods |
+| worker.readinessProbe.exec.command[0] | string | `"ak"` |  |
+| worker.readinessProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.readinessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.readinessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
+| worker.readinessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.readinessProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.readinessProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.replicas | int | `1` | The number of worker pods to run |
 | worker.resources | object | `{}` | Resource limits and requests for the authentik worker |
 | worker.securityContext | object | `{}` (See [values.yaml]) | authentik worker pod-level security context |
-| worker.serviceAccount | string | `nil` | serviceAccount for usage of worker pods |
+| worker.serviceAccountName | string | `nil` | serviceAccount to use for authentik worker pods. If set, overrides the value used when serviceAccount.create is true |
+| worker.startupProbe.exec.command[0] | string | `"ak"` |  |
+| worker.startupProbe.exec.command[1] | string | `"healthcheck"` |  |
+| worker.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
+| worker.startupProbe.initialDelaySeconds | int | `30` | Number of seconds after the container has started before [probe] is initiated |
+| worker.startupProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
+| worker.startupProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
+| worker.startupProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | worker.terminationGracePeriodSeconds | int | `30` | terminationGracePeriodSeconds for container lifecycle hook |
 | worker.tolerations | list | `[]` (defaults to global.tolerations) | [Tolerations] for use with node taints |
 | worker.topologySpreadConstraints | list | `[]` (defaults to global.topologySpreadConstraints) | Assign custom [TopologySpreadConstraints] rules to the authentik worker # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # If labelSelector is left out, it will default to the labelSelector configuration of the deployment |
