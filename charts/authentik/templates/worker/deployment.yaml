@@ -42,7 +42,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.worker.serviceAccount }}
+      {{- with .Values.worker.serviceAccountName }}
       serviceAccountName: {{ . }}
       {{- else }}
       {{- if .Values.serviceAccount.create }}
