@@ -42,8 +42,12 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.worker.serviceAccountName }}
+      serviceAccountName: {{ . }}
+      {{- else }}
       {{- if .Values.serviceAccount.create }}
       serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
+      {{- end }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
       hostAliases:
