@@ -228,7 +228,7 @@ server:
     # -- Average CPU utilization percentage for the authentik server [HPA]
     targetCPUUtilizationPercentage: 50
     # -- Average memory utilization percentage for the authentik server [HPA]
-    targetMemoryUtilizationPercentage: ~
+    targetMemoryUtilizationPercentage:
     # -- Configures the scaling behavior of the target in both Up and Down directions.
     behavior: {}
       # scaleDown:
@@ -371,7 +371,7 @@ server:
   dnsPolicy: ""
 
   # -- serviceAccount to use for authentik server pods
-  serviceAccountName: ~
+  serviceAccountName:
 
   # -- authentik server pod-level security context
   # @default -- `{}` (See [values.yaml])
@@ -616,7 +616,7 @@ worker:
     # -- Average CPU utilization percentage for the authentik worker [HPA]
     targetCPUUtilizationPercentage: 50
     # -- Average memory utilization percentage for the authentik worker [HPA]
-    targetMemoryUtilizationPercentage: ~
+    targetMemoryUtilizationPercentage:
     # -- Configures the scaling behavior of the target in both Up and Down directions.
     behavior: {}
       # scaleDown:
@@ -750,7 +750,7 @@ worker:
   dnsPolicy: ""
 
   # -- serviceAccount to use for authentik worker pods. If set, overrides the value used when serviceAccount.create is true
-  serviceAccountName: ~
+  serviceAccountName:
 
   # -- authentik worker pod-level security context
   # @default -- `{}` (See [values.yaml])
