@@ -139,16 +139,74 @@ global:
 ## Authentik configuration
 authentik:
   # -- Log level for server and worker
+  postgresql:
+    # -- set the postgresql hostname to talk to
+    # if unset and .Values.postgresql.enabled == true, will generate the default
+    # @default -- `{{ .Release.Name }}-postgresql`
+    host: "{{ .Release.Name }}-postgresql"
+    # -- postgresql Database name
+    # @default -- `authentik`
+    name: "authentik"
+    # -- postgresql Username
+    # @default -- `authentik`
+    user: "authentik"
+    password: ""
+    port: 5432
+  # For example
+  # 0:
+  #   host: replica1.example.com
+
+  listen:
+    listen_http: 0.0.0.0:9000
+    listen_https: 0.0.0.0:9443
+    listen_ldap: 0.0.0.0:3389
+    listen_ldaps: 0.0.0.0:6636
+    listen_radius: 0.0.0.0:1812
+    listen_metrics: 0.0.0.0:9300
+    listen_debug: 0.0.0.0:9900
+    trusted_proxy_cidrs:
+    - 127.0.0.0/8
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - fe80::/10
+    - ::1/128
+
+  redis:
+    # -- set the redis hostname to talk to
+    # @default -- `{{ .Release.Name }}-redis-master`
+    host: "{{ .Release.Name }}-redis-master"
+    password: ""
+
+
+  cache:
+  # url: ""
+    timeout: 300
+    timeout_flows: 300
+    timeout_policies: 300
+
+# channel:
+#   url: ""
+
+# result_backend:
+#   url: ""
+#   transport_options: ""
+
+  debug: false
+  remote_debug: false
+
   log_level: info
-  # -- Secret key used for cookie singing and unique user IDs,
-  # don't change this after the first install
-  secret_key: ""
-  events:
-    context_processors:
-      # -- Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled.
-      geoip: /geoip/GeoLite2-City.mmdb
-      # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
-      asn: /geoip/GeoLite2-ASN.mmdb
+
+  session_storage: cache
+
+  error_reporting:
+    # -- This sends anonymous usage-data, stack traces on errors and
+    # performance data to sentry.beryju.org, and is fully opt-in
+    enabled: false
+    # -- This is a string that is sent to sentry with your error reports
+    environment: "k8s"
+    # -- Send PII (Personally identifiable information) data to sentry
+    send_pii: false
   email:
     # -- SMTP Server emails are sent from, fully optional
     host: ""
@@ -166,40 +224,73 @@ authentik:
     timeout: 30
     # -- Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>"
     from: ""
+  throttle:
+    providers:
+      oauth2:
+        device: 20/hour
+    default: 1000/second
+
   outposts:
-    # -- Template used for managed outposts. The following placeholders can be used
-    # %(type)s - the type of the outpost
-    # %(version)s - version of your authentik install
-    # %(build_hash)s - only for beta versions, the build hash of the image
+  # Placeholders:
+  # %(type)s: Outpost type; proxy, ldap, etc
+  # %(version)s: Current version; 2021.4.1
+  # %(build_hash)s: Build hash if you're running a beta version
     container_image_base: ghcr.io/goauthentik/%(type)s:%(version)s
-  error_reporting:
-    # -- This sends anonymous usage-data, stack traces on errors and
-    # performance data to sentry.beryju.org, and is fully opt-in
+  ldap:
+    task_timeout_hours: 2
+    page_size: 50
+    tls:
+      ciphers:
+
+  reputation:
+    expiry: 86400
+
+  cookie_domain:
+  disable_update_check: false
+  disable_startup_analytics: false
+  events:
+    context_processors:
+      # -- Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled.
+      geoip: /geoip/GeoLite2-City.mmdb
+      # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
+      asn: /geoip/GeoLite2-ASN.mmdb
+  compliance:
+    fips:
+      enabled: false
+
+  cert_discovery_dir: /certs
+
+  tenants:
     enabled: false
-    # -- This is a string that is sent to sentry with your error reports
-    environment: "k8s"
-    # -- Send PII (Personally identifiable information) data to sentry
-    send_pii: false
-  postgresql:
-    # -- set the postgresql hostname to talk to
-    # if unset and .Values.postgresql.enabled == true, will generate the default
-    # @default -- `{{ .Release.Name }}-postgresql`
-    host: "{{ .Release.Name }}-postgresql"
-    # -- postgresql Database name
-    # @default -- `authentik`
-    name: "authentik"
-    # -- postgresql Username
-    # @default -- `authentik`
-    user: "authentik"
-    password: ""
-    port: 5432
-  redis:
-    # -- set the redis hostname to talk to
-    # @default -- `{{ .Release.Name }}-redis-master`
-    host: "{{ .Release.Name }}-redis-master"
-    password: ""
+    api_key: ""
 
+  blueprints_dir: /blueprints
 
+  web:
+  # No default here as it's set dynamically
+  # workers: 2
+    threads: 4
+
+  worker:
+    concurrency: 2
+
+  storage:
+    media:
+      backend: file # or s3
+      file:
+        path: ./media
+      s3:
+      # How to talk to s3
+      # region: "us-east-1"
+      # use_ssl: True
+      # endpoint: "https://s3.us-east-1.amazonaws.com"
+      # access_key: ""
+      # secret_key: ""
+      # bucket_name: "authentik-media"
+      # How to render file URLs
+      # custom_domain: null
+        secure_urls: true
+  secret_key: ""
 blueprints:
   # -- List of config maps to mount blueprints from.
   # Only keys in the configMap ending with `.yaml` will be discovered and applied.
@@ -574,7 +665,7 @@ server:
 
     # -- List of ingress paths
     paths:
-      - /
+    - /
     # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
     pathType: Prefix
     # -- additional ingress paths
@@ -786,8 +877,8 @@ worker:
     ## Probe configuration
     exec:
       command:
-        - ak
-        - healthcheck
+      - ak
+      - healthcheck
 
   readinessProbe:
     # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
@@ -803,8 +894,8 @@ worker:
     ## Probe configuration
     exec:
       command:
-        - ak
-        - healthcheck
+      - ak
+      - healthcheck
 
   startupProbe:
     # -- Minimum consecutive failures for the [probe] to be considered failed after having succeeded
@@ -820,8 +911,8 @@ worker:
     ## Probe configuration
     exec:
       command:
-        - ak
-        - healthcheck
+      - ak
+      - healthcheck
 
   # -- terminationGracePeriodSeconds for container lifecycle hook
   terminationGracePeriodSeconds: 30
