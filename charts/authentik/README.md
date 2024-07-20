@@ -123,6 +123,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| authentik.web.path | string | `"/"` | Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash. |
 | blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
 | blueprints.secrets | list | `[]` | List of secrets to mount blueprints from. Only keys in the secret ending with `.yaml` will be discovered and applied. |
 | fullnameOverride | string | `""` | String to fully override `"authentik.fullname"`. Prefer using global.fullnameOverride if possible |
@@ -222,7 +223,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.initContainers | list | `[]` | Init containers to add to the authentik server pod # Note: Supports use of custom Helm templates |
 | server.lifecycle | object | `{}` | Specify postStart and preStop lifecycle hooks for you authentik server container |
 | server.livenessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
-| server.livenessProbe.httpGet.path | string | `"/-/health/live/"` |  |
+| server.livenessProbe.httpGet.path | string | `"{{ .Values.authentik.web.path }}-/health/live/"` |  |
 | server.livenessProbe.httpGet.port | string | `"http"` |  |
 | server.livenessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
 | server.livenessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
@@ -257,7 +258,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.podLabels | object | `{}` | Labels to be added to the authentik server pods |
 | server.priorityClassName | string | `""` (defaults to global.priorityClassName) | Prority class for the authentik server pods |
 | server.readinessProbe.failureThreshold | int | `3` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
-| server.readinessProbe.httpGet.path | string | `"/-/health/ready/"` |  |
+| server.readinessProbe.httpGet.path | string | `"{{ .Values.authentik.web.path }}-/health/ready/"` |  |
 | server.readinessProbe.httpGet.port | string | `"http"` |  |
 | server.readinessProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
 | server.readinessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
@@ -283,7 +284,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.service.type | string | `"ClusterIP"` | authentik server service type |
 | server.serviceAccountName | string | `nil` | serviceAccount to use for authentik server pods |
 | server.startupProbe.failureThreshold | int | `60` | Minimum consecutive failures for the [probe] to be considered failed after having succeeded |
-| server.startupProbe.httpGet.path | string | `"/-/health/live/"` |  |
+| server.startupProbe.httpGet.path | string | `"{{ .Values.authentik.web.path }}-/health/live/"` |  |
 | server.startupProbe.httpGet.port | string | `"http"` |  |
 | server.startupProbe.initialDelaySeconds | int | `5` | Number of seconds after the container has started before [probe] is initiated |
 | server.startupProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
