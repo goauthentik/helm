@@ -218,7 +218,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.ingress.ingressClassName | string | `""` | defines which ingress controller will implement the resource |
 | server.ingress.labels | object | `{}` | additional ingress labels |
 | server.ingress.pathType | string | `"Prefix"` | Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific` |
-| server.ingress.paths | list | `["/"]` | List of ingress paths |
+| server.ingress.paths | list | `["{{ .Values.authentik.web.path }}"]` | List of ingress paths |
 | server.ingress.tls | list | `[]` | ingress TLS configuration |
 | server.initContainers | list | `[]` | Init containers to add to the authentik server pod # Note: Supports use of custom Helm templates |
 | server.lifecycle | object | `{}` | Specify postStart and preStop lifecycle hooks for you authentik server container |

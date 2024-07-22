@@ -577,7 +577,7 @@ server:
 
     # -- List of ingress paths
     paths:
-      - /
+      - "{{ .Values.authentik.web.path }}"
     # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
     pathType: Prefix
     # -- additional ingress paths
