@@ -25,8 +25,9 @@ spec:
     - type: Resource
       resource:
         name: memory
-        target: Utilization
-        averageUtilization: {{ . }}
+        target:
+          type: Utilization
+          averageUtilization: {{ . }}
     {{- end }}
     {{- with .Values.server.autoscaling.targetCPUUtilizationPercentage }}
     - type: Resource
