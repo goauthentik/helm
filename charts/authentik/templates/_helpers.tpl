@@ -25,7 +25,7 @@ Create authentik configuration environment variables.
             {{- end -}}
         {{- else -}}
             {{- $value := $v -}}
-            {{- if or (kindIs "bool" $v) (kindIs "float64" $v) -}}
+            {{- if or (kindIs "bool" $v) (kindIs "float64" $v) (kindIs "int" $v) (kindIs "int64" $v) -}}
                 {{- $v = $v | toString | b64enc | quote -}}
             {{- else -}}
                 {{- $v = tpl $v $.root | toString | b64enc | quote }}
