@@ -110,15 +110,15 @@ spec:
               protocol: TCP
           {{- with .Values.server.livenessProbe }}
           livenessProbe:
-            {{ toYaml . | nindent 12 }}
+            {{ tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
           {{- with .Values.server.readinessProbe }}
           readinessProbe:
-            {{ toYaml . | nindent 12 }}
+            {{ tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
           {{- with .Values.server.startupProbe }}
           startupProbe:
-            {{ toYaml . | nindent 12 }}
+            {{ tpl (toYaml .) $ | nindent 12 }}
           {{- end }}
           resources:
             {{- toYaml .Values.server.resources | nindent 12 }}
