@@ -9,8 +9,8 @@
 
 ## authentik Chart
 
-![Version: 2024.8.4](https://img.shields.io/badge/Version-2024.8.4-informational?style=for-the-badge)
-![AppVersion: 2024.8.4](https://img.shields.io/badge/AppVersion-2024.8.4-informational?style=for-the-badge)
+![Version: 2024.10.0](https://img.shields.io/badge/Version-2024.10.0-informational?style=for-the-badge)
+![AppVersion: 2024.10.0](https://img.shields.io/badge/AppVersion-2024.10.0-informational?style=for-the-badge)
 
 See [README](./charts/authentik/README.md)
 
