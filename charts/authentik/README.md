@@ -165,6 +165,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | global.podLabels | object | `{}` | Labels for all deployed pods |
 | global.priorityClassName | string | `""` | Default priority class for all components |
 | global.revisionHistoryLimit | int | `3` |  |
+| global.secretAnnotations | object | `{}` | Annotations for all deployed secrets |
 | global.securityContext | object | `{}` (See [values.yaml]) | Toggle and define pod-level security context. |
 | global.tolerations | list | `[]` | Default tolerations for all components |
 | global.topologySpreadConstraints | list | `[]` | Default [TopologySpreadConstraints] rules for all components # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |
