@@ -92,8 +92,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.0.0 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 12.12.10 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 18.6.1 |
+| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.0.4 |
+| oci://registry-1.docker.io/bitnamicharts | redis | 20.2.1 |
 
 ## Values
 
@@ -176,6 +176,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.auth.database | string | `"authentik"` |  |
 | postgresql.auth.username | string | `"authentik"` |  |
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
+| postgresql.image.repository | string | `"bitnami/postgresql"` |  |
+| postgresql.image.tag | string | `"15.8.0-debian-12-r18"` |  |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
 | prometheus.rules.enabled | bool | `false` |  |
