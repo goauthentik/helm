@@ -122,6 +122,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
+| authentik.redis.tls | bool | false | Use TLS to connect to Redis |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
 | blueprints.secrets | list | `[]` | List of secrets to mount blueprints from. Only keys in the secret ending with `.yaml` will be discovered and applied. |
