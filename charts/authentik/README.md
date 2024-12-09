@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2024.8.3](https://img.shields.io/badge/Version-2024.8.3-informational?style=for-the-badge)
-![AppVersion: 2024.8.3](https://img.shields.io/badge/AppVersion-2024.8.3-informational?style=for-the-badge)
+![Version: 2024.10.4](https://img.shields.io/badge/Version-2024.10.4-informational?style=for-the-badge)
+![AppVersion: 2024.10.4](https://img.shields.io/badge/AppVersion-2024.10.4-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -165,6 +165,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | global.podLabels | object | `{}` | Labels for all deployed pods |
 | global.priorityClassName | string | `""` | Default priority class for all components |
 | global.revisionHistoryLimit | int | `3` |  |
+| global.secretAnnotations | object | `{}` | Annotations for all deployed secrets |
 | global.securityContext | object | `{}` (See [values.yaml]) | Toggle and define pod-level security context. |
 | global.tolerations | list | `[]` | Default tolerations for all components |
 | global.topologySpreadConstraints | list | `[]` | Default [TopologySpreadConstraints] rules for all components # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |

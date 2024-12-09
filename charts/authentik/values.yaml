@@ -40,6 +40,9 @@ global:
   # -- Annotations for all deployed pods
   podAnnotations: {}
 
+  # -- Annotations for all deployed secrets
+  secretAnnotations: {}
+
   # -- Labels for all deployed pods
   podLabels: {}
 
