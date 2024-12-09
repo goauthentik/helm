@@ -975,6 +975,9 @@ prometheus:
 postgresql:
   # -- enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values.
   enabled: false
+  image:
+    repository: bitnami/postgresql
+    tag: 15.8.0-debian-12-r18
   auth:
     username: authentik
     database: authentik
