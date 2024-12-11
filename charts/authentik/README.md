@@ -6,7 +6,7 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2024.10.5](https://img.shields.io/badge/Version-2024.10.5-informational?style=for-the-badge)
+![Version: 2024.10.5-1](https://img.shields.io/badge/Version-2024.10.5-1-informational?style=for-the-badge)
 ![AppVersion: 2024.10.5](https://img.shields.io/badge/AppVersion-2024.10.5-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
@@ -138,7 +138,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | geoip.image.digest | string | `""` | If defined, an image digest for GeoIP images |
 | geoip.image.pullPolicy | string | `"IfNotPresent"` | If defined, an imagePullPolicy for GeoIP images |
 | geoip.image.repository | string | `"ghcr.io/maxmind/geoipupdate"` | If defined, a repository for GeoIP images |
-| geoip.image.tag | string | `"v6.0.0"` | If defined, a tag for GeoIP images |
+| geoip.image.tag | string | `"v7.1.0"` | If defined, a tag for GeoIP images |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.resources | object | `{}` | Resource limits and requests for GeoIP containers |
 | geoip.updateInterval | int | `8` | GeoIP update frequency, in hours |
