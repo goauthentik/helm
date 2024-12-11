@@ -985,11 +985,22 @@ postgresql:
   primary:
     extendedConfiguration: |
       max_connections = 500
+    resourcesPreset: "none"
     # persistence:
     #   enabled: true
     #   storageClass:
     #   accessModes:
     #     - ReadWriteOnce
+  readReplicas:
+    resourcesPreset: "none"
+  backup:
+    resourcesPreset: "none"
+  passwordUpdateJob:
+    resourcesPreset: "none"
+  volumePermissions:
+    resourcesPreset: "none"
+  metrics:
+    resourcesPreset: "none"
 
 
 redis:
@@ -998,6 +1009,18 @@ redis:
   architecture: standalone
   auth:
     enabled: false
+  master:
+    resourcesPreset: "none"
+  replica:
+    resourcesPreset: "none"
+  sentinel:
+    resourcesPreset: "none"
+  metrics:
+    resourcesPreset: "none"
+  volumePermissions:
+    resourcesPreset: "none"
+  sysctl:
+    resourcesPreset: "none"
 
 
 # -- additional resources to deploy. Those objects are templated.

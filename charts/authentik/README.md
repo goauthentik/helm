@@ -175,10 +175,16 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | nameOverride | string | `""` | Provide a name in place of `authentik`. Prefer using global.nameOverride if possible |
 | postgresql.auth.database | string | `"authentik"` |  |
 | postgresql.auth.username | string | `"authentik"` |  |
+| postgresql.backup.resourcesPreset | string | `"none"` |  |
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
 | postgresql.image.repository | string | `"bitnami/postgresql"` |  |
 | postgresql.image.tag | string | `"15.8.0-debian-12-r18"` |  |
+| postgresql.metrics.resourcesPreset | string | `"none"` |  |
+| postgresql.passwordUpdateJob.resourcesPreset | string | `"none"` |  |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
+| postgresql.primary.resourcesPreset | string | `"none"` |  |
+| postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
+| postgresql.volumePermissions.resourcesPreset | string | `"none"` |  |
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
 | prometheus.rules.enabled | bool | `false` |  |
 | prometheus.rules.labels | object | `{}` | PrometheusRule labels |
@@ -187,6 +193,12 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values. |
+| redis.master.resourcesPreset | string | `"none"` |  |
+| redis.metrics.resourcesPreset | string | `"none"` |  |
+| redis.replica.resourcesPreset | string | `"none"` |  |
+| redis.sentinel.resourcesPreset | string | `"none"` |  |
+| redis.sysctl.resourcesPreset | string | `"none"` |  |
+| redis.volumePermissions.resourcesPreset | string | `"none"` |  |
 | server.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
 | server.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | server.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik server |
