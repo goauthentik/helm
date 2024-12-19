@@ -9,14 +9,14 @@
 
 ## authentik Chart
 
-![Version: 2024.10.5-1](https://img.shields.io/badge/Version-2024.10.5-1-1-informational?style=for-the-badge)
-![AppVersion: 2024.10.5](https://img.shields.io/badge/AppVersion-2024.10.5-informational?style=for-the-badge)
+![Version: 2024.12.0](https://img.shields.io/badge/Version-2024.12.0-informational?style=for-the-badge)
+![AppVersion: 2024.12.0](https://img.shields.io/badge/AppVersion-2024.12.0-informational?style=for-the-badge)
 
 See [README](./charts/authentik/README.md)
 
 ## authentik-remote-cluster Chart
 
-![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=for-the-badge)
-![AppVersion: 2021.10.2](https://img.shields.io/badge/AppVersion-2021.10.2-informational?style=for-the-badge)
+![Version: 2.0.0](https://img.shields.io/badge/Version-2.0.0-informational?style=for-the-badge)
+![AppVersion: 2024.12.0](https://img.shields.io/badge/AppVersion-2021.10.2-informational?style=for-the-badge)
 
 See [README](./charts/authentik-remote-cluster/README.md)
