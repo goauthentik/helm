@@ -100,6 +100,16 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | additionalObjects | list | `[]` | additional resources to deploy. Those objects are templated. |
+| authentik.blueprints_dir | string | `"/blueprints"` |  |
+| authentik.cache.timeout | int | `300` |  |
+| authentik.cache.timeout_flows | int | `300` |  |
+| authentik.cache.timeout_policies | int | `300` |  |
+| authentik.cert_discovery_dir | string | `"/certs"` |  |
+| authentik.compliance.fips.enabled | bool | `false` |  |
+| authentik.cookie_domain | string | `nil` |  |
+| authentik.debug | bool | `false` |  |
+| authentik.disable_startup_analytics | bool | `false` |  |
+| authentik.disable_update_check | bool | `false` |  |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, no authentication will be done |
@@ -113,16 +123,43 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
 | authentik.events.context_processors.asn | string | `"/geoip/GeoLite2-ASN.mmdb"` | Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.events.context_processors.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled. |
-| authentik.log_level | string | `"info"` | Log level for server and worker |
-| authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
+| authentik.ldap.page_size | int | `50` |  |
+| authentik.ldap.task_timeout_hours | int | `2` |  |
+| authentik.ldap.tls.ciphers | string | `nil` |  |
+| authentik.listen.listen_debug | string | `"0.0.0.0:9900"` |  |
+| authentik.listen.listen_http | string | `"0.0.0.0:9000"` |  |
+| authentik.listen.listen_https | string | `"0.0.0.0:9443"` |  |
+| authentik.listen.listen_ldap | string | `"0.0.0.0:3389"` |  |
+| authentik.listen.listen_ldaps | string | `"0.0.0.0:6636"` |  |
+| authentik.listen.listen_metrics | string | `"0.0.0.0:9300"` |  |
+| authentik.listen.listen_radius | string | `"0.0.0.0:1812"` |  |
+| authentik.listen.trusted_proxy_cidrs[0] | string | `"127.0.0.0/8"` |  |
+| authentik.listen.trusted_proxy_cidrs[1] | string | `"10.0.0.0/8"` |  |
+| authentik.listen.trusted_proxy_cidrs[2] | string | `"172.16.0.0/12"` |  |
+| authentik.listen.trusted_proxy_cidrs[3] | string | `"192.168.0.0/16"` |  |
+| authentik.listen.trusted_proxy_cidrs[4] | string | `"fe80::/10"` |  |
+| authentik.listen.trusted_proxy_cidrs[5] | string | `"::1/128"` |  |
+| authentik.log_level | string | `"info"` |  |
+| authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` |  |
+| authentik.postgresql | object | `{"host":"{{ .Release.Name }}-postgresql","name":"authentik","password":"","port":5432,"user":"authentik"}` | Log level for server and worker |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `authentik` | postgresql Database name |
-| authentik.postgresql.password | string | `""` |  |
-| authentik.postgresql.port | int | `5432` |  |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
 | authentik.redis.password | string | `""` |  |
-| authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
+| authentik.remote_debug | bool | `false` |  |
+| authentik.reputation.expiry | int | `86400` |  |
+| authentik.secret_key | string | `""` |  |
+| authentik.session_storage | string | `"cache"` |  |
+| authentik.storage.media.backend | string | `"file"` |  |
+| authentik.storage.media.file.path | string | `"./media"` |  |
+| authentik.storage.media.s3.secure_urls | bool | `true` |  |
+| authentik.tenants.api_key | string | `""` |  |
+| authentik.tenants.enabled | bool | `false` |  |
+| authentik.throttle.default | string | `"1000/second"` |  |
+| authentik.throttle.providers.oauth2.device | string | `"20/hour"` |  |
+| authentik.web.threads | int | `4` |  |
+| authentik.worker.concurrency | int | `2` |  |
 | blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
 | blueprints.secrets | list | `[]` | List of secrets to mount blueprints from. Only keys in the secret ending with `.yaml` will be discovered and applied. |
 | fullnameOverride | string | `""` | String to fully override `"authentik.fullname"`. Prefer using global.fullnameOverride if possible |
