@@ -16,5 +16,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ template "authentik-remote-cluster.fullname" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "authentik.namespace" . | quote }}
 {{- end }}

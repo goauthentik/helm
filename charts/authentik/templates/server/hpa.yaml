@@ -3,7 +3,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "authentik.server.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ include "authentik.namespace" . | quote }}
   labels:
     {{- include "authentik.labels" (dict "context" . "component" .Values.server.name) | nindent 4 }}
   {{- with .Values.server.autoscaling.annotations }}

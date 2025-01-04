@@ -13,6 +13,8 @@ global:
   nameOverride: ""
   # -- String to fully override `"authentik.fullname"`
   fullnameOverride: ""
+  # -- A custom namespace to override the default namespace for the deployed resources.
+  namespaceOverride: ""
   # -- Common labels for all resources.
   additionalLabels: {}
     # app: authentik

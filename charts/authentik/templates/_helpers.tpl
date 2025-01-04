@@ -15,6 +15,17 @@ Create authentik server worker and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Determine the namespace to use, allowing for a namespace override.
+*/}}
+{{- define "authentik.namespace" -}}
+  {{- if .Values.namespaceOverride }}
+    {{- .Values.namespaceOverride }}
+  {{- else }}
+    {{- .Release.Namespace }}
+  {{- end }}
+{{- end }}
+
+{{/*
 Create authentik configuration environment variables.
 */}}
 {{- define "authentik.env" -}}

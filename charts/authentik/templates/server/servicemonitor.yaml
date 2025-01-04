@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ include "authentik.server.fullname" . }}
-  namespace: {{ default .Release.Namespace .Values.server.metrics.serviceMonitor.namespace | quote }}
+  namespace: {{ .Values.server.metrics.serviceMonitor.namespace | default (include "authentik.namespace" .) | quote }}
   labels:
     {{- include "authentik.labels" (dict "context" . "component" (printf "%s-metrics" .Values.server.name)) | nindent 4 }}
     {{- with .Values.server.metrics.serviceMonitor.selector }}

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "authentik.server.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ include "authentik.namespace" . | quote }}
   labels:
     {{- include "authentik.labels" (dict "context" . "component" .Values.server.name) | nindent 4 }}
   {{- with (mergeOverwrite (deepCopy .Values.global.deploymentAnnotations) .Values.server.deploymentAnnotations) }}

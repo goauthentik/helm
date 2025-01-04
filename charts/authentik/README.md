@@ -160,6 +160,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | global.image.tag | string | `""` | Overrides the global authentik whose default is the chart appVersion |
 | global.imagePullSecrets | list | `[]` | Secrets with credentials to pull images from a private registry |
 | global.nameOverride | string | `""` | Provide a name in place of `authentik` |
+| global.namespaceOverride | string | `""` | A custom namespace to override the default namespace for the deployed resources. |
 | global.nodeSelector | object | `{}` | Default node selector for all components |
 | global.podAnnotations | object | `{}` | Annotations for all deployed pods |
 | global.podLabels | object | `{}` | Labels for all deployed pods |

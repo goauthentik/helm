@@ -3,7 +3,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "authentik.worker.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ include "authentik.namespace" . | quote }}
   labels:
     {{- include "authentik.labels" (dict "context" . "component" .Values.worker.name) | nindent 4 }}
     {{- with .Values.worker.pdb.labels }}

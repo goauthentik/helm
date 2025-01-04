@@ -33,6 +33,7 @@ RBAC required for a remote cluster to be connected to authentik.
 | global.additionalLabels | object | `{}` | Common labels for all resources. |
 | global.fullnameOverride | string | `""` | String to fully override `"authentik.fullname"` |
 | global.nameOverride | string | `""` | Provide a name in place of `authentik` |
+| global.namespaceOverride | string | `""` | A custom namespace to override the default namespace for the deployed resources. |
 | kubeVersionOverride | string | `""` | Override the Kubernetes version, which is used to evaluate certain manifests |
 | nameOverride | string | `""` | Provide a name in place of `authentik`. Prefer using global.nameOverride if possible |
 | serviceAccountSecret.enabled | bool | `true` | Create a secret with the service account credentials |
