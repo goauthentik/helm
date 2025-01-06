@@ -43,7 +43,7 @@ spec:
       {{- end }}
   namespaceSelector:
     matchNames:
-      - {{ .Release.Namespace }}
+      - {{ include "authentik.namespace" . }}
   selector:
     matchLabels:
       {{- include "authentik.selectorLabels" (dict "context" . "component" (printf "%s-metrics" .Values.server.name)) | nindent 6 }}
