@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ printf "%s-%s" (include "authentik-remote-cluster.fullname" .) .Release.Namespace | quote }}
+  name: {{ printf "%s-%s" (include "authentik-remote-cluster.fullname" .) (include "authauthentik-remote-cluster.namespace" .) | quote }}
   labels:
     {{- include "authentik-remote-cluster.labels" (dict "context" .) | nindent 4 }}
   {{- with .Values.annotations }}
@@ -12,9 +12,9 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ printf "%s-%s" (include "authentik-remote-cluster.fullname" .) .Release.Namespace | quote }}
+  name: {{ printf "%s-%s" (include "authentik-remote-cluster.fullname" .) (include "authauthentik-remote-cluster.namespace" .) | quote }}
 subjects:
   - kind: ServiceAccount
     name: {{ template "authentik-remote-cluster.fullname" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "authauthentik-remote-cluster.namespace" . | quote }}
 {{- end }}

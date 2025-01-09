@@ -2,7 +2,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ template "authentik-remote-cluster.fullname" . }}
-  namespace: {{ .Release.Namespace | quote }}
+  namespace: {{ include "authauthentik-remote-cluster.namespace" . | quote }}
   labels:
     {{- include "authentik-remote-cluster.labels" (dict "context" .) | nindent 4 }}
   {{- with .Values.annotations }}
@@ -16,4 +16,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ template "authentik-remote-cluster.fullname" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "authauthentik-remote-cluster.namespace" . | quote }}

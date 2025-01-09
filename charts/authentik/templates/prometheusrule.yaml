@@ -3,7 +3,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: {{ template "authentik.fullname" . }}
-  namespace: {{ default .Release.Namespace .Values.prometheus.rules.namespace | quote }}
+  namespace: {{ .Values.prometheus.rules.namespace | default (include "authentik.namespace" .) | quote }}
   labels:
     {{- include "authentik.labels" (dict "context" .) | nindent 4 }}
     {{- if .Values.prometheus.rules.selector }}
