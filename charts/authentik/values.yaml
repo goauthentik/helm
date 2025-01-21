@@ -154,6 +154,9 @@ authentik:
       geoip: /geoip/GeoLite2-City.mmdb
       # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
       asn: /geoip/GeoLite2-ASN.mmdb
+  web:
+    # -- Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash.
+    path: /
   email:
     # -- SMTP Server emails are sent from, fully optional
     host: ""
@@ -413,7 +416,7 @@ server:
     timeoutSeconds: 1
     ## Probe configuration
     httpGet:
-      path: /-/health/live/
+      path: "{{ .Values.authentik.web.path }}-/health/live/"
       port: http
 
   readinessProbe:
@@ -429,7 +432,7 @@ server:
     timeoutSeconds: 1
     ## Probe configuration
     httpGet:
-      path: /-/health/ready/
+      path: "{{ .Values.authentik.web.path }}-/health/ready/"
       port: http
 
   startupProbe:
@@ -445,7 +448,7 @@ server:
     timeoutSeconds: 1
     ## Probe configuration
     httpGet:
-      path: /-/health/live/
+      path: "{{ .Values.authentik.web.path }}-/health/live/"
       port: http
 
   # -- terminationGracePeriodSeconds for container lifecycle hook
@@ -579,7 +582,7 @@ server:
 
     # -- List of ingress paths
     paths:
-      - /
+      - "{{ .Values.authentik.web.path }}"
     # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
     pathType: Prefix
     # -- additional ingress paths
