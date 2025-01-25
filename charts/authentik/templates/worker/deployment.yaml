@@ -38,15 +38,19 @@ spec:
         {{- end }}
         {{- end }}
     spec:
+      {{- if .Values.worker.serviceAccount.create }}
+      {{- if .Values.worker.serviceAccount.name }}
+      serviceAccountName: {{ .Values.worker.serviceAccount.name }}
+      {{- else }}
+      serviceAccountName: {{ template "authentik.server.fullname" . }}
+      {{- end }}      
+      {{- else }}      
       {{- with .Values.worker.imagePullSecrets | default .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.worker.serviceAccountName }}
+      {{- end }}            
+      {{- with .Values.server.serviceAccountName }}
       serviceAccountName: {{ . }}
-      {{- else }}
-      {{- if .Values.serviceAccount.create }}
-      serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
       {{- end }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
