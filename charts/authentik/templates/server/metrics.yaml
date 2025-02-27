@@ -1,3 +1,4 @@
+{{- if .Values.server.enabled }}
 {{- if .Values.server.metrics.enabled }}
 apiVersion: v1
 kind: Service
@@ -31,4 +32,5 @@ spec:
     targetPort: metrics
   selector:
     {{- include "authentik.selectorLabels" (dict "context" . "component" .Values.server.name) | nindent 4 }}
+{{- end }}
 {{- end }}
