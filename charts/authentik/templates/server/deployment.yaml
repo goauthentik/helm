@@ -38,12 +38,20 @@ spec:
         {{- end }}
         {{- end }}
     spec:
+      {{- if .Values.server.serviceAccount.create }}
+      {{- if .Values.server.serviceAccount.name }}
+      serviceAccountName: {{ .Values.server.serviceAccount.name }}
+      {{- else }}
+      serviceAccountName: {{ template "authentik.server.fullname" . }}
+      {{- end }}      
+      {{- else }}      
       {{- with .Values.server.imagePullSecrets | default .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+      {{- end }}            
       {{- with .Values.server.serviceAccountName }}
       serviceAccountName: {{ . }}
+      {{- end }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
       hostAliases:
