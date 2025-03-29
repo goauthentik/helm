@@ -105,8 +105,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, no authentication will be done |
 | authentik.email.port | int | `587` | SMTP server port |
 | authentik.email.timeout | int | `30` | Connection timeout |
-| authentik.email.use_ssl | bool | `false` | Enable either use_tls or use_ssl, they can't be enabled at the same time. |
-| authentik.email.use_tls | bool | `false` | Enable either use_tls or use_ssl, they can't be enabled at the same time. |
+| authentik.email.use_ssl | bool | `false` | Use SSL. Enable either use_tls or use_ssl, they can't be enabled at the same time. |
+| authentik.email.use_tls | bool | `false` | Use StartTLS. Enable either use_tls or use_ssl, they can't be enabled at the same time. |
 | authentik.email.username | string | `""` | SMTP credentials, when left empty, no authentication will be done |
 | authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
 | authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
