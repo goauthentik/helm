@@ -292,7 +292,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.route.main.httpsRedirect | bool | `false` | Create http route for redirect (https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/#http-to-https-redirects). Take care that you only enable this on the http listener of the gateway to avoid an infinite redirect. Matches, filters and additionalRules will be ignored if this is set to true |
 | server.route.main.kind | string | `"HTTPRoute"` | Set the route kind |
 | server.route.main.labels | object | `{}` | Route labels |
-| server.route.main.matches | list | `[{"path":{"type":"PathPrefix","value":"/"}}]` | Route matches |
+| server.route.main.matches | list | `[{"path":{"type":"PathPrefix","value":"{{ .Values.authentik.web.path }}"}}]` | Route matches |
 | server.route.main.parentRefs | list | `[]` | Reference to parent gateways |
 | server.securityContext | object | `{}` (See [values.yaml]) | authentik server pod-level security context |
 | server.service.annotations | object | `{}` | authentik server service annotations |
