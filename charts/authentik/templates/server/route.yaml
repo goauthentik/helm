@@ -1,3 +1,4 @@
+{{- if .Values.server.enabled }}
 {{- $servicePort := ternary .Values.server.service.servicePortHttps .Values.server.service.servicePortHttp .Values.server.ingress.https -}}
 {{- range $name, $route := .Values.server.route }}
 {{- if $route.enabled }}
@@ -47,5 +48,6 @@ spec:
         {{- tpl (toYaml .) $ | nindent 8 }}
       {{- end }}
     {{- end }}
+{{- end }}
 {{- end }}
 {{- end }}
