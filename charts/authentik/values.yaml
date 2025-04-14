@@ -143,6 +143,8 @@ global:
 
 ## Authentik configuration
 authentik:
+  # -- whether to create the authentik configuration secret
+  enabled: true
   # -- Log level for server and worker
   log_level: info
   # -- Secret key used for cookie singing and unique user IDs,
@@ -166,9 +168,9 @@ authentik:
     username: ""
     # -- SMTP credentials, when left empty, no authentication will be done
     password: ""
-    # -- Enable either use_tls or use_ssl, they can't be enabled at the same time.
+    # -- Use StartTLS. Enable either use_tls or use_ssl, they can't be enabled at the same time.
     use_tls: false
-    # -- Enable either use_tls or use_ssl, they can't be enabled at the same time.
+    # -- Use SSL. Enable either use_tls or use_ssl, they can't be enabled at the same time.
     use_ssl: false
     # -- Connection timeout
     timeout: 30
@@ -219,6 +221,9 @@ blueprints:
 
 ## authentik server
 server:
+  # -- whether to enable server resources
+  enabled: true
+
   # -- authentik server name
   name: server
 
@@ -647,6 +652,9 @@ server:
 
 ## authentik worker
 worker:
+  # -- whether to enable worker resources
+  enabled: true
+
   # -- authentik worker name
   name: worker
 

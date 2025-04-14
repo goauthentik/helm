@@ -1,3 +1,4 @@
+{{- if .Values.server.enabled }}
 {{- if and .Values.server.metrics.enabled .Values.server.metrics.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -47,4 +48,5 @@ spec:
   selector:
     matchLabels:
       {{- include "authentik.selectorLabels" (dict "context" . "component" (printf "%s-metrics" .Values.server.name)) | nindent 6 }}
+{{- end }}
 {{- end }}
