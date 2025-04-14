@@ -636,7 +636,7 @@ server:
       matches:
         - path:
             type: PathPrefix
-            value: /
+            value: "{{ .Values.authentik.web.path }}"
 
       # -- Route filters
       filters: []
