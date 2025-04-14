@@ -108,6 +108,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.email.use_ssl | bool | `false` | Use SSL. Enable either use_tls or use_ssl, they can't be enabled at the same time. |
 | authentik.email.use_tls | bool | `false` | Use StartTLS. Enable either use_tls or use_ssl, they can't be enabled at the same time. |
 | authentik.email.username | string | `""` | SMTP credentials, when left empty, no authentication will be done |
+| authentik.enabled | bool | `true` | whether to create the authentik configuration secret |
 | authentik.error_reporting.enabled | bool | `false` | This sends anonymous usage-data, stack traces on errors and performance data to sentry.beryju.org, and is fully opt-in |
 | authentik.error_reporting.environment | string | `"k8s"` | This is a string that is sent to sentry with your error reports |
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
@@ -217,6 +218,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.deploymentStrategy | object | `{}` (defaults to global.deploymentStrategy) | Deployment strategy to be added to the authentik server Deployment |
 | server.dnsConfig | object | `{}` | [DNS configuration] |
 | server.dnsPolicy | string | `""` | Alternative DNS policy for authentik server pods |
+| server.enabled | bool | `true` | whether to enable server resources |
 | server.env | list | `[]` (See [values.yaml]) | Environment variables to pass to the authentik server. Does not apply to GeoIP See configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | server.envFrom | list | `[]` (See [values.yaml]) | envFrom to pass to the authentik server. Does not apply to GeoIP |
 | server.extraContainers | list | `[]` | Additional containers to be added to the authentik server pod # Note: Supports use of custom Helm templates |
@@ -328,6 +330,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.deploymentStrategy | object | `{}` (defaults to global.deploymentStrategy) | Deployment strategy to be added to the authentik worker Deployment |
 | worker.dnsConfig | object | `{}` | [DNS configuration] |
 | worker.dnsPolicy | string | `""` | Alternative DNS policy for authentik worker pods |
+| worker.enabled | bool | `true` | whether to enable worker resources |
 | worker.env | list | `[]` (See [values.yaml]) | Environment variables to pass to the authentik worker. Does not apply to GeoIP See configuration options at https://goauthentik.io/docs/installation/configuration/ |
 | worker.envFrom | list | `[]` (See [values.yaml]) | envFrom to pass to the authentik worker. Does not apply to GeoIP |
 | worker.extraContainers | list | `[]` | Additional containers to be added to the authentik worker pod # Note: Supports use of custom Helm templates |

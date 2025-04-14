@@ -1,3 +1,4 @@
+{{- if .Values.server.enabled }}
 {{- if .Values.server.pdb.enabled }}
 apiVersion: policy/v1
 kind: PodDisruptionBudget
@@ -22,4 +23,5 @@ spec:
   selector:
     matchLabels:
       {{- include "authentik.selectorLabels" (dict "context" . "component" .Values.server.name) | nindent 6 }}
+{{- end }}
 {{- end }}

@@ -1,3 +1,4 @@
+{{- if .Values.worker.enabled }}
 {{- if .Values.worker.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -42,4 +43,5 @@ spec:
   behavior:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+{{- end }}
 {{- end }}
