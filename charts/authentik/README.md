@@ -284,6 +284,18 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.readinessProbe.timeoutSeconds | int | `1` | Number of seconds after which the [probe] times out |
 | server.replicas | int | `1` | The number of server pods to run |
 | server.resources | object | `{}` | Resource limits and requests for the authentik server |
+| server.route.main.additionalRules | list | `[]` | Additional custom rules that can be added to the route |
+| server.route.main.annotations | object | `{}` | Route annotations |
+| server.route.main.apiVersion | string | `"gateway.networking.k8s.io/v1"` | Set the route apiVersion |
+| server.route.main.enabled | bool | `false` | enable an HTTPRoute resource for the authentik server. Be aware that this is an early beta of this feature. We don't guarantee this works and is subject to change. |
+| server.route.main.filters | list | `[]` | Route filters |
+| server.route.main.hostnames | list | `[]` | Route hostnames |
+| server.route.main.https | bool | `false` | uses `server.service.servicePortHttps` instead of `server.service.servicePortHttp` |
+| server.route.main.httpsRedirect | bool | `false` | Create http route for redirect (https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/#http-to-https-redirects). Take care that you only enable this on the http listener of the gateway to avoid an infinite redirect. Matches, filters and additionalRules will be ignored if this is set to true |
+| server.route.main.kind | string | `"HTTPRoute"` | Set the route kind |
+| server.route.main.labels | object | `{}` | Route labels |
+| server.route.main.matches | list | `[{"path":{"type":"PathPrefix","value":"{{ .Values.authentik.web.path }}"}}]` | Route matches |
+| server.route.main.parentRefs | list | `[]` | Reference to parent gateways |
 | server.securityContext | object | `{}` (See [values.yaml]) | authentik server pod-level security context |
 | server.service.annotations | object | `{}` | authentik server service annotations |
 | server.service.externalIPs | list | `[]` | authentik server service external IPs |
