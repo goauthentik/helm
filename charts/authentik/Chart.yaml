@@ -30,11 +30,11 @@ maintainers:
     url: https://goauthentik.io
 dependencies:
   - name: postgresql
-    version: 16.0.4
+    version: 16.6.3
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis
-    version: 20.2.1
+    version: 20.11.5
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled
   - name: authentik-remote-cluster
