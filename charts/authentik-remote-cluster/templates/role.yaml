@@ -40,6 +40,12 @@ rules:
     verbs:
       {{- include "authentik-remote-cluster.api-verbs-rw" . | nindent 6 }}
   - apiGroups:
+      - gateway.networking.k8s.io
+    resources:
+      - httproutes
+    verbs:
+      {{- include "authentik-remote-cluster.api-verbs-rw" . | nindent 6 }}
+  - apiGroups:
       - monitoring.coreos.com
     resources:
       - servicemonitors
