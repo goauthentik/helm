@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2025.2.4](https://img.shields.io/badge/Version-2025.2.4-informational?style=for-the-badge)
-![AppVersion: 2025.2.4](https://img.shields.io/badge/AppVersion-2025.2.4-informational?style=for-the-badge)
+![Version: 2025.4.0](https://img.shields.io/badge/Version-2025.4.0-informational?style=for-the-badge)
+![AppVersion: 2025.4.0](https://img.shields.io/badge/AppVersion-2025.4.0-informational?style=for-the-badge)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -91,7 +91,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.0.0 |
+| https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.1.0 |
 | oci://registry-1.docker.io/bitnamicharts | postgresql | 16.6.3 |
 | oci://registry-1.docker.io/bitnamicharts | redis | 20.11.5 |
 
