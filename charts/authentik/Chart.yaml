@@ -39,7 +39,7 @@ dependencies:
     condition: redis.enabled
   - name: authentik-remote-cluster
     repository: https://charts.goauthentik.io
-    version: 2.0.0
+    version: 2.1.0
     condition: serviceAccount.create
     alias: serviceAccount
 annotations:
