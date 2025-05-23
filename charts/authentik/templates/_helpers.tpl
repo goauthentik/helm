@@ -39,7 +39,7 @@ Create authentik configuration environment variables.
             {{- if or (kindIs "bool" $v) (kindIs "float64" $v) (kindIs "int" $v) (kindIs "int64" $v) -}}
                 {{- $v = $v | toString | b64enc | quote -}}
             {{- else -}}
-                {{- $v = tpl $v $.root | toString | b64enc | quote }}
+                {{- $v = tpl (toString $v) $.root | toString | b64enc | quote }}
             {{- end -}}
             {{- if and ($v) (ne $v "\"\"") }}
 {{ printf "AUTHENTIK_%s" (upper $k) }}: {{ $v }}
