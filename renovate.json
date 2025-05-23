@@ -1,0 +1,22 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "dependencyDashboardLabels": [
+        "dependencies"
+    ],
+    "extends": [
+        "config:base",
+        ":label(dependencies)",
+        ":preserveSemverRanges",
+        ":disableRateLimiting",
+        ":dependencyDashboard",
+        ":enableVulnerabilityAlerts",
+        "github>whitesource/merge-confidence:beta",
+        ":enablePreCommit"
+    ],
+    "internalChecksFilter": "strict",
+    "lockFileMaintenance": {
+        "enabled": true
+    },
+    "reviewersFromCodeOwners": true,
+    "semanticCommits": "auto"
+}
