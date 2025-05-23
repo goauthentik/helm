@@ -92,7 +92,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.1.0 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.6.3 |
+| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.4 |
 | oci://registry-1.docker.io/bitnamicharts | redis | 21.1.6 |
 
 ## Values
@@ -180,8 +180,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.auth.username | string | `"authentik"` |  |
 | postgresql.backup.resourcesPreset | string | `"none"` |  |
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
-| postgresql.image.repository | string | `"bitnami/postgresql"` |  |
-| postgresql.image.tag | string | `"15.8.0-debian-12-r18"` |  |
 | postgresql.metrics.resourcesPreset | string | `"none"` |  |
 | postgresql.passwordUpdateJob.resourcesPreset | string | `"none"` |  |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
