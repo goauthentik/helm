@@ -140,7 +140,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | geoip.image.digest | string | `""` | If defined, an image digest for GeoIP images |
 | geoip.image.pullPolicy | string | `"IfNotPresent"` | If defined, an imagePullPolicy for GeoIP images |
 | geoip.image.repository | string | `"ghcr.io/maxmind/geoipupdate"` | If defined, a repository for GeoIP images |
-| geoip.image.tag | string | `"v7.1.0"` | If defined, a tag for GeoIP images |
+| geoip.image.tag | string | `"v7.1.1"` | If defined, a tag for GeoIP images |
 | geoip.licenseKey | string | `""` | sign up under https://www.maxmind.com/en/geolite2/signup |
 | geoip.resources | object | `{}` | Resource limits and requests for GeoIP containers |
 | geoip.updateInterval | int | `8` | GeoIP update frequency, in hours |
