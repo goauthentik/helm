@@ -34,7 +34,7 @@ dependencies:
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis
-    version: 21.1.6
+    version: 21.2.14
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: redis.enabled
   - name: authentik-remote-cluster
