@@ -953,7 +953,7 @@ geoip:
     # -- If defined, a repository for GeoIP images
     repository: ghcr.io/maxmind/geoipupdate
     # -- If defined, a tag for GeoIP images
-    tag: v7.1.0
+    tag: v7.1.1
     # -- If defined, an image digest for GeoIP images
     digest: ""
     # -- If defined, an imagePullPolicy for GeoIP images
