@@ -169,6 +169,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | global.priorityClassName | string | `""` | Default priority class for all components |
 | global.revisionHistoryLimit | int | `3` |  |
 | global.secretAnnotations | object | `{}` | Annotations for all deployed secrets |
+| global.security.allowInsecureImages | bool | `true` |  |
 | global.securityContext | object | `{}` (See [values.yaml]) | Toggle and define pod-level security context. |
 | global.tolerations | list | `[]` | Default tolerations for all components |
 | global.topologySpreadConstraints | list | `[]` | Default [TopologySpreadConstraints] rules for all components # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |
@@ -180,9 +181,21 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.auth.username | string | `"authentik"` |  |
 | postgresql.backup.resourcesPreset | string | `"none"` |  |
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
+| postgresql.image.registry | string | `"docker.io"` |  |
+| postgresql.image.repository | string | `"library/postgres"` |  |
+| postgresql.image.tag | string | `"17.6-bookworm"` |  |
 | postgresql.metrics.resourcesPreset | string | `"none"` |  |
 | postgresql.passwordUpdateJob.resourcesPreset | string | `"none"` |  |
+| postgresql.primary.args[0] | string | `"-c"` |  |
+| postgresql.primary.args[1] | string | `"config_file=/bitnami/postgresql/conf/postgresql.conf"` |  |
+| postgresql.primary.args[2] | string | `"-c"` |  |
+| postgresql.primary.args[3] | string | `"hba_file=/bitnami/postgresql/conf/pg_hba.conf"` |  |
+| postgresql.primary.configuration | string | `"listen_addresses = '*'\nport = '5432'\nwal_level = 'replica'\nfsync = 'on'\nhot_standby = 'on'\nlog_connections = 'false'\nlog_disconnections = 'false'\nlog_hostname = 'false'\nclient_min_messages = 'error'\ninclude_dir = 'conf.d'\n"` |  |
+| postgresql.primary.containerSecurityContext.readOnlyRootFilesystem | bool | `false` |  |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
+| postgresql.primary.extraEnvVars[0].name | string | `"POSTGRES_DB"` |  |
+| postgresql.primary.extraEnvVars[0].value | string | `"{{ (include \"postgresql.v1.database\" .) }}"` |  |
+| postgresql.primary.pgHbaConfiguration | string | `"host     all             all             0.0.0.0/0               scram-sha-256\nhost     all             all             ::/0                    scram-sha-256\nlocal    all             all                                     scram-sha-256\nhost     all             all        127.0.0.1/32                 scram-sha-256\nhost     all             all        ::1/128                      scram-sha-256\n"` |  |
 | postgresql.primary.resourcesPreset | string | `"none"` |  |
 | postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
 | postgresql.volumePermissions.resourcesPreset | string | `"none"` |  |
@@ -194,6 +207,9 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | redis.architecture | string | `"standalone"` |  |
 | redis.auth.enabled | bool | `false` |  |
 | redis.enabled | bool | `false` | enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values. |
+| redis.image.registry | string | `"docker.io"` |  |
+| redis.image.repository | string | `"library/redis"` |  |
+| redis.image.tag | string | `"8.2.1"` |  |
 | redis.master.resourcesPreset | string | `"none"` |  |
 | redis.metrics.resourcesPreset | string | `"none"` |  |
 | redis.replica.resourcesPreset | string | `"none"` |  |
