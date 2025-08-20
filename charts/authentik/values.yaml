@@ -1092,9 +1092,6 @@ postgresql:
     database: authentik
     # password: ""
   primary:
-    # command: [/bin/bash, -c]
-    # args:
-    #   - sleep 3600
     args:
       - -c
       - config_file=/bitnami/postgresql/conf/postgresql.conf
