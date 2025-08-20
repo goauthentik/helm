@@ -335,6 +335,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.autoscaling.minReplicas | int | `1` | Minimum number of replicas for the authentik worker [HPA] |
 | worker.autoscaling.targetCPUUtilizationPercentage | int | `50` | Average CPU utilization percentage for the authentik worker [HPA] |
 | worker.autoscaling.targetMemoryUtilizationPercentage | string | `nil` | Average memory utilization percentage for the authentik worker [HPA] |
+| worker.containerPorts.http | int | `9000` | http container port |
+| worker.containerPorts.metrics | int | `9300` | metrics container port |
 | worker.containerSecurityContext | object | See [values.yaml] | authentik worker container-level security context |
 | worker.deploymentAnnotations | object | `{}` | Annotations to be added to the authentik worker Deployment |
 | worker.deploymentStrategy | object | `{}` (defaults to global.deploymentStrategy) | Deployment strategy to be added to the authentik worker Deployment |
@@ -359,6 +361,24 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | worker.livenessProbe.periodSeconds | int | `10` | How often (in seconds) to perform the [probe] |
 | worker.livenessProbe.successThreshold | int | `1` | Minimum consecutive successes for the [probe] to be considered successful after having failed |
 | worker.livenessProbe.timeoutSeconds | int | `3` | Number of seconds after which the [probe] times out |
+| worker.metrics.enabled | bool | `false` | deploy metrics service |
+| worker.metrics.service.annotations | object | `{}` | metrics service annotations |
+| worker.metrics.service.clusterIP | string | `""` | metrics service clusterIP. `None` makes a "headless service" (no virtual IP) |
+| worker.metrics.service.labels | object | `{}` | metrics service labels |
+| worker.metrics.service.portName | string | `"metrics"` | metrics service port name |
+| worker.metrics.service.servicePort | int | `9300` | metrics service port |
+| worker.metrics.service.type | string | `"ClusterIP"` | metrics service type |
+| worker.metrics.serviceMonitor.annotations | object | `{}` | Prometheus ServiceMonitor annotations |
+| worker.metrics.serviceMonitor.enabled | bool | `false` | enable a prometheus ServiceMonitor |
+| worker.metrics.serviceMonitor.interval | string | `"30s"` | Prometheus ServiceMonitor interval |
+| worker.metrics.serviceMonitor.labels | object | `{}` | Prometheus ServiceMonitor labels |
+| worker.metrics.serviceMonitor.metricRelabelings | list | `[]` | Prometheus [MetricsRelabelConfigs] to apply to samples before ingestion |
+| worker.metrics.serviceMonitor.namespace | string | `""` | Prometheus ServiceMonitor namespace |
+| worker.metrics.serviceMonitor.relabelings | list | `[]` | Prometheus [RelabelConfigs] to apply to samples before scraping |
+| worker.metrics.serviceMonitor.scheme | string | `""` | Prometheus ServiceMonitor scheme |
+| worker.metrics.serviceMonitor.scrapeTimeout | string | `"3s"` | Prometheus ServiceMonitor scrape timeout |
+| worker.metrics.serviceMonitor.selector | object | `{}` | Prometheus ServiceMonitor selector |
+| worker.metrics.serviceMonitor.tlsConfig | object | `{}` | Prometheus ServiceMonitor tlsConfig |
 | worker.name | string | `"worker"` | authentik worker name |
 | worker.nodeSelector | object | `{}` (defaults to global.nodeSelector) | [Node selector] |
 | worker.pdb.annotations | object | `{}` | Annotations to be added to the authentik worker pdb |

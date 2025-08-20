@@ -797,6 +797,13 @@ worker:
     # limits:
     #   memory: 512Mi
 
+  # authentik worker container ports
+  containerPorts:
+    # -- http container port
+    http: 9000
+    # -- metrics container port
+    metrics: 9300
+
   # -- Host Network for authentik worker pods
   hostNetwork: false
 
@@ -914,6 +921,49 @@ worker:
     # rollingUpdate:
     #   maxSurge: 25%
     #   maxUnavailable: 25%
+
+  ## authentik worker metrics service configuration
+  metrics:
+    # -- deploy metrics service
+    enabled: false
+    service:
+      # -- metrics service type
+      type: ClusterIP
+      # -- metrics service clusterIP. `None` makes a "headless service" (no virtual IP)
+      clusterIP: ""
+      # -- metrics service annotations
+      annotations: {}
+      # -- metrics service labels
+      labels: {}
+      # -- metrics service port
+      servicePort: 9300
+      # -- metrics service port name
+      portName: metrics
+    serviceMonitor:
+      # -- enable a prometheus ServiceMonitor
+      enabled: false
+      # -- Prometheus ServiceMonitor interval
+      interval: 30s
+      # -- Prometheus ServiceMonitor scrape timeout
+      scrapeTimeout: 3s
+      # -- Prometheus [RelabelConfigs] to apply to samples before scraping
+      relabelings: []
+      # -- Prometheus [MetricsRelabelConfigs] to apply to samples before ingestion
+      metricRelabelings: []
+      # -- Prometheus ServiceMonitor selector
+      selector: {}
+        # prometheus: kube-prometheus
+
+      # -- Prometheus ServiceMonitor scheme
+      scheme: ""
+      # -- Prometheus ServiceMonitor tlsConfig
+      tlsConfig: {}
+      # -- Prometheus ServiceMonitor namespace
+      namespace: ""
+      # -- Prometheus ServiceMonitor labels
+      labels: {}
+      # -- Prometheus ServiceMonitor annotations
+      annotations: {}
 
 
 serviceAccount:
