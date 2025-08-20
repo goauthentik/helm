@@ -78,6 +78,10 @@ spec:
             {{- with (concat .Values.global.env .Values.worker.env) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+            - name: AUTHENTIK_LISTEN__HTTP
+              value: {{ printf "0.0.0.0:%v" .Values.worker.containerPorts.http | quote }}
+            - name: AUTHENTIK_LISTEN__METRICS
+              value: {{ printf "0.0.0.0:%v" .Values.worker.containerPorts.metrics | quote }}
           envFrom:
             - secretRef:
                 name: {{ template "authentik.fullname" . }}
@@ -174,6 +178,13 @@ spec:
             {{- end }}
             - name: geoip-db
               mountPath: /usr/share/GeoIP
+          ports:
+            - name: http
+              containerPort: {{ .Values.worker.containerPorts.http }}
+              protocol: TCP
+            - name: metrics
+              containerPort: {{ .Values.worker.containerPorts.metrics }}
+              protocol: TCP
           resources:
             {{- toYaml .Values.geoip.resources | nindent 12 }}
           {{- with .Values.geoip.containerSecurityContext }}
