@@ -9,6 +9,11 @@ kubeVersionOverride: ""
 
 ## Globally shared configuration for authentik components.
 global:
+
+  # To override bitnami images
+  security:
+    allowInsecureImages: true
+
   # -- Provide a name in place of `authentik`
   nameOverride: ""
   # -- String to fully override `"authentik.fullname"`
@@ -1078,19 +1083,53 @@ prometheus:
 postgresql:
   # -- enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values.
   enabled: false
+  image:
+    registry: docker.io
+    repository: library/postgres
+    tag: "17.6-bookworm"
   auth:
     username: authentik
     database: authentik
     # password: ""
   primary:
+    # command: [/bin/bash, -c]
+    # args:
+    #   - sleep 3600
+    args:
+      - -c
+      - config_file=/bitnami/postgresql/conf/postgresql.conf
+      - -c
+      - hba_file=/bitnami/postgresql/conf/pg_hba.conf
+    configuration: |
+      listen_addresses = '*'
+      port = '5432'
+      wal_level = 'replica'
+      fsync = 'on'
+      hot_standby = 'on'
+      log_connections = 'false'
+      log_disconnections = 'false'
+      log_hostname = 'false'
+      client_min_messages = 'error'
+      include_dir = 'conf.d'
+    pgHbaConfiguration: |
+      host     all             all             0.0.0.0/0               scram-sha-256
+      host     all             all             ::/0                    scram-sha-256
+      local    all             all                                     peer
+      host     all             all        127.0.0.1/32                 scram-sha-256
+      host     all             all        ::1/128                      scram-sha-256
     extendedConfiguration: |
       max_connections = 500
+    extraEnvVars:
+      - name: POSTGRES_DB
+        value: '{{ (include "postgresql.v1.database" .) }}'
     resourcesPreset: "none"
     # persistence:
     #   enabled: true
     #   storageClass:
     #   accessModes:
     #     - ReadWriteOnce
+    containerSecurityContext:
+      readOnlyRootFilesystem: false
   readReplicas:
     resourcesPreset: "none"
   backup:
@@ -1106,6 +1145,10 @@ postgresql:
 redis:
   # -- enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values.
   enabled: false
+  image:
+    registry: docker.io
+    repository: library/redis
+    tag: "8.2.1"
   architecture: standalone
   auth:
     enabled: false
