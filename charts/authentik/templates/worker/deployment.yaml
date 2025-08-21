@@ -109,6 +109,13 @@ spec:
               mountPath: /blueprints/mounted/secret-{{ $name }}
             {{- end }}
           {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.worker.containerPorts.http }}
+              protocol: TCP
+            - name: metrics
+              containerPort: {{ .Values.worker.containerPorts.metrics }}
+              protocol: TCP
           {{- with .Values.worker.livenessProbe }}
           livenessProbe:
             {{ toYaml . | nindent 12 }}
@@ -178,13 +185,6 @@ spec:
             {{- end }}
             - name: geoip-db
               mountPath: /usr/share/GeoIP
-          ports:
-            - name: http
-              containerPort: {{ .Values.worker.containerPorts.http }}
-              protocol: TCP
-            - name: metrics
-              containerPort: {{ .Values.worker.containerPorts.metrics }}
-              protocol: TCP
           resources:
             {{- toYaml .Values.geoip.resources | nindent 12 }}
           {{- with .Values.geoip.containerSecurityContext }}
