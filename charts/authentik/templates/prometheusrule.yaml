@@ -19,6 +19,10 @@ metadata:
 spec:
   groups:
     - name: authentik Aggregate request counters
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - record: job:django_http_requests_before_middlewares_total:sum_rate30s
           expr: sum(rate(django_http_requests_before_middlewares_total[30s])) by (job)
@@ -60,6 +64,10 @@ spec:
           expr: sum(rate(django_http_exceptions_total_by_view[30s])) by (job,view)
 
     - name: authentik Aggregate latency histograms
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - record: job:django_http_requests_latency_including_middlewares_seconds:quantile_rate30s
           expr: histogram_quantile(0.50, sum(rate(django_http_requests_latency_including_middlewares_seconds_bucket[30s])) by (job, le))
@@ -95,6 +103,10 @@ spec:
             quantile: "99.9"
 
     - name: authentik Aggregate model operations
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - record: job:django_model_inserts_total:sum_rate1m
           expr: sum(rate(django_model_inserts_total[1m])) by (job, model)
@@ -103,6 +115,10 @@ spec:
         - record: job:django_model_deletes_total:sum_rate1m
           expr: sum(rate(django_model_deletes_total[1m])) by (job, model)
     - name: authentik Aggregate database operations
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - record: job:django_db_new_connections_total:sum_rate30s
           expr: sum(rate(django_db_new_connections_total[30s])) by (alias, vendor)
@@ -116,6 +132,10 @@ spec:
           expr: sum(rate(django_db_errors_total[30s])) by (alias, vendor, type)
 
     - name: authentik Aggregate migrations
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - record: job:django_migrations_applied_total:max
           expr: max(django_migrations_applied_total) by (job, connection)
@@ -123,6 +143,10 @@ spec:
           expr: max(django_migrations_unapplied_total) by (job, connection)
 
     - name: authentik Alerts
+      {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
+      annotations:
+        {{- toYaml .Values.prometheus.rules.additionalRuleGroupAnnotations | nindent 8 }}
+      {{- end }}
       rules:
         - alert: NoWorkersConnected
           labels:

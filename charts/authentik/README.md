@@ -199,6 +199,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.primary.resourcesPreset | string | `"none"` |  |
 | postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
 | postgresql.volumePermissions.resourcesPreset | string | `"none"` |  |
+| prometheus.rules.additionalRuleGroupAnnotations | object | `{}` | PrometheusRuleGroup additional annotations |
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
 | prometheus.rules.enabled | bool | `false` |  |
 | prometheus.rules.labels | object | `{}` | PrometheusRule labels |
