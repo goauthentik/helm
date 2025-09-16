@@ -4,6 +4,89 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: upgrade to authentik 2025.8.3
+      artifacthub.io/images: |
+        - name: authentik
+          image: ghcr.io/goauthentik/server:2025.8.3
+          whitelisted: true
+        - name: authentik-outpost-proxy
+          image: ghcr.io/goauthentik/proxy:2025.8.3
+          whitelisted: true
+        - name: authentik-outpost-ldap
+          image: ghcr.io/goauthentik/ldap:2025.8.3
+          whitelisted: true
+        - name: authentik-outpost-radius
+          image: ghcr.io/goauthentik/radius:2025.8.3
+          whitelisted: true
+        - name: authentik-outpost-rac
+          image: ghcr.io/goauthentik/rac:2025.8.3
+          whitelisted: true
+      artifacthub.io/license: GPL
+      artifacthub.io/links: |
+        - name: GitHub
+          url: https://github.com/goauthentik/authentik
+        - name: Docs
+          url: https://goauthentik.io/docs/
+      artifacthub.io/maintainers: |
+        - name: authentik Team
+          email: hello@goauthentik.io
+          url: https://goauthentik.io
+      artifacthub.io/screenshots: |
+        - title: User interface
+          url: https://docs.goauthentik.io/img/screen_apps_light.jpg
+        - title: Admin interface
+          url: https://docs.goauthentik.io/img/screen_admin_light.jpg
+    apiVersion: v2
+    appVersion: 2025.8.3
+    created: "2025-09-16T16:08:51.854829776Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.7.26
+    - condition: redis.enabled
+      name: redis
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 22.0.4
+    - alias: serviceAccount
+      condition: serviceAccount.create
+      name: authentik-remote-cluster
+      repository: https://charts.goauthentik.io
+      version: 2.1.0
+    description: authentik is an open-source Identity Provider focused on flexibility
+      and versatility
+    digest: f2581b0e196691f5b0e74d6a2e918a646718150a0dc0e9b1bb2a6167c8294a8a
+    home: https://goauthentik.io
+    icon: https://goauthentik.io/img/icon.png
+    keywords:
+    - authentication
+    - directory
+    - identity
+    - idp
+    - ldap
+    - oauth
+    - oidc
+    - proxy
+    - saml
+    - scim
+    - single-sign-on
+    - sp
+    - sso
+    maintainers:
+    - email: hello@goauthentik.io
+      name: authentik Team
+      url: https://goauthentik.io
+    name: authentik
+    sources:
+    - https://goauthentik.io/docs/
+    - https://github.com/goauthentik/authentik
+    type: application
+    urls:
+    - https://github.com/goauthentik/helm/releases/download/authentik-2025.8.3/authentik-2025.8.3.tgz
+    version: 2025.8.3
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: upgrade to authentik 2025.8.2
       artifacthub.io/images: |
         - name: authentik
@@ -10300,4 +10383,4 @@ entries:
     urls:
     - https://github.com/goauthentik/helm/releases/download/redis-15.7.6/redis-15.7.6.tgz
     version: 15.7.6
-generated: "2025-09-15T16:21:04.760737416Z"
+generated: "2025-09-16T16:08:51.855228001Z"
