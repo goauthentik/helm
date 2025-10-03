@@ -1147,7 +1147,7 @@ redis:
   image:
     registry: docker.io
     repository: library/redis
-    tag: "8.2.1"
+    tag: "8.2.2"
   architecture: standalone
   auth:
     enabled: false
