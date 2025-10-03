@@ -45,6 +45,9 @@ spec:
       {{- end }}
       {{- with .Values.worker.serviceAccountName }}
       serviceAccountName: {{ . }}
+      {{- with $.Values.worker.automountServiceAccountToken }}
+      automountServiceAccountToken:  {{ . }}
+      {{- end }}
       {{- else }}
       {{- if .Values.serviceAccount.create }}
       serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
