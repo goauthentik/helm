@@ -22,6 +22,3 @@ postgresql:
     password: au7h3n71k
   persistence:
     enabled: false
-
-redis:
-  enabled: true

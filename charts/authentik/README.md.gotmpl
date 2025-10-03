@@ -37,15 +37,12 @@ postgresql:
   enabled: true
   auth:
     password: "ThisIsNotASecurePassword"
-
-redis:
-  enabled: true
 ```
 
 ## Advanced values examples
 
 <details>
-<summary>External PostgreSQL and Redis</summary>
+<summary>External PostgreSQL</summary>
 
 ```yaml
 authentik:
@@ -53,8 +50,6 @@ authentik:
     host: postgres.domain.tld
     user: file:///postgres-creds/username
     password: file:///postgres-creds/password
-  redis:
-    host: redis.domain.tld
 server:
   volumes:
     - name: postgres-creds

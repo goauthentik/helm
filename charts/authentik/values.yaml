@@ -208,12 +208,6 @@ authentik:
     user: "authentik"
     password: ""
     port: 5432
-  redis:
-    # -- set the redis hostname to talk to
-    # @default -- `{{ .Release.Name }}-redis-master`
-    host: "{{ .Release.Name }}-redis-master"
-    password: ""
-
 
 blueprints:
   # -- List of config maps to mount blueprints from.
@@ -1139,31 +1133,6 @@ postgresql:
     resourcesPreset: "none"
   metrics:
     resourcesPreset: "none"
-
-
-redis:
-  # -- enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values.
-  enabled: false
-  image:
-    registry: docker.io
-    repository: library/redis
-    tag: "8.2.1"
-  architecture: standalone
-  auth:
-    enabled: false
-  master:
-    resourcesPreset: "none"
-  replica:
-    resourcesPreset: "none"
-  sentinel:
-    resourcesPreset: "none"
-  metrics:
-    resourcesPreset: "none"
-  volumePermissions:
-    resourcesPreset: "none"
-  sysctl:
-    resourcesPreset: "none"
-
 
 # -- additional resources to deploy. Those objects are templated.
 additionalObjects: []
