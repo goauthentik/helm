@@ -345,6 +345,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | serviceAccount.fullnameOverride | string | `"authentik"` |  |
 | serviceAccount.serviceAccountSecret.enabled | bool | `false` |  |
 | worker.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
+| worker.automountServiceAccountToken | bool | `nil` | automount behavior for service account token in worker pods. Only applies if worker.serviceAccountName is set. |
 | worker.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | worker.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik worker |
 | worker.autoscaling.maxReplicas | int | `5` | Maximum number of replicas for the authentik worker [HPA] |

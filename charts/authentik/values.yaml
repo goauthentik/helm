@@ -819,6 +819,8 @@ worker:
 
   # -- serviceAccount to use for authentik worker pods. If set, overrides the value used when serviceAccount.create is true
   serviceAccountName: ~
+  # -- (bool) automount behavior for service account token in worker pods. Only applies if worker.serviceAccountName is set.
+  automountServiceAccountToken: ~
 
   # -- authentik worker pod-level security context
   # @default -- `{}` (See [values.yaml])
