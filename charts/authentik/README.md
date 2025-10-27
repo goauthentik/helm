@@ -92,7 +92,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.1.0 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.26 |
+| oci://registry-1.docker.io/bitnamicharts | postgresql | 18.0.17 |
 | oci://registry-1.docker.io/bitnamicharts | redis | 22.0.4 |
 
 ## Values
