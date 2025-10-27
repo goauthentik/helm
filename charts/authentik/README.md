@@ -315,6 +315,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.service.annotations | object | `{}` | authentik server service annotations |
 | server.service.externalIPs | list | `[]` | authentik server service external IPs |
 | server.service.externalTrafficPolicy | string | `""` | Denotes if this service desires to route external traffic to node-local or cluster-wide endpoints |
+| server.service.ipFamilies | list | `[]` | IP families |
+| server.service.ipFamilyPolicy | string | `""` | IP family policy |
 | server.service.labels | object | `{}` | authentik server service labels |
 | server.service.loadBalancerIP | string | `""` | LoadBalancer will get created with the IP specified in this field |
 | server.service.loadBalancerSourceRanges | list | `[]` | Source IP ranges to allow access to service from |

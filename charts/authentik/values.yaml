@@ -533,6 +533,10 @@ server:
     sessionAffinity: ""
     # -- Session affinity configuration
     sessionAffinityConfig: {}
+    # -- IP family policy
+    ipFamilyPolicy: ""
+    # -- IP families
+    ipFamilies: []
 
   ## authentik server metrics service configuration
   metrics:
