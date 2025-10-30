@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2025.8.4](https://img.shields.io/badge/Version-2025.8.4-informational?style=flat-square)
-![AppVersion: 2025.8.4](https://img.shields.io/badge/AppVersion-2025.8.4-informational?style=flat-square)
+![Version: 2025.10.0](https://img.shields.io/badge/Version-2025.10.0-informational?style=flat-square)
+![AppVersion: 2025.10.0](https://img.shields.io/badge/AppVersion-2025.10.0-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -325,6 +325,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | serviceAccount.fullnameOverride | string | `"authentik"` |  |
 | serviceAccount.serviceAccountSecret.enabled | bool | `false` |  |
 | worker.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
+| worker.automountServiceAccountToken | bool | `nil` | automount behavior for service account token in worker pods. Only applies if worker.serviceAccountName is set. |
 | worker.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | worker.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik worker |
 | worker.autoscaling.maxReplicas | int | `5` | Maximum number of replicas for the authentik worker [HPA] |
