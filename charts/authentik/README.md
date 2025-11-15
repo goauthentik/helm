@@ -191,7 +191,11 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.primary.args[2] | string | `"-c"` |  |
 | postgresql.primary.args[3] | string | `"hba_file=/bitnami/postgresql/conf/pg_hba.conf"` |  |
 | postgresql.primary.configuration | string | `"listen_addresses = '*'\nport = '5432'\nwal_level = 'replica'\nfsync = 'on'\nhot_standby = 'on'\nlog_connections = 'false'\nlog_disconnections = 'false'\nlog_hostname = 'false'\nclient_min_messages = 'error'\ninclude_dir = 'conf.d'\n"` |  |
-| postgresql.primary.containerSecurityContext.readOnlyRootFilesystem | bool | `false` |  |
+| postgresql.primary.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
+| postgresql.primary.extraVolumeMounts[0].name | string | `postgresql-socket` | |
+| postgresql.primary.extraVolumeMounts[0].mountPath | string | `/var/run/postgresql` | |
+| postgresql.primary.extraVolumes[0].name | string | `postgresql-socket` | |
+| postgresql.primary.extraVolumes[0].emptyDir | object | `{}` | |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
 | postgresql.primary.extraEnvVars[0].name | string | `"POSTGRES_DB"` |  |
 | postgresql.primary.extraEnvVars[0].value | string | `"{{ (include \"postgresql.v1.database\" .) }}"` |  |
