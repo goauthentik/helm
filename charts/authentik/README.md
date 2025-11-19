@@ -35,15 +35,12 @@ postgresql:
   enabled: true
   auth:
     password: "ThisIsNotASecurePassword"
-
-redis:
-  enabled: true
 ```
 
 ## Advanced values examples
 
 <details>
-<summary>External PostgreSQL and Redis</summary>
+<summary>External PostgreSQL</summary>
 
 ```yaml
 authentik:
@@ -51,8 +48,6 @@ authentik:
     host: postgres.domain.tld
     user: file:///postgres-creds/username
     password: file:///postgres-creds/password
-  redis:
-    host: redis.domain.tld
 server:
   volumes:
     - name: postgres-creds
@@ -93,7 +88,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.1.0 |
 | oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.26 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 22.0.4 |
 
 ## Values
 
@@ -121,8 +115,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.postgresql.password | string | `""` |  |
 | authentik.postgresql.port | int | `5432` |  |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
-| authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
-| authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | authentik.web.path | string | `"/"` | Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash. |
 | blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
@@ -205,18 +197,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | prometheus.rules.labels | object | `{}` | PrometheusRule labels |
 | prometheus.rules.namespace | string | `""` | PrometheusRule namespace |
 | prometheus.rules.selector | object | `{}` | PrometheusRule selector |
-| redis.architecture | string | `"standalone"` |  |
-| redis.auth.enabled | bool | `false` |  |
-| redis.enabled | bool | `false` | enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values. |
-| redis.image.registry | string | `"docker.io"` |  |
-| redis.image.repository | string | `"library/redis"` |  |
-| redis.image.tag | string | `"8.2.1"` |  |
-| redis.master.resourcesPreset | string | `"none"` |  |
-| redis.metrics.resourcesPreset | string | `"none"` |  |
-| redis.replica.resourcesPreset | string | `"none"` |  |
-| redis.sentinel.resourcesPreset | string | `"none"` |  |
-| redis.sysctl.resourcesPreset | string | `"none"` |  |
-| redis.volumePermissions.resourcesPreset | string | `"none"` |  |
 | server.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
 | server.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | server.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik server |
