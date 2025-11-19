@@ -30,7 +30,7 @@ maintainers:
     url: https://goauthentik.io
 dependencies:
   - name: postgresql
-    version: 16.7.26
+    version: 18.0.17
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis
