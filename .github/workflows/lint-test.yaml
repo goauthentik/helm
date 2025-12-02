@@ -38,7 +38,7 @@ jobs:
 
       - name: Setup Chart Linting
         id: lint
-        uses: helm/chart-testing-action@v2
+        uses: helm/chart-testing-action@v2.8.0
 
       - name: List changed charts
         id: list-changed
