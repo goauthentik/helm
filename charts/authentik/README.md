@@ -190,6 +190,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.primary.pgHbaConfiguration | string | `"host     all             all             0.0.0.0/0               scram-sha-256\nhost     all             all             ::/0                    scram-sha-256\nlocal    all             all                                     scram-sha-256\nhost     all             all        127.0.0.1/32                 scram-sha-256\nhost     all             all        ::1/128                      scram-sha-256\n"` |  |
 | postgresql.primary.resourcesPreset | string | `"none"` |  |
 | postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
+| postgresql.volumePermissions.image.repository | string | `"debian"` |  |
+| postgresql.volumePermissions.image.tag | string | `"13-slim"` |  |
 | postgresql.volumePermissions.resourcesPreset | string | `"none"` |  |
 | prometheus.rules.additionalRuleGroupAnnotations | object | `{}` | PrometheusRuleGroup additional annotations |
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
