@@ -1133,6 +1133,9 @@ postgresql:
     resourcesPreset: "none"
   volumePermissions:
     resourcesPreset: "none"
+    image:
+      repository: debian
+      tag: 13-slim
   metrics:
     resourcesPreset: "none"
 
