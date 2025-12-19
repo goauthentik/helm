@@ -1138,6 +1138,9 @@ postgresql:
       tag: 13-slim
   metrics:
     resourcesPreset: "none"
+    image:
+      repository: prometheuscommunity/postgres-exporter
+      tag: v0.18.1
 
 # -- additional resources to deploy. Those objects are templated.
 additionalObjects: []
