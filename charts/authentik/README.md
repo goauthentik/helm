@@ -176,6 +176,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.image.registry | string | `"docker.io"` |  |
 | postgresql.image.repository | string | `"library/postgres"` |  |
 | postgresql.image.tag | string | `"17.7-bookworm"` |  |
+| postgresql.metrics.image.repository | string | `"prometheuscommunity/postgres-exporter"` |  |
+| postgresql.metrics.image.tag | string | `"v0.18.1"` |  |
 | postgresql.metrics.resourcesPreset | string | `"none"` |  |
 | postgresql.passwordUpdateJob.resourcesPreset | string | `"none"` |  |
 | postgresql.primary.args[0] | string | `"-c"` |  |
