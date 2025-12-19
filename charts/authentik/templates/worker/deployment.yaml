@@ -87,7 +87,7 @@ spec:
               value: {{ printf "0.0.0.0:%v" .Values.worker.containerPorts.metrics | quote }}
           envFrom:
             - secretRef:
-                name: {{ template "authentik.fullname" . }}
+                name: {{ template "authentik.secret.name" . }}
             {{- with (concat .Values.global.envFrom .Values.worker.envFrom) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}

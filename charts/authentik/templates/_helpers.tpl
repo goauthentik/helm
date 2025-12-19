@@ -8,6 +8,17 @@ Create authentik server name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Get the secret name for authentik configuration
+*/}}
+{{- define "authentik.secret.name" -}}
+{{- if .Values.authentik.existingSecret.secretName -}}
+{{- .Values.authentik.existingSecret.secretName -}}
+{{- else -}}
+{{- template "authentik.fullname" . -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create authentik server worker and version as used by the chart label.
 */}}
 {{- define "authentik.worker.fullname" -}}
