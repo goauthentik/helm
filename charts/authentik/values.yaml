@@ -156,6 +156,7 @@ authentik:
   # don't change this after the first install
   secret_key: ""
   ## use existing secret for authentik configuration instead of creating one
+  ## WARNING: when set, authentik.* secret values are ignored
   existingSecret:
     # -- name of an existing secret to use for authentik configuration
     secretName: ""
