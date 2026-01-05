@@ -108,6 +108,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
 | authentik.events.context_processors.asn | string | `"/geoip/GeoLite2-ASN.mmdb"` | Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.events.context_processors.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.existingSecret.secretName | string | `""` | name of an existing secret to use for authentik configuration |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
