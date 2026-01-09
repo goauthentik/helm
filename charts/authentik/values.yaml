@@ -1129,7 +1129,14 @@ postgresql:
     #   accessModes:
     #     - ReadWriteOnce
     containerSecurityContext:
-      readOnlyRootFilesystem: false
+      readOnlyRootFilesystem: true
+    extraVolumeMounts:
+      - name: postgresql-socket
+        mountPath: /var/run/postgresql
+    extraVolumes:
+      - name: postgresql-socket
+        emptyDir: {}
+
   readReplicas:
     resourcesPreset: "none"
   backup:
