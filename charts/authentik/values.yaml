@@ -155,6 +155,11 @@ authentik:
   # -- Secret key used for cookie singing and unique user IDs,
   # don't change this after the first install
   secret_key: ""
+  ## use existing secret for authentik configuration instead of creating one
+  ## WARNING: when set, authentik.* secret values are ignored
+  existingSecret:
+    # -- name of an existing secret to use for authentik configuration
+    secretName: ""
   events:
     context_processors:
       # -- Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled.
@@ -208,12 +213,6 @@ authentik:
     user: "authentik"
     password: ""
     port: 5432
-  redis:
-    # -- set the redis hostname to talk to
-    # @default -- `{{ .Release.Name }}-redis-master`
-    host: "{{ .Release.Name }}-redis-master"
-    password: ""
-
 
 blueprints:
   # -- List of config maps to mount blueprints from.
@@ -1090,7 +1089,7 @@ postgresql:
   image:
     registry: docker.io
     repository: library/postgres
-    tag: "17.6-bookworm"
+    tag: "17.7-bookworm"
   auth:
     username: authentik
     database: authentik
@@ -1146,33 +1145,14 @@ postgresql:
     resourcesPreset: "none"
   volumePermissions:
     resourcesPreset: "none"
+    image:
+      repository: debian
+      tag: 13-slim
   metrics:
     resourcesPreset: "none"
-
-
-redis:
-  # -- enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values.
-  enabled: false
-  image:
-    registry: docker.io
-    repository: library/redis
-    tag: "8.2.1"
-  architecture: standalone
-  auth:
-    enabled: false
-  master:
-    resourcesPreset: "none"
-  replica:
-    resourcesPreset: "none"
-  sentinel:
-    resourcesPreset: "none"
-  metrics:
-    resourcesPreset: "none"
-  volumePermissions:
-    resourcesPreset: "none"
-  sysctl:
-    resourcesPreset: "none"
-
+    image:
+      repository: prometheuscommunity/postgres-exporter
+      tag: v0.18.1
 
 # -- additional resources to deploy. Those objects are templated.
 additionalObjects: []

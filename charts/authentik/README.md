@@ -6,8 +6,8 @@
 
 [![Join Discord](https://img.shields.io/discord/809154715984199690?label=Discord&style=for-the-badge)](https://goauthentik.io/discord)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/goauthentik/helm/lint-test.yaml?branch=main&label=ci&style=for-the-badge)](https://github.com/goauthentik/helm/actions/workflows/lint-test.yaml)
-![Version: 2025.10.1](https://img.shields.io/badge/Version-2025.10.1-informational?style=flat-square)
-![AppVersion: 2025.10.1](https://img.shields.io/badge/AppVersion-2025.10.1-informational?style=flat-square)
+![Version: 2025.10.3](https://img.shields.io/badge/Version-2025.10.3-informational?style=flat-square)
+![AppVersion: 2025.10.3](https://img.shields.io/badge/AppVersion-2025.10.3-informational?style=flat-square)
 
 authentik is an open-source Identity Provider focused on flexibility and versatility
 
@@ -35,15 +35,12 @@ postgresql:
   enabled: true
   auth:
     password: "ThisIsNotASecurePassword"
-
-redis:
-  enabled: true
 ```
 
 ## Advanced values examples
 
 <details>
-<summary>External PostgreSQL and Redis</summary>
+<summary>External PostgreSQL</summary>
 
 ```yaml
 authentik:
@@ -51,8 +48,6 @@ authentik:
     host: postgres.domain.tld
     user: file:///postgres-creds/username
     password: file:///postgres-creds/password
-  redis:
-    host: redis.domain.tld
 server:
   volumes:
     - name: postgres-creds
@@ -92,8 +87,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Repository | Name | Version |
 |------------|------|---------|
 | https://charts.goauthentik.io | serviceAccount(authentik-remote-cluster) | 2.1.0 |
-| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.26 |
-| oci://registry-1.docker.io/bitnamicharts | redis | 22.0.4 |
+| oci://registry-1.docker.io/bitnamicharts | postgresql | 16.7.27 |
 
 ## Values
 
@@ -114,6 +108,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.error_reporting.send_pii | bool | `false` | Send PII (Personally identifiable information) data to sentry |
 | authentik.events.context_processors.asn | string | `"/geoip/GeoLite2-ASN.mmdb"` | Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled. |
 | authentik.events.context_processors.geoip | string | `"/geoip/GeoLite2-City.mmdb"` | Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled. |
+| authentik.existingSecret.secretName | string | `""` | name of an existing secret to use for authentik configuration |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
@@ -121,8 +116,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.postgresql.password | string | `""` |  |
 | authentik.postgresql.port | int | `5432` |  |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
-| authentik.redis.host | string | `{{ .Release.Name }}-redis-master` | set the redis hostname to talk to |
-| authentik.redis.password | string | `""` |  |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | authentik.web.path | string | `"/"` | Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash. |
 | blueprints.configMaps | list | `[]` | List of config maps to mount blueprints from. Only keys in the configMap ending with `.yaml` will be discovered and applied. |
@@ -183,7 +176,9 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
 | postgresql.image.registry | string | `"docker.io"` |  |
 | postgresql.image.repository | string | `"library/postgres"` |  |
-| postgresql.image.tag | string | `"17.6-bookworm"` |  |
+| postgresql.image.tag | string | `"17.7-bookworm"` |  |
+| postgresql.metrics.image.repository | string | `"prometheuscommunity/postgres-exporter"` |  |
+| postgresql.metrics.image.tag | string | `"v0.18.1"` |  |
 | postgresql.metrics.resourcesPreset | string | `"none"` |  |
 | postgresql.passwordUpdateJob.resourcesPreset | string | `"none"` |  |
 | postgresql.primary.args[0] | string | `"-c"` |  |
@@ -202,6 +197,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.primary.pgHbaConfiguration | string | `"host     all             all             0.0.0.0/0               scram-sha-256\nhost     all             all             ::/0                    scram-sha-256\nlocal    all             all                                     scram-sha-256\nhost     all             all        127.0.0.1/32                 scram-sha-256\nhost     all             all        ::1/128                      scram-sha-256\n"` |  |
 | postgresql.primary.resourcesPreset | string | `"none"` |  |
 | postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
+| postgresql.volumePermissions.image.repository | string | `"debian"` |  |
+| postgresql.volumePermissions.image.tag | string | `"13-slim"` |  |
 | postgresql.volumePermissions.resourcesPreset | string | `"none"` |  |
 | prometheus.rules.additionalRuleGroupAnnotations | object | `{}` | PrometheusRuleGroup additional annotations |
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
@@ -209,18 +206,6 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | prometheus.rules.labels | object | `{}` | PrometheusRule labels |
 | prometheus.rules.namespace | string | `""` | PrometheusRule namespace |
 | prometheus.rules.selector | object | `{}` | PrometheusRule selector |
-| redis.architecture | string | `"standalone"` |  |
-| redis.auth.enabled | bool | `false` |  |
-| redis.enabled | bool | `false` | enable the Bitnami Redis chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/redis/ for possible values. |
-| redis.image.registry | string | `"docker.io"` |  |
-| redis.image.repository | string | `"library/redis"` |  |
-| redis.image.tag | string | `"8.2.1"` |  |
-| redis.master.resourcesPreset | string | `"none"` |  |
-| redis.metrics.resourcesPreset | string | `"none"` |  |
-| redis.replica.resourcesPreset | string | `"none"` |  |
-| redis.sentinel.resourcesPreset | string | `"none"` |  |
-| redis.sysctl.resourcesPreset | string | `"none"` |  |
-| redis.volumePermissions.resourcesPreset | string | `"none"` |  |
 | server.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
 | server.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | server.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik server |
