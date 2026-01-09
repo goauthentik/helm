@@ -187,13 +187,13 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.primary.args[3] | string | `"hba_file=/bitnami/postgresql/conf/pg_hba.conf"` |  |
 | postgresql.primary.configuration | string | `"listen_addresses = '*'\nport = '5432'\nwal_level = 'replica'\nfsync = 'on'\nhot_standby = 'on'\nlog_connections = 'false'\nlog_disconnections = 'false'\nlog_hostname = 'false'\nclient_min_messages = 'error'\ninclude_dir = 'conf.d'\n"` |  |
 | postgresql.primary.containerSecurityContext.readOnlyRootFilesystem | bool | `true` |  |
-| postgresql.primary.extraVolumeMounts[0].name | string | `postgresql-socket` | |
-| postgresql.primary.extraVolumeMounts[0].mountPath | string | `/var/run/postgresql` | |
-| postgresql.primary.extraVolumes[0].name | string | `postgresql-socket` | |
-| postgresql.primary.extraVolumes[0].emptyDir | object | `{}` | |
 | postgresql.primary.extendedConfiguration | string | `"max_connections = 500\n"` |  |
 | postgresql.primary.extraEnvVars[0].name | string | `"POSTGRES_DB"` |  |
 | postgresql.primary.extraEnvVars[0].value | string | `"{{ (include \"postgresql.v1.database\" .) }}"` |  |
+| postgresql.primary.extraVolumeMounts[0].mountPath | string | `"/var/run/postgresql"` |  |
+| postgresql.primary.extraVolumeMounts[0].name | string | `"postgresql-socket"` |  |
+| postgresql.primary.extraVolumes[0].emptyDir | object | `{}` |  |
+| postgresql.primary.extraVolumes[0].name | string | `"postgresql-socket"` |  |
 | postgresql.primary.pgHbaConfiguration | string | `"host     all             all             0.0.0.0/0               scram-sha-256\nhost     all             all             ::/0                    scram-sha-256\nlocal    all             all                                     scram-sha-256\nhost     all             all        127.0.0.1/32                 scram-sha-256\nhost     all             all        ::1/128                      scram-sha-256\n"` |  |
 | postgresql.primary.resourcesPreset | string | `"none"` |  |
 | postgresql.readReplicas.resourcesPreset | string | `"none"` |  |
