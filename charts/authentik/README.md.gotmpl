@@ -73,6 +73,35 @@ worker:
 The secret `authentik-postgres-credentials` must have `username` and `password` keys.
 </details>
 
+<details>
+<summary>External PostgreSQL with SSL connection without certificate check</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: postgres.domain.tld
+    user: file:///postgres-creds/username
+    password: file:///postgres-creds/password
+    sslmode: require
+```
+
+Supported `sslmode` values: `disable`, `allow`, `prefer`, `require`, `verify-ca`, `verify-full`.
+</details>
+
+<details>
+<summary>External PostgreSQL with pgbouncer</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: pgbouncer.domain.tld
+    password: "your-password"
+    use_pgbouncer: true
+```
+
+When `use_pgbouncer` is enabled, authentik automatically sets `DISABLE_SERVER_SIDE_CURSORS=True` and uses persistent connections (`CONN_MAX_AGE=None`). You can override these with `disable_server_side_cursors` and `conn_max_age` if needed.
+</details>
+
 {{ template "chart.maintainersSection" . }}
 
 {{ template "chart.sourcesSection" . }}

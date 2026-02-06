@@ -71,6 +71,35 @@ worker:
 The secret `authentik-postgres-credentials` must have `username` and `password` keys.
 </details>
 
+<details>
+<summary>External PostgreSQL with SSL connection without certificate check</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: postgres.domain.tld
+    user: file:///postgres-creds/username
+    password: file:///postgres-creds/password
+    sslmode: require
+```
+
+Supported `sslmode` values: `disable`, `allow`, `prefer`, `require`, `verify-ca`, `verify-full`.
+</details>
+
+<details>
+<summary>External PostgreSQL with pgbouncer</summary>
+
+```yaml
+authentik:
+  postgresql:
+    host: pgbouncer.domain.tld
+    password: "your-password"
+    use_pgbouncer: true
+```
+
+When `use_pgbouncer` is enabled, authentik automatically sets `DISABLE_SERVER_SIDE_CURSORS=True` and uses persistent connections (`CONN_MAX_AGE=None`). You can override these with `disable_server_side_cursors` and `conn_max_age` if needed.
+</details>
+
 ## Maintainers
 
 | Name | Email | Url |
@@ -111,10 +140,19 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.existingSecret.secretName | string | `""` | name of an existing secret to use for authentik configuration |
 | authentik.log_level | string | `"info"` | Log level for server and worker |
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
+| authentik.postgresql.conn_health_checks | bool | `false` | Enable connection health checks |
+| authentik.postgresql.conn_max_age | int | `0` | Maximum connection age in seconds. Set to 0 for unlimited. |
+| authentik.postgresql.disable_server_side_cursors | bool | `false` | Disable server-side cursors (useful for connection poolers like pgbouncer/pgpool) |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `authentik` | postgresql Database name |
 | authentik.postgresql.password | string | `""` |  |
 | authentik.postgresql.port | int | `5432` |  |
+| authentik.postgresql.sslcert | string | `""` | Path to the SSL client certificate for PostgreSQL client authentication |
+| authentik.postgresql.sslkey | string | `""` | Path to the SSL client key for PostgreSQL client authentication |
+| authentik.postgresql.sslmode | string | `disable` | PostgreSQL SSL mode. Options: disable, allow, prefer, require, verify-ca, verify-full |
+| authentik.postgresql.sslrootcert | string | `""` | Path to the SSL CA certificate for PostgreSQL server verification |
+| authentik.postgresql.use_pgbouncer | bool | `false` | Enable compatibility mode for pgbouncer. Sets DISABLE_SERVER_SIDE_CURSORS=True and persistent connections. |
+| authentik.postgresql.use_pgpool | bool | `false` | Enable compatibility mode for pgpool. Sets DISABLE_SERVER_SIDE_CURSORS=True. |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | authentik.web.path | string | `"/"` | Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash. |

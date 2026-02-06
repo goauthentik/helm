@@ -213,6 +213,26 @@ authentik:
     user: "authentik"
     password: ""
     port: 5432
+    # -- PostgreSQL SSL mode. Options: disable, allow, prefer, require, verify-ca, verify-full
+    # @default -- `disable`
+    sslmode: "disable"
+    # -- Path to the SSL CA certificate for PostgreSQL server verification
+    sslrootcert: ""
+    # -- Path to the SSL client certificate for PostgreSQL client authentication
+    sslcert: ""
+    # -- Path to the SSL client key for PostgreSQL client authentication
+    sslkey: ""
+    # -- Enable compatibility mode for pgbouncer. Sets DISABLE_SERVER_SIDE_CURSORS=True and persistent connections.
+    use_pgbouncer: false
+    # -- Enable compatibility mode for pgpool. Sets DISABLE_SERVER_SIDE_CURSORS=True.
+    use_pgpool: false
+    # -- Maximum connection age in seconds. Set to 0 for unlimited.
+    # @default -- `0`
+    conn_max_age: 0
+    # -- Enable connection health checks
+    conn_health_checks: false
+    # -- Disable server-side cursors (useful for connection poolers like pgbouncer/pgpool)
+    disable_server_side_cursors: false
 
 blueprints:
   # -- List of config maps to mount blueprints from.
