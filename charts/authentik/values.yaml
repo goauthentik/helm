@@ -146,7 +146,8 @@ global:
     #   emptyDir: {}
 
 
-## Authentik configuration
+# -- Authentik configuration. See the [authentik configuration docs] for details about which values are accepted here. See the note at the top of that page for details about transforming environment variable names into values here.
+# @default -- See [values.yaml]
 authentik:
   # -- whether to create the authentik configuration secret
   enabled: true
@@ -211,7 +212,9 @@ authentik:
     # -- postgresql Username
     # @default -- `authentik`
     user: "authentik"
+    # -- postgresql password
     password: ""
+    # -- postgresql port
     port: 5432
 
 blueprints:
