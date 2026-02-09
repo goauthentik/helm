@@ -94,6 +94,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | additionalObjects | list | `[]` | additional resources to deploy. Those objects are templated. |
+| authentik | object | See [values.yaml] | Authentik configuration. See the [authentik configuration docs] for details about which values are accepted here. See the note at the top of that page for details about transforming environment variable names into values here. |
 | authentik.email.from | string | `""` | Email from address, can either be in the format "foo@bar.baz" or "authentik <foo@bar.baz>" |
 | authentik.email.host | string | `""` | SMTP Server emails are sent from, fully optional |
 | authentik.email.password | string | `""` | SMTP credentials, when left empty, no authentication will be done |
@@ -113,8 +114,8 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | authentik.outposts.container_image_base | string | `"ghcr.io/goauthentik/%(type)s:%(version)s"` | Template used for managed outposts. The following placeholders can be used %(type)s - the type of the outpost %(version)s - version of your authentik install %(build_hash)s - only for beta versions, the build hash of the image |
 | authentik.postgresql.host | string | `{{ .Release.Name }}-postgresql` | set the postgresql hostname to talk to if unset and .Values.postgresql.enabled == true, will generate the default |
 | authentik.postgresql.name | string | `authentik` | postgresql Database name |
-| authentik.postgresql.password | string | `""` |  |
-| authentik.postgresql.port | int | `5432` |  |
+| authentik.postgresql.password | string | `""` | postgresql password |
+| authentik.postgresql.port | int | `5432` | postgresql port |
 | authentik.postgresql.user | string | `authentik` | postgresql Username |
 | authentik.secret_key | string | `""` | Secret key used for cookie singing and unique user IDs, don't change this after the first install |
 | authentik.web.path | string | `"/"` | Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash. |
@@ -432,3 +433,4 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 [Tolerations]: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
 [TopologySpreadConstraints]: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
 [values.yaml]: values.yaml
+[authentik configuration docs]: https://docs.goauthentik.io/install-config/configuration/
