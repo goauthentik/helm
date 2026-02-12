@@ -1155,7 +1155,7 @@ postgresql:
     resourcesPreset: "none"
     image:
       repository: prometheuscommunity/postgres-exporter
-      tag: v0.18.1
+      tag: v0.19.0
 
 # -- additional resources to deploy. Those objects are templated.
 additionalObjects: []
