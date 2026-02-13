@@ -37,7 +37,9 @@ spec:
             statusCode: 301
     {{- else }}
     - backendRefs:
-        - name: {{ include "authentik.server.fullname" $ }}
+        - group: ''
+          kind: Service
+          name: {{ include "authentik.server.fullname" $ }}
           port: {{ $servicePort }}
       {{- with $route.filters }}
       filters:
