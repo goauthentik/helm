@@ -39,6 +39,17 @@ postgresql:
     password: "ThisIsNotASecurePassword"
 ```
 
+## Setting the authentik version
+
+> [!WARNING]
+> This should only be used to adjust the patch version of authentik as newer chart versions might require a matching authentik version.
+
+```yaml
+global:
+  image:
+    tag: 2025.12.4
+```
+
 ## Advanced values examples
 
 <details>
