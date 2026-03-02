@@ -41,6 +41,7 @@ spec:
           kind: Service
           name: {{ include "authentik.server.fullname" $ }}
           port: {{ $servicePort }}
+          weight: 1
       {{- with $route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
