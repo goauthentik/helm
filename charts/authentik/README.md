@@ -188,7 +188,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | postgresql.enabled | bool | `false` | enable the Bitnami PostgreSQL chart. Refer to https://github.com/bitnami/charts/blob/main/bitnami/postgresql/ for possible values. |
 | postgresql.image.registry | string | `"docker.io"` |  |
 | postgresql.image.repository | string | `"library/postgres"` |  |
-| postgresql.image.tag | string | `"17.7-bookworm"` |  |
+| postgresql.image.tag | string | `"17.9-bookworm"` |  |
 | postgresql.metrics.image.repository | string | `"prometheuscommunity/postgres-exporter"` |  |
 | postgresql.metrics.image.tag | string | `"v0.18.1"` |  |
 | postgresql.metrics.resourcesPreset | string | `"none"` |  |
