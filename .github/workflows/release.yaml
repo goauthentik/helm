@@ -31,7 +31,7 @@ jobs:
         uses: tibdex/github-app-token@v2
         with:
           app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          private_key: ${{ secrets.GH_APP_PRIV_KEY }}
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
