@@ -662,8 +662,12 @@ worker:
   # -- whether to enable worker resources
   enabled: true
 
-  # -- authentik worker name
-  name: worker
+  ## authentik worker queue distribution
+  #  key => worker config definition
+  #
+  queues:
+    default:
+      name: worker
 
   # -- The number of worker pods to run
   replicas: 1

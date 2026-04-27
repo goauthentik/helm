@@ -1,4 +1,13 @@
 {{- if .Values.worker.enabled }}
+{{/*
+Minimize changing every "." for $root by overlapping the workerconfig on top of
+the current root + a with block.
+*/}}
+{{- $root := . -}}
+{{- $defaultWorker := (dict "default" (dict)) -}}
+{{- range $queueName, $workerConfig := (default $defaultWorker $root.Values.worker.queues) -}}
+{{- $newRoot := mustMergeOverwrite (dict) $root (dict "Values" (dict "worker" $workerConfig)) -}}
+{{- with $newRoot -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,8 +84,10 @@ spec:
         - name: {{ .Values.worker.name }}
           image: {{ default .Values.global.image.repository .Values.worker.image.repository }}:{{ default (include "authentik.defaultTag" .) .Values.worker.image.tag }}{{- if (default .Values.global.image.digest .Values.worker.image.digest) -}}@{{ default .Values.global.image.digest .Values.worker.image.digest }}{{- end }}
           imagePullPolicy: {{ default .Values.global.image.pullPolicy .Values.worker.image.pullPolicy }}
+          {{- with default (list "worker") .Values.worker.args }}
           args:
-            - worker
+            {{- . | toYaml | nindent 12 }}
+          {{- end }}
           env:
             {{- with (concat .Values.global.env .Values.worker.env) }}
               {{- toYaml . | nindent 12 }}
@@ -255,4 +266,7 @@ spec:
       {{- if .Values.worker.dnsPolicy }}
       dnsPolicy: {{ .Values.worker.dnsPolicy }}
       {{- end }}
+...
+{{- end -}}
+{{ end -}}
 {{- end }}
