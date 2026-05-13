@@ -74,12 +74,6 @@ spec:
             {{- with (concat .Values.global.env .Values.server.env) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
-            - name: AUTHENTIK_LISTEN__HTTP
-              value: {{ printf "0.0.0.0:%v" .Values.server.containerPorts.http | quote }}
-            - name: AUTHENTIK_LISTEN__HTTPS
-              value: {{ printf "0.0.0.0:%v" .Values.server.containerPorts.https | quote }}
-            - name: AUTHENTIK_LISTEN__METRICS
-              value: {{ printf "0.0.0.0:%v" .Values.server.containerPorts.metrics | quote }}
           envFrom:
             - secretRef:
                 name: {{ template "authentik.secret.name" . }}
