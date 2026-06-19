@@ -159,7 +159,7 @@ authentik:
   ## use existing secret for authentik configuration instead of creating one
   ## WARNING: when set, authentik.* secret values are ignored
   existingSecret:
-    # -- name of an existing secret to use for authentik configuration. The map key must be AUTHENTIK_SECRET_KEY
+    # -- name of an existing secret to use for authentik configuration. The keys in the secret must be environment variables, see the docs for the full list of configuration options https://docs.goauthentik.io/install-config/configuration/
     secretName: ""
   events:
     context_processors:
