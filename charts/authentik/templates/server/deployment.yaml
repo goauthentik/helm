@@ -45,6 +45,9 @@ spec:
       {{- end }}
       {{- with .Values.server.serviceAccountName }}
       serviceAccountName: {{ . }}
+      {{- with $.Values.server.automountServiceAccountToken }}
+      automountServiceAccountToken:  {{ . }}
+      {{- end }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
       hostAliases:

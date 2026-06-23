@@ -219,6 +219,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | prometheus.rules.namespace | string | `""` | PrometheusRule namespace |
 | prometheus.rules.selector | object | `{}` | PrometheusRule selector |
 | server.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
+| server.automountServiceAccountToken | bool | `nil` | automount behavior for service account token in server pods. Only applies if server.serviceAccountName is set. |
 | server.autoscaling.behavior | object | `{}` | Configures the scaling behavior of the target in both Up and Down directions. |
 | server.autoscaling.enabled | bool | `false` | Enable Horizontal Pod Autoscaler ([HPA]) for the authentik server |
 | server.autoscaling.maxReplicas | int | `5` | Maximum number of replicas for the authentik server [HPA] |
