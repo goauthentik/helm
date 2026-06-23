@@ -1094,7 +1094,7 @@ postgresql:
   image:
     registry: docker.io
     repository: library/postgres
-    tag: "17.10-bookworm"
+    tag: "18.4-bookworm"
   auth:
     username: authentik
     database: authentik
