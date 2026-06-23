@@ -392,6 +392,8 @@ server:
 
   # -- serviceAccount to use for authentik server pods
   serviceAccountName: ~
+  # -- (bool) automount behavior for service account token in server pods. Only applies if server.serviceAccountName is set.
+  automountServiceAccountToken: ~
 
   # -- authentik server pod-level security context
   # @default -- `{}` (See [values.yaml])
