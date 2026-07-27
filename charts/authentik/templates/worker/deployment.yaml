@@ -45,8 +45,8 @@ spec:
       {{- end }}
       {{- with .Values.worker.serviceAccountName }}
       serviceAccountName: {{ . }}
-      {{- with $.Values.worker.automountServiceAccountToken }}
-      automountServiceAccountToken:  {{ . }}
+      {{- if kindIs "bool" $.Values.worker.automountServiceAccountToken }}
+      automountServiceAccountToken: {{ $.Values.worker.automountServiceAccountToken }}
       {{- end }}
       {{- else }}
       {{- if .Values.serviceAccount.create }}
