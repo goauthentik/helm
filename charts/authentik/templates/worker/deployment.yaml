@@ -43,15 +43,13 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.worker.serviceAccountName }}
-      serviceAccountName: {{ . }}
-      {{- with $.Values.worker.automountServiceAccountToken }}
-      automountServiceAccountToken:  {{ . }}
+      {{- if .Values.worker.serviceAccountName }}
+      serviceAccountName: {{ .Values.worker.serviceAccountName | quote }}
+      {{- else if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount | quote }}
       {{- end }}
-      {{- else }}
-      {{- if .Values.serviceAccount.create }}
-      serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
-      {{- end }}
+      {{- if kindIs "bool" .Values.worker.automountServiceAccountToken }}
+      automountServiceAccountToken: {{ .Values.worker.automountServiceAccountToken }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
       hostAliases:
