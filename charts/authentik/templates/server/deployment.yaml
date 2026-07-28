@@ -78,8 +78,10 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
           envFrom:
+            {{- if or .Values.authentik.enabled .Values.authentik.existingSecret.secretName }}
             - secretRef:
                 name: {{ template "authentik.secret.name" . }}
+            {{- end }}
             {{- with (concat .Values.global.envFrom .Values.server.envFrom) }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
