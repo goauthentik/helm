@@ -131,6 +131,7 @@ spec:
         - record: job:django_db_errors_total:sum_rate30s
           expr: sum(rate(django_db_errors_total[30s])) by (alias, vendor, type)
 
+    {{- if .Values.prometheus.rules.migrations.enabled }}
     - name: authentik Aggregate migrations
       {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
       annotations:
@@ -141,6 +142,7 @@ spec:
           expr: max(django_migrations_applied_total) by (job, connection)
         - record: job:django_migrations_unapplied_total:max
           expr: max(django_migrations_unapplied_total) by (job, connection)
+    {{- end }}
 
     - name: authentik Alerts
       {{- if .Values.prometheus.rules.additionalRuleGroupAnnotations }}
@@ -160,6 +162,7 @@ spec:
             `}}
 
 
+        {{- if .Values.prometheus.rules.migrations.enabled }}
         - alert: PendingMigrations
           labels:
             severity: critical
@@ -170,6 +173,7 @@ spec:
             summary: Pending database migrations
             message: authentik instance {{ $labels.instance }} has pending database migrations
             `}}
+        {{- end }}
 
         - alert: FailedSystemTasks
           labels:

@@ -1074,6 +1074,13 @@ geoip:
 prometheus:
   rules:
     enabled: false
+    migrations:
+      # -- Emit the migration recording rules and the `PendingMigrations` alert. Off by default:
+      # the default deployment applies migrations during startup, before metrics are served, so
+      # `django_migrations_unapplied_total` is never exported and the alert can never fire. Enable
+      # it if you run migrations as a separate step, where authentik can serve against a database
+      # whose migrations have not been applied yet.
+      enabled: false
     # -- PrometheusRule namespace
     namespace: ""
     # -- PrometheusRule selector

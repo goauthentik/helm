@@ -216,6 +216,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | prometheus.rules.annotations | object | `{}` | PrometheusRule annotations |
 | prometheus.rules.enabled | bool | `false` |  |
 | prometheus.rules.labels | object | `{}` | PrometheusRule labels |
+| prometheus.rules.migrations.enabled | bool | `false` | Emit the migration recording rules and the `PendingMigrations` alert. Off by default: the default deployment applies migrations during startup, before metrics are served, so `django_migrations_unapplied_total` is never exported and the alert can never fire. Enable it if you run migrations as a separate step, where authentik can serve against a database whose migrations have not been applied yet. |
 | prometheus.rules.namespace | string | `""` | PrometheusRule namespace |
 | prometheus.rules.selector | object | `{}` | PrometheusRule selector |
 | server.affinity | object | `{}` (defaults to the global.affinity preset) | Assign custom [affinity] rules to the deployment |
