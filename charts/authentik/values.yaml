@@ -246,7 +246,7 @@ server:
     # -- Maximum number of replicas for the authentik server [HPA]
     maxReplicas: 5
     # -- Average CPU utilization percentage for the authentik server [HPA]
-    targetCPUUtilizationPercentage: 50
+    targetCPUUtilizationPercentage: 75
     # -- Average memory utilization percentage for the authentik server [HPA]
     targetMemoryUtilizationPercentage: ~
     # -- Configures the scaling behavior of the target in both Up and Down directions.
