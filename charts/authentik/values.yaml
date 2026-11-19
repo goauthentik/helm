@@ -164,9 +164,9 @@ authentik:
   events:
     context_processors:
       # -- Path for the GeoIP City database. If the file doesn't exist, GeoIP features are disabled.
-      geoip: /geoip/GeoLite2-City.mmdb
+      geoip: "/geoip/dbip-city-lite.mmdb"
       # -- Path for the GeoIP ASN database. If the file doesn't exist, GeoIP features are disabled.
-      asn: /geoip/GeoLite2-ASN.mmdb
+      asn: "/geoip/dbip-asn-lite.mmdb"
   web:
     # -- Relative path the authentik instance will be available at. Value _must_ contain both a leading and trailing slash.
     path: /
