@@ -68,4 +68,11 @@ spec:
   {{- with .Values.server.service.publishNotReadyAddresses }}
   publishNotReadyAddresses: {{ . }}
   {{- end }}
+  {{- with .Values.server.service.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ . }}
+  {{- end }}
+  {{- with .Values.server.service.ipFamilies }}
+  ipFamilies:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 {{- end }}
