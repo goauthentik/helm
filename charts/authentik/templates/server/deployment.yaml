@@ -48,6 +48,10 @@ spec:
       {{- if kindIs "bool" $.Values.server.automountServiceAccountToken }}
       automountServiceAccountToken: {{ $.Values.server.automountServiceAccountToken }}
       {{- end }}
+      {{- else }}
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ include "authentik-remote-cluster.fullname" .Subcharts.serviceAccount }}
+      {{- end }}
       {{- end }}
       {{- with .Values.global.hostAliases }}
       hostAliases:
