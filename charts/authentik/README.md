@@ -225,7 +225,7 @@ The secret `authentik-postgres-credentials` must have `username` and `password` 
 | server.autoscaling.maxReplicas | int | `5` | Maximum number of replicas for the authentik server [HPA] |
 | server.autoscaling.metrics | list | `[]` | Configures custom HPA metrics for the authentik server Ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/ |
 | server.autoscaling.minReplicas | int | `1` | Minimum number of replicas for the authentik server [HPA] |
-| server.autoscaling.targetCPUUtilizationPercentage | int | `50` | Average CPU utilization percentage for the authentik server [HPA] |
+| server.autoscaling.targetCPUUtilizationPercentage | int | `75` | Average CPU utilization percentage for the authentik server [HPA] |
 | server.autoscaling.targetMemoryUtilizationPercentage | string | `nil` | Average memory utilization percentage for the authentik server [HPA] |
 | server.containerPorts.http | int | `9000` | http container port |
 | server.containerPorts.https | int | `9443` | https container port |
